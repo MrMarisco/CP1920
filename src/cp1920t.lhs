@@ -1038,7 +1038,7 @@ insOrd' x = cataBTree g
 insOrd a = (hFunction a) . recBTree(insOrd' a) . outBTree 
   
 hFunction :: (Ord a) => a -> Either () (a,((BTree a,BTree a),(BTree a,BTree a))) -> BTree a 
-hFunction x k = either (h1 x) (h2 x) k
+hFunction x = either (h1 x) (h2 x) 
   where h1 x () = Node (x,(Empty,Empty))
         h2 x (a,((t11,t12),(t21,t22))) | x<=a = Node (a,(t11,t22))
                                        | otherwise = Node (a,(t12,t21))
@@ -1050,11 +1050,19 @@ hFunction x k = either (h1 x) (h2 x) k
 \begin{code}
 
 isOrd' = cataBTree g
-  where g = undefined
+  where g = split hFunc (either (const Empty) k2)
+        k2 (a,((b1,t1),(b2,t2))) = Node (a,(t1,t2))
 
-isOrd = undefined
+isOrd = hFunc . recBTree(isOrd') . outBTree
 
---hFunc :: (Ord a) => Either () (Bool,BTree a) -> BTree a 
+hFunc :: (Ord a) => Either () (a,((Bool,BTree a),(Bool,BTree a))) -> Bool 
+hFunc = either h1 h2
+  where h1 () = True
+        h2 (a,((True,Empty),(True,Empty))) = True
+        h2 (a,((True,Empty),(True,t2))) = Just a <= (maisEsq t2)
+        h2 (a,((True,t1),(True,Empty))) = Just a >= (maisDir t1)
+        h2 (a,((True,t1),(True,t2))) = Just a <= (maisEsq t2) && Just a >= (maisDir t1)
+        h2 _ = False
 
 rrot = undefined
 

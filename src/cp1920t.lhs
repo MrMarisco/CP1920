@@ -995,10 +995,22 @@ tar = cataExp g where
     g1 s = [("",s)]
     g2 (o,l) = map ((o++) >< id) (concat l)
 
-dic_rd "" (Var v) = Just [v]
-dic_rd "" _ = Nothing
-dic_rd p (Term o l) | o == "" || o == [head p] = undefined
-                    | otherwise = Nothing
+dic_rd = cataList (either (const g1) g2)
+  where g1 (Var v) = Just [v]
+        g1 (Term o l) = Nothing
+        g2 (a,g2t) (Term o l) | o== "" = auxSequence (map (g2 (a,g2t)) l) 
+                              | o==[a] = auxSequence [ b | b <- (map g2t l), Nothing /= b] 
+                              | otherwise = Nothing  
+        g2 _ (Var v) = Nothing
+
+
+auxSequence :: [Maybe [String]] -> Maybe [String]
+auxSequence = cataList (either g1 g2)
+  where g1 () = Nothing
+        g2 (Just a,Just t) = Just (a++t)
+        g2 (Nothing,Nothing) = Nothing
+        g2 (Just a,Nothing) = Just a
+        g2 (Nothing,Just a) = Just a
 
 dic_in = undefined
 
@@ -1064,11 +1076,18 @@ hFunc = either h1 h2
         h2 (a,((True,t1),(True,t2))) = Just a <= (maisEsq t2) && Just a >= (maisDir t1)
         h2 _ = False
 
-rrot = undefined
+rrot (Node (a,((Node (e1,(t11,t12))),t2))) = Node (e1,((t11),(Node (a,(t12,t2)))))
+rrot l = l
 
-lrot = undefined
+lrot (Node (a,(t1,(Node (e2,(t21,t22)))))) = Node (e2,((Node (a,(t1,t21))),t22))
+lrot t = t
 
-splay l t =  undefined
+splay = cataList (either g1 g2) 
+  where g1 () t = t 
+        g2 _ Empty = Empty
+        g2 (b1,sp2) (Node (a,(t1,t2))) | b1 == True = sp2 t1  
+                                       | otherwise = sp2 t2 
+ 
   
 \end{code}
 

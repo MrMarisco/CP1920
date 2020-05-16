@@ -1114,7 +1114,15 @@ anaBdt g = inBdt . recBdt (anaBdt g) . g
 
 navLTree :: LTree a -> ([Bool] -> LTree a)
 navLTree = cataLTree g 
-  where g = undefined
+  where g = either g1 fFunction
+        g1 a = const (Leaf a)
+        g2 (tt1,tt2) = const(fFunction (tt1,tt2))
+
+fFunction :: (([Bool] -> LTree a),([Bool] -> LTree a)) -> [Bool] -> LTree a
+fFunction (t1,t2) [] = Fork (t1 [],t2 [])
+fFunction (t1,t2) (h:t) | h = t1 t
+                        | otherwise = t2 t
+
 \end{code}
 
 

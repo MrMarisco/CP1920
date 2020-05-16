@@ -1116,7 +1116,6 @@ navLTree :: LTree a -> ([Bool] -> LTree a)
 navLTree = cataLTree g 
   where g = either g1 fFunction
         g1 a = const (Leaf a)
-        g2 (tt1,tt2) = const(fFunction (tt1,tt2))
 
 fFunction :: (([Bool] -> LTree a),([Bool] -> LTree a)) -> [Bool] -> LTree a
 fFunction (t1,t2) [] = Fork (t1 [],t2 [])
@@ -1130,8 +1129,13 @@ fFunction (t1,t2) (h:t) | h = t1 t
 
 \begin{code}
 bnavLTree = cataLTree g
-  where g = undefined
+  where g = either g1 bfFunction
+        g1 a = const(Leaf a)
 
+bfFunction :: ((BTree Bool -> LTree a),(BTree Bool -> LTree a)) -> BTree Bool -> LTree a
+bfFunction (t1,t2) (Empty) = Fork ((t1 Empty),(t2 Empty))
+bfFunction (t1,t2) (Node (a,(tt1,tt2))) | a = t1 tt1
+                                        | otherwise = t2 tt2
 
 pbnavLTree = cataLTree g
   where g = undefined 

@@ -1161,6 +1161,28 @@ janela = InWindow
 
 put  = uncurry Translate 
 
+putTiles :: Int -> Int -> [Picture]
+putTiles 0 _ = []
+putTiles n 0 = truchet2 : putTiles (n-1) 0
+putTiles n m = truchet1 : putTiles (n-1) (m-1)
+
+draw :: Int -> Int -> Int -> [Picture] -> [Picture]
+draw _ _ _ [] = []
+draw x y 0 l = (draw x (y-1) x l)
+draw x y i (h:t) = (put ((fromIntegral (i*80)),(fromIntegral (y*80))) h) : (draw x y (i-1) t)
+
+main :: IO()
+main = do
+    putStrLn "Enter the width:"
+    xi <- getLine
+    let x = (read xi :: Int)
+    putStrLn "Enter the height:"
+    yi <- getLine
+    let y = (read yi :: Int)
+    n <- getStdRandom (randomR(0,x*y))
+    r <- permuta (putTiles (x*y) n)
+    display janela white (put ((-480),(-480)) (Pictures (draw x y x r)) )
+
 -------------------------------------------------
 \end{code}
 

@@ -1133,12 +1133,17 @@ bnavLTree = cataLTree g
         g1 a = const(Leaf a)
 
 bfFunction :: ((BTree Bool -> LTree a),(BTree Bool -> LTree a)) -> BTree Bool -> LTree a
-bfFunction (t1,t2) (Empty) = Fork ((t1 Empty),(t2 Empty))
+bfFunction (t1,t2) Empty = Fork ((t1 Empty),(t2 Empty))
 bfFunction (t1,t2) (Node (a,(tt1,tt2))) | a = t1 tt1
                                         | otherwise = t2 tt2
 
 pbnavLTree = cataLTree g
-  where g = undefined 
+  where g = either g1 pbfFunction
+        g1 a = const(certainly (Leaf a))
+
+pbfFunction :: ((BTree (Dist Bool) -> Dist(LTree a)),(BTree (Dist Bool) -> Dist (LTree a))) -> BTree (Dist Bool) -> Dist (LTree a)
+pbfFunction (t1,t2) Empty = unfoldD ( D [((t1 Empty),0.5),((t2 Empty),0.5)])
+pbfFunction (t1,t2) (Node (e,(l1,l2))) = Probability.cond e (t1 l1) (t2 l2) 
 
 \end{code}
 

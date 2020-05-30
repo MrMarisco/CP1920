@@ -1012,7 +1012,9 @@ auxSequence = cataList (either g1 g2)
         g2 (Just a,Nothing) = Just a
         g2 (Nothing,Just a) = Just a
 
-dic_in = undefined
+dic_in p s = undefined --(hyloList (either id id) divideFunction) (p,s)
+ 
+divideFunction = undefined
 
 \end{code}
 

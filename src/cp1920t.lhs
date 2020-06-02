@@ -1012,7 +1012,7 @@ auxSequence = cataList (either g1 g2)
         g2 (Just a,Nothing) = Just a
         g2 (Nothing,Just a) = Just a
 
-dic_in p s = undefined --(hyloList (either id id) divideFunction) (p,s)
+dic_in p s (Term "" v) = undefined --(Term "" (hyloList conquerFunction divideFunction)) p s v
  
 divideFunction = undefined
 
@@ -1085,7 +1085,7 @@ lrot (Node (a,(t1,(Node (e2,(t21,t22)))))) = Node (e2,((Node (a,(t1,t21))),t22))
 lrot t = t
 
 splay = cataList (either g1 g2) 
-  where g1 () t = t 
+  where g1 = const id 
         g2 _ Empty = Empty
         g2 (b1,sp2) (Node (a,(t1,t2))) | b1 == True = sp2 t1  
                                        | otherwise = sp2 t2 
@@ -1103,8 +1103,8 @@ extLTree = cataBdt (either g1 g2) where
 
 inBdt = either Dec Query
 
-outBdt (Dec c) = Left c
-outBdt (Query (a,(t1,t2))) = Right (a,(t1,t2))
+outBdt (Dec c) = i1 c
+outBdt (Query d) = i2 d
 
 baseBdt f g h = f -|- g >< (h >< h)
 
@@ -1117,12 +1117,10 @@ anaBdt g = inBdt . recBdt (anaBdt g) . g
 navLTree :: LTree a -> ([Bool] -> LTree a)
 navLTree = cataLTree g 
   where g = either g1 fFunction
-        g1 a = const (Leaf a)
+        g1 = const . Leaf
 
 fFunction :: (([Bool] -> LTree a),([Bool] -> LTree a)) -> [Bool] -> LTree a
-fFunction (t1,t2) [] = Fork (t1 [],t2 [])
-fFunction (t1,t2) (h:t) | h = t1 t
-                        | otherwise = t2 t
+fFunction (t1,t2) = Cp.cond null (Fork . (split t1 t2)) (Cp.cond head (t1 . tail) (t2 . tail))
 
 \end{code}
 
@@ -1144,7 +1142,7 @@ pbnavLTree = cataLTree g
         g1 a = const(certainly (Leaf a))
 
 pbfFunction :: ((BTree (Dist Bool) -> Dist(LTree a)),(BTree (Dist Bool) -> Dist (LTree a))) -> BTree (Dist Bool) -> Dist (LTree a)
-pbfFunction (t1,t2) Empty = unfoldD ( D [((t1 Empty),0.5),((t2 Empty),0.5)])
+pbfFunction (t1,t2) Empty = Probability.cond (choose 0.5 True False) (t1 Empty) (t2 Empty)
 pbfFunction (t1,t2) (Node (e,(l1,l2))) = Probability.cond e (t1 l1) (t2 l2) 
 
 \end{code}

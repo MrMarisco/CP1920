@@ -972,8 +972,7 @@ A função discollect abaixo apresentada tira partido da utilização de \| de m
 
 \begin{code}
 discollect :: (Ord b, Ord a) => [(b, [a])] -> [(b, a)]
-discollect [] = []
-discollect ((a,x):t) = [(a,b) | b <- x ]++discollect t
+discollect d = Cp.cond null nil (do { (a,x) <- head; return ([(a,b) | b <- x]++(discollect . tail) d) }) d
 \end{code}
 
 A função de exportação do dicionário usa a ja implementada função collect após a função tar ter retornadoa lista com pares entre a palavra em português e uma lista de possíveis traduções desta.
@@ -1006,7 +1005,7 @@ dic_rd = cataList (either (const g1) g2)
 
 auxSequence :: [Maybe [String]] -> Maybe [String]
 auxSequence = cataList (either g1 g2)
-  where g1 () = Nothing
+  where g1 = nothing
         g2 (Just a,Just t) = Just (a++t)
         g2 (Nothing,Nothing) = Nothing
         g2 (Just a,Nothing) = Just a
@@ -1028,13 +1027,13 @@ O constituinte g2 seria aplicado ao resultado de (id >< ( {| cataBTree g |} >< {
 \begin{code}
 maisDir = cataBTree g where
   g = either g1 g2 where 
-    g1 s = Nothing
+    g1 = nothing
     g2 (a,(t1,Nothing)) = Just a
     g2 (a,(t1,t2)) = t2
 
 maisEsq = cataBTree g where 
   g = either g1 g2 where 
-    g1 s = Nothing
+    g1 = nothing
     g2 (a,(Nothing,t2)) = Just a
     g2 (a,(t1,t2)) = t1
 

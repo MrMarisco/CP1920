@@ -1011,9 +1011,23 @@ auxSequence = cataList (either g1 g2)
         g2 (Just a,Nothing) = Just a
         g2 (Nothing,Just a) = Just a
 
-dic_in p s (Term "" v) = undefined --(Term "" (hyloList conquerFunction divideFunction)) p s v
- 
-divideFunction = undefined
+dic_in p s (Term "" v) = Term "" (hyloList (conquerFunction s) (divideFunction) (p,v))
+
+divideFunction :: (String,[Dict]) -> Either () (Either [Dict] (Char,[Dict]),(String,[Dict]))
+divideFunction ("",[]) = i1 ()
+divideFunction ((h:t),[]) = i2 ((i2 (h,[])),(t,[]))
+divideFunction ("",d) = i2 ( i1 d ,("",[]))
+divideFunction ((h:t),((Term k v):ds)) | k==[h] =  i2 (i2 (h,ds), (t,v))
+                                       | otherwise = (either (i1 . id) (i2.((either (i1 . ((Term k v):)) (i2 . (id >< ((Term k v):)))) >< id)) . divideFunction) ((h:t),ds)
+divideFunction ((h:t),(d:ds)) = (either (i1 . id) (i2.((either (i1 . (d:)) (i2 . (id >< (d:)))) >< id)) . divideFunction) ((h:t),ds)
+
+conquerFunction :: String -> Either () (Either [Dict] (Char,[Dict]),[Dict]) -> [Dict]
+conquerFunction t l = either (const [Var t]) (uncurry (cFaux t) . swap) l
+
+cFaux :: String -> [Dict] -> (Either [Dict] (Char,[Dict])) -> [Dict]
+cFaux t l = either (tt1 t l) (tt2 t l)
+        where tt1 t k d = (Var t):d
+              tt2 t k (l,r) = r ++ [Term [l] k]
 
 \end{code}
 

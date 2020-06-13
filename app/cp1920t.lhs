@@ -89,6 +89,7 @@
 %format (cataLTree_ (g)) = "\cata{" g "}"
 %format (cataBTree_ (g)) = "\cata{" g "}"
 %format (cataList_ (g)) = "\cata{" g "}"
+%format (anaBdt_ (g)) = "\ana{" g "} "
 %format listS = "^*"
 %format powerBool = "^{Bool^*}"
 %format powerBTree = "^{BTree}"
@@ -982,7 +983,7 @@ discollect :: (Ord b, Ord a) => [(b, [a])] -> [(b, a)]
 discollect d = Cp.cond null nil (do { (a,x) <- head; return ([(a,b) | b <- x]++(discollect . tail) d) }) d
 \end{code}
 
-A função de exportação do dicionário usa a ja implementada função collect após a função tar ter retornadoa lista com pares entre a palavra em português e uma lista de possíveis traduções desta.
+A função de exportação do dicionário usa a ja implementada função collect após a função tar ter retornado a lista com pares entre a palavra em português e uma lista de possíveis traduções desta.
 
 \begin{code}
 dic_exp :: Dict -> [(String,[String])]
@@ -995,12 +996,57 @@ O constituinte g1 será aplicado ao resultado de outExp . (Var v), tendo o seu r
 O constituinte g2 será aplicado a (id >< map {|cataExp g|} ) . outExp . (Term v d), a partir disto facilmente chegamos a conclusão que g2 será aplicado a (v,k) onde k é uma lista do tipo que temos de retornar e são os pares de traduções que se formam a partir daquele termo v, logo tudo o que temos de fazer é inserir v no inicio do primeiro membro de cada um dos pares da lista k concatenada,
 daí ficamos com g2 (v,k) = map ((v++) >< id) (concat k)
 
+Sendo assim fácil definir a função tar:
+
 \begin{code}
 tar = cataExp g where
   g = either g1 g2 where
     g1 s = [("",s)]
     g2 (o,l) = map ((o++) >< id) (concat l)
+\end{code}
 
+Esta função foi o primeiro desafio do trabalho pois não nos era dito nada sobre a forma que ela devia tomar mas com um pouco de raciocinio chega-se a conclusão que iriamos percorrer a palavra que na sua essência é simplesmente uma lista de caracteres.
+Sabendo isso tinhamos o molde inicial, um cataList após isso tinhamos que conseguir descobrir cada um dos contituintes do either, aplicando o conjunto de fórmulas muito comum neste contexto de catamorfismo conseguimos como é apresentado a seguir chegar a:
+
+\begin{eqnarray*}
+%
+\start
+%
+ | dic_rd = cataList_ (either g1 g2) | 
+%
+\just={lei-43}
+%
+    | dic_rd . inList = (either g1 g2) . F dic_rd |    
+%
+\just={def inBTree ; def F }
+%
+    | dic_rd . either nil cons = (either g1 g2) . (id -||- (id >< dic_rd)))|
+%
+\just={lei-20 ; lei-22}
+%
+    | either (dic_rd . nil (dic_rd . cons) = (either g1  (g2 . (id >< dic_rd))) |
+%
+\just={lei-27}
+%
+  | lcbr (dic_rd . nil = g1) (dic_rd . cons = g2 . (id >< dic_rd)) |
+%
+\just={inserindo variáveis}
+%
+  | lcbr (dic_rd . nil () = g1 ()) (dic_rd . cons (a,b) = g2 . (id >< dic_rd) (a,b) |
+%
+\just={lei-3 ; lei-75}
+%
+  | lcbr (dic_rd [] = g1 ()) (dic_rd (a:b)) = g2 . (a,(dic_rd b)))) |
+%
+ \end{eqnarray*}
+
+Chegando a este modelo conseguimos atravês de raciocinio lógico chegar a conclusão que a leitura de uma palavra vazia de um dicionário deverá caso o dicionário seja Var v retornar essa tradução e caso o dicionário seja um Term não fará sentido retornar nada.
+
+O caso mais complicado como já é costume é a resolução de g2, g2 irá receber o resultado de aplicar a procura do resto da palavra aos vários dicionarios da lista proveniente de Term nesse sentido temos apenas que verificar se a primeira letra da palavra coincide com a letra apresentada em Term e após isto temos apenas que retornar o resultado que tinhamos anteriormente referido da aplicação de dic_rd ao resto da palavra, mas existe uma armadilha pois como aplicamos dic_rd a todos os outros possíveis dicionários da lista do term temos que filtrar esse resultado retirando os Nothing e temos ainda que juntar as listas de cada um dos resultados que forem diferentes de Nothing,para tal criamos uma função auxiliar parecida com a Sequence a qual, orginalmente, chamamos auxSequence.
+
+Existe também um caso extra que é o de a palavra que estamos a aplicar ainda não ter terminado ou seja a lista de caracteres ter pelo menos um membro e o dicionário no qual estamos a procurar ser um Var, mas uma simples condição de verificação resolve esse assunto.
+
+\begin{code}
 dic_rd = cataList (either (const g1) g2)
   where g1 (Var v) = Just [v]
         g1 (Term o l) = Nothing
@@ -1017,7 +1063,16 @@ auxSequence = cataList (either g1 g2)
         g2 (Nothing,Nothing) = Nothing
         g2 (Just a,Nothing) = Just a
         g2 (Nothing,Just a) = Just a
+\end{code}
 
+Para a resolução desta função, que na nossa opinião foi a mais complicada entre todos os problemas, tivemos a ajuda do professor, sabendo que era um hyloList optamos por, atravês da função de divide procurar o local de inserção e atravês da função conquer tratar da inserção da tradução.
+
+Na função de divide decidimos...
+
+A seguir temos a apresentação do diagrama de tipos associado a esta:
+
+
+\begin{code}
 dic_in p s (Term "" v) = Term "" (hyloList (conquerFunction s) (divideFunction) (p,v))
 
 divideFunction :: (String,[Dict]) -> Either () (Either [Dict] (Char,[Dict]),(String,[Dict]))
@@ -1037,6 +1092,10 @@ cFaux t l = either (tt1 t l) (tt2 t l)
               tt2 t k (l,r) = r ++ [Term [l] k]
 
 \end{code}
+
+Após algum tempo a pensar tivemos uma outra ideia para a resolução desta que consistia em um anamorfismo de /textit{List} após um anamorfismo de /textit{Exp} a qual apresentamos a seguir:
+
+
 
 \subsection*{Problema 2}
 
@@ -1186,7 +1245,7 @@ lrot t = t
 
 \subsubsection*{splay}
 
-A definição de splay foi obtida por nós seguindo as formulas da Unidade Curricular sendo abaixo apresentada.
+A definição de splay foi obtida por nós seguindo as formulas da Unidade Curricular sendo abaixo apresentada que já anteriormente foi apresentado no trabalho mudando apenas o nome da função logo iremos apenas apresentar o início e fim do raciocinio por questões de espaço e de repetição.
 
 \begin{eqnarray*}
 %
@@ -1194,27 +1253,7 @@ A definição de splay foi obtida por nós seguindo as formulas da Unidade Curri
 %
  | splay = cataList_ (either g1 g2) | 
 %
-\just={lei-43}
-%
-    | splay . inList = (either g1 g2) . F splay |    
-%
-\just={def inBTree ; def F }
-%
-    | splay . either nil cons = (either g1 g2) . (id -||- (id >< splay))|
-%
-\just={lei-20 ; lei-22}
-%
-    | either (splay . nil (splay . cons)) = (either g1  (g2 . (id >< splay))) |
-%
-\just={lei-27}
-%
-  | lcbr (splay . nil = g1) (splay . cons = g2 . (id >< splay )) |
-%
-\just={inserindo variáveis}
-%
-  | lcbr (splay . nil () = g1 ()) (splay . cons (h,t) = g2 . (id >< splay) (h,t)) |
-%
-\just={lei-3 ; lei-75}
+\just={...}
 %
   | lcbr (splay [] = g1 ()) (splay (h:t) = g2 . (a,(splay t))) |
 %
@@ -1312,6 +1351,24 @@ cataBdt g = g . recBdt (cataBdt g) . outBdt
 
 anaBdt g = inBdt . recBdt (anaBdt g) . g
 \end{code}
+Como pedido temos abaixo apresentado o diagrama de anaBdt:
+
+\begin{eqnarray*}
+\xymatrix@@C=3.1cm@@R=2cm{
+	|Bdt|
+		\ar@@/_0.5cm/[r]_-{|out|}
+&
+	|A + (String >< (Bdt,Bdt)|
+		\ar@@/_0.5cm/[l]_-{|in|}
+\\
+	|Bdt|
+		\ar[u]||{|anaBdt = anaBdt_ g|}
+		\ar[r]_{|g|}
+&
+	|A + (String >< (Bdt,Bdt))|
+		\ar[u]||{|id + (id >< (anaBdt_ g >< anaBdt_ g))|}
+}
+\end{eqnarray*}
 
 \subsubsection*{navLTree}
 A forma de pensar usada para esta função foi a utilização de um catamorfismo que irá percorrer a \textit{LTree} dada, e consoante a lista de \textit{Bool} a receber irá caso a cabeça desta lista seja true aplicar o resultado do catamorfismo da \textit{LTree} da direita aplicado à cauda da lista de \textit{Bool} à lista da direita e o contrário quando for false.
@@ -1358,6 +1415,8 @@ fFunctionPW (t1,t2) (h:t) | h = t1 t
                           | otherwise = t2 t
 
 \end{code}
+
+\subsection*{Problema 4}
 Este problema consiste em colocar os alunos a prova com uma primeira função relativamente facil de resolver pois segue o mesmo principio da função definida anteriormente \textit{navLTree} e após isso aumentar a dificuldade para os alunos criarem uma mesma versão mas desta vez monadificada.
 
 \subsubsection*{bnvaLTree}
@@ -1445,28 +1504,13 @@ Utilizando esta forma de pensar a definição da função torna-se simples sendo
 \end{eqnarray*}
 
 \begin{code}
-{--
 pbnavLTree = cataLTree g
   where g = either g1 pbfFunction
         g1 = const . certainly . Leaf
 
 pbfFunction :: ((BTree (Dist Bool) -> Dist(LTree a)),(BTree (Dist Bool) -> Dist (LTree a))) -> BTree (Dist Bool) -> Dist (LTree a)
-pbfFunction = curry (Cp.cond ((Empty==) . p2) func1 func2 )
-            where func1 = Probability.cond (choose 0.5 True False) (Cp.ap . (p1 >< id)) (Cp.ap . (p2 >< id))
-                  func2 = Probability.cond (getNodVal . p2) (Cp.ap . (p1 >< getNodEsq)) (Cp.ap . (p2 >< getNodDir))
---}
-\end{code}
-
-Abaixo se encontra a versão pointwise que é mais simples de compreender e menos confusa.
-
-\begin{code}
-pbnavLTree = cataLTree g
-  where g = either g1 pbfFunctionPW
-        g1 a = const(certainly (Leaf a))
-
-pbfFunctionPW :: ((BTree (Dist Bool) -> Dist(LTree a)),(BTree (Dist Bool) -> Dist (LTree a))) -> BTree (Dist Bool) -> Dist (LTree a)
-pbfFunctionPW (t1,t2) Empty = Probability.cond (choose 0.5 True False) (t1 Empty) (t2 Empty)
-pbfFunctionPW (t1,t2) (Node (e,(l1,l2))) = Probability.cond e (t1 l1) (t2 l2) 
+pbfFunction (t1,t2) Empty = Probability.cond (choose 0.5 True False) (t1 Empty) (t2 Empty)
+pbfFunction (t1,t2) (Node (e,(l1,l2))) = Probability.cond e (t1 l1) (t2 l2) 
 
 \end{code}
 
@@ -1483,6 +1527,8 @@ decisao = Query ("2a-feira?",
                   ((Dec "precisa"),(Dec "nao precisa")))))),
         (Dec "nao precisa"))))
 
+
+
 bTProbabilidade = Node ((D [(True,1/7),(False,6/7)]),
                  (Node ((D [(True,0.8),(False,0.2)]),
                         (Empty,
@@ -1492,9 +1538,10 @@ bTProbabilidade = Node ((D [(True,1/7),(False,6/7)]),
 
 \end{code}
 
-Chamando o conjunto de funções obtemos o seguinte resultado tendo como podemos ver abaixo 86.9 % probabilidades de não precisar de levar guarda chuva maioritariamente devido a ter apenas de se preocupar com isso em 1 dos 7 dias da semana.
+Chamando o conjunto de funções obtemos o seguinte resultado tendo como podemos ver abaixo 86.9 \% probabilidades de não precisar de levar guarda chuva maioritariamente devido a ter apenas de se preocupar com isso em 1 dos 7 dias da semana.
 
-\begin{figure}\centering
+
+\begin{figure}[h]\centering
     \includegraphics[scale=0.80]{images/P3-Anita.png}
     \caption{Resposta ao problema de Anita.}
     \label{fig:anita}

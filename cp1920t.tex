@@ -689,7 +689,7 @@ De seguida implemente a operação de splaying
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{splay}\mathbin{::}(\Conid{Eq}\;\Varid{a})\Rightarrow [\mskip1.5mu \Conid{Bool}\mskip1.5mu]\to (\fun{BTree} \;\Varid{a}\to \fun{BTree} \;\Varid{a}){}\<[E]%
+\>[B]{}\Varid{splay}\mathbin{::}[\mskip1.5mu \Conid{Bool}\mskip1.5mu]\to (\fun{BTree} \;\Varid{a}\to \fun{BTree} \;\Varid{a}){}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
 como um catamorfismo de listas. O argumento \ensuremath{[\mskip1.5mu \Conid{Bool}\mskip1.5mu]}
@@ -1486,59 +1486,10 @@ daí ficamos com g2 (v,k) = map ((v++) >< id) (concat k)
 
 \subsection*{Problema 2}
 
-\subsubsection*{maisDir e maisEsq}
 
 Para a resolução das funções maisDir e maisEsq utilizamos as várias regras aprendidas em Cálculo de Programas para obter a estrutura de g, que seria um either de g1 e g2.
-O raciocinio e as fórmulas de Cálculo de Programas usadas na resolução da função maisDir está apresentado em baixo.
-
-\begin{eqnarray*}
-%
-\start
-%
- \ensuremath{\Varid{maisDir}\mathrel{=}\cata{\alt{\Varid{g1}}{\Varid{g2}}}} 
-%
-\just={lei-43}
-%
-    \ensuremath{\Varid{maisDir}\comp \Varid{inBTree}\mathrel{=}\alt{\Varid{g1}}{\Varid{g2}}\comp \Conid{F}\;\Varid{maisDir}}    
-%
-\just={def inBTree ; def F }
-%
-    \ensuremath{\Varid{maisDir}\comp \alt{\underline{\Conid{Empty}}}{\Conid{Node}}\mathrel{=}\alt{\Varid{g1}}{\Varid{g2}}\comp (\Varid{id}+(\Varid{id}\times(\Varid{maisDir}\times\Varid{maisDir})))}
-%
-\just={lei-20 ; lei-22}
-%
-    \ensuremath{\alt{\Varid{maisDir}\comp \underline{\Conid{Empty}}}{\Varid{maisDir}\comp \Conid{Node}}\mathrel{=}\alt{\Varid{g1}}{\Varid{g2}\comp (\Varid{id}\times(\Varid{maisDir}\times\Varid{maisDir}))}}
-%
-\just={lei-27}
-%
-  \ensuremath{\begin{lcbr}\Varid{maisDir}\comp \underline{\Conid{Empty}}\mathrel{=}\Varid{g1}\\\Varid{maisDir}\comp \Conid{Node}\mathrel{=}\Varid{g2}\comp (\Varid{id}\times(\Varid{maisDir}\times\Varid{maisDir}))\end{lcbr}}
-%
-\just={inserindo variáveis}
-%
-  \ensuremath{\begin{lcbr}\Varid{maisDir}\comp \underline{\Conid{Empty}}\;()\mathrel{=}\Varid{g1}\;()\\\Varid{maisDir}\comp \Conid{Node}\;(\Varid{a},(\Varid{t1},\Varid{t2}))\mathrel{=}\Varid{g2}\comp (\Varid{id}\times(\Varid{maisDir}\times\Varid{maisDir}))\;(\Varid{a},(\Varid{t1},\Varid{t2}))\end{lcbr}}
-%
-\just={lei-3 ; lei-75}
-%
-  \ensuremath{\begin{lcbr}\Varid{maisDir}\;\Conid{Empty}\mathrel{=}\Varid{g1}\;()\\\Varid{maisDir}\;(\Conid{Node}\;(\Varid{a},(\Varid{t1},\Varid{t2})))\mathrel{=}\Varid{g2}\comp (\Varid{a},((\Varid{maisDir}\;\Varid{t1}),(\Varid{maisDir}\;\Varid{t2})))\end{lcbr}}
-%
- \end{eqnarray*}
-
-A partir do sistema de equações ao qual chegamos conseguimos facilmente extrair g1 pois o node mais à direita de uma árvore vazia não existe logo Nothing.
-
-Para g2 temos um contratempo pois não podemos apenas dizer que o resultado seria o obtido em \textit{maisDir} t1 pois este pode retornar Nothing mas um simples pattern match resolve essa situação.
-
-Por isso decidimos criar a função abaixo apresentada que retorna o \textit{Bool} True caso receba um \textit{Maybe} com valor Nothing.
-\begin{hscode}\SaveRestoreHook
-\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{isNothing}\mathbin{::}\Conid{Maybe}\;\Varid{a}\to \Conid{Bool}{}\<[E]%
-\\
-\>[B]{}\Varid{isNothing}\;(\Conid{Just}\;\Varid{a})\mathrel{=}\Conid{False}{}\<[E]%
-\\
-\>[B]{}\Varid{isNothing}\;(\Conid{Nothing})\mathrel{=}\Conid{True}{}\<[E]%
-\ColumnHook
-\end{hscode}\resethooks
-Ficamos assim com a função definida abaixo. 
+O constituinte g1 seria aplicado ao resultado de out . (Empty) gerando logicamente Nothing pois uma árvore vazia não tem elementos logo não tem Máximo nem mínimo.
+O constituinte g2 seria aplicado ao resultado de (id >< ( {\ensuremath{\Varid{cataBTree}\;\Varid{g}}} >< {\ensuremath{\Varid{cataBTree}\;\Varid{g}}})) .out .(Node a (t1,t2)) simplificando iria ser aplicado a (a,(r1,r2)) sendo r1 = {\ensuremath{\Varid{cataBtree}\;\Varid{g}}} e r2 = {\ensuremath{\Varid{cataBTree}\;\Varid{g}}} o que consoante o elemento que queriamos nos retorna o que está abaixo representado.
 
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
@@ -1554,35 +1505,11 @@ Ficamos assim com a função definida abaixo.
 \>[5]{}\Varid{g1}\mathrel{=}\Varid{nothing}{}\<[E]%
 \\
 \>[3]{}\hsindent{2}{}\<[5]%
-\>[5]{}\Varid{g2}\mathrel{=}\Varid{\Conid{Cp}.cond}\;(\Varid{isNothing}\comp \p2\comp \p2)\;(\Conid{Just}\comp \p1)\;(\p2\comp \p2){}\<[E]%
-\ColumnHook
-\end{hscode}\resethooks
-
-Para a função maisEsq a forma de calcular é muito parecida mudando apenas o lado que vamos querer verificar se é Nothing, por isso decidimos apresentar apenas o diagrama de tipos para auxiliar na compreensão desta.
-
-\begin{eqnarray*}
-\xymatrix@C=3.4cm@R=2cm{
-	\ensuremath{\fun{BTree} }
-		\ar[d]|{\ensuremath{\Varid{maisDir}\mathrel{=}\cata{\Varid{g}}}}
-		\ar@/_0.5cm/[r]_-{\ensuremath{\Varid{out}}}
-&
-	\ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\times(\fun{BTree} \times\fun{BTree} ))}
-		\ar@/_0.5cm/[l]^-{\ensuremath{\mathbf{in}}}
-		\ar[d]|{\ensuremath{\Varid{id}\mathbin{+}\Varid{id}\times(\cata{\Varid{g}}\times\cata{\Varid{g}})}}
+\>[5]{}\Varid{g2}\;(\Varid{a},(\Varid{t1},\Conid{Nothing}))\mathrel{=}\Conid{Just}\;\Varid{a}{}\<[E]%
 \\
-	\ensuremath{\Conid{Maybe}\;\Conid{A}}
-&
-	\ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\times(\Conid{Maybe}\;\Conid{A}\times\Conid{Maybe}\;\Conid{A}))}
-		\ar[l]^-{\ensuremath{\Varid{g}\mathrel{=}\alt{\Varid{nothing}}{\Varid{\Conid{Cp}.cond}\;(\Varid{isNothing}\comp \p1\comp \p2)\;(\Conid{Just}\comp \p1)\;(\p1\comp \p2)}}}
-}
-\end{eqnarray*}
-
-
-\begin{hscode}\SaveRestoreHook
-\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{g2}\;(\Varid{a},(\Varid{t1},\Varid{t2}))\mathrel{=}\Varid{t2}{}\<[E]%
+\\[\blanklineskip]%
 \>[B]{}\Varid{maisEsq}\mathrel{=}\Varid{cataBTree}\;\Varid{g}\;\mathbf{where}{}\<[E]%
 \\
 \>[B]{}\hsindent{3}{}\<[3]%
@@ -1592,40 +1519,44 @@ Para a função maisEsq a forma de calcular é muito parecida mudando apenas o l
 \>[5]{}\Varid{g1}\mathrel{=}\Varid{nothing}{}\<[E]%
 \\
 \>[3]{}\hsindent{2}{}\<[5]%
-\>[5]{}\Varid{g2}\mathrel{=}\Varid{\Conid{Cp}.cond}\;(\Varid{isNothing}\comp \p1\comp \p2)\;(\Conid{Just}\comp \p1)\;(\p1\comp \p2){}\<[E]%
+\>[5]{}\Varid{g2}\;(\Varid{a},(\Conid{Nothing},\Varid{t2}))\mathrel{=}\Conid{Just}\;\Varid{a}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{g2}\;(\Varid{a},(\Varid{t1},\Varid{t2}))\mathrel{=}\Varid{t1}{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
 
 Para a resolução da função abaixo recorremos ao enunciado, à equação dada que nos diz que insOrd' x = split <insOrd x,id>, a partir desta conseguimos aplicar a lei de Fokkinga e outras para chegar a um estado em que se torna mais fácil a prespeção de o que cada função possa ser.
-
-Como no formulário temos o nome que cada função toma como sendo h e k no lado direito da equação presente na fórmula de Fokkinga decidimos manter essa formulação criando assim hFunction e referindo k2 como o segundo constituinte de k.
-Assim encontra-se abaixo resolvida a equação que nos levou a chegar às funções apresentadas de forma mais fácil. 
-
-
-
+Como no formulário temos o nome que cada função toma como sendo h e k no lado direito da equação presente na fórmula de Fokkinga decidimos manter essa formulação criando assim hFunction e referindo k2 como o segundo constituinte de k que pela resolução vemos ser k
 
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{3}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{13}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{15}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{9}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{40}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
 \>[B]{}\Varid{insOrd'}\;\Varid{x}\mathrel{=}\Varid{cataBTree}\;\Varid{g}{}\<[E]%
 \\
 \>[B]{}\hsindent{3}{}\<[3]%
-\>[3]{}\mathbf{where}\;\Varid{g}\mathrel{=}\conj{\Varid{hFunction}\;\Varid{x}}{\alt{\underline{\Conid{Empty}}}{\Conid{Node}\comp (\Varid{id}\times(\p2\times\p2))}}{}\<[E]%
+\>[3]{}\mathbf{where}\;\Varid{g}\mathrel{=}\conj{\Varid{hFunction}\;\Varid{x}}{\alt{\underline{\Conid{Empty}}}{\Varid{k2}}}{}\<[E]%
+\\
+\>[3]{}\hsindent{6}{}\<[9]%
+\>[9]{}\Varid{k2}\;(\Varid{a},((\Varid{t11},\Varid{t12}),(\Varid{t21},\Varid{t22})))\mathrel{=}\Conid{Node}\;(\Varid{a},(\Varid{t12},\Varid{t22})){}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{insOrd}\;\Varid{a}\mathrel{=}(\Varid{hFunction}\;\Varid{a})\comp \Varid{recBTree}\;(\Varid{insOrd'}\;\Varid{a})\comp \Varid{outBTree}{}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{hFunction}\mathbin{::}(\Conid{Ord}\;\Varid{a})\Rightarrow \Varid{a}\to ()+(\Varid{a},((\fun{BTree} \;\Varid{a},\fun{BTree} \;\Varid{a}),(\fun{BTree} \;\Varid{a},\fun{BTree} \;\Varid{a})))\to \fun{BTree} \;\Varid{a}{}\<[E]%
 \\
-\>[B]{}\Varid{hFunction}\;\Varid{x}\mathrel{=}\alt{\underline{(\Conid{Node}\;(\Varid{x},(\Conid{Empty},\Conid{Empty})))}}{\Varid{g2}}{}\<[E]%
+\>[B]{}\Varid{hFunction}\;\Varid{x}\mathrel{=}\alt{\Varid{h1}\;\Varid{x}}{\Varid{h2}\;\Varid{x}}{}\<[E]%
 \\
-\>[B]{}\hsindent{13}{}\<[13]%
-\>[13]{}\mathbf{where}{}\<[E]%
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\mathbf{where}\;\Varid{h1}\;\Varid{x}\;()\mathrel{=}\Conid{Node}\;(\Varid{x},(\Conid{Empty},\Conid{Empty})){}\<[E]%
 \\
-\>[13]{}\hsindent{2}{}\<[15]%
-\>[15]{}\Varid{g2}\mathrel{=}\Varid{\Conid{Cp}.cond}\;((\Varid{x}\geq )\comp \p1)\;(\Conid{Node}\comp (\Varid{id}\times(\p1\times\p2)))\;(\Conid{Node}\comp (\Varid{id}\times(\p2\times\p1))){}\<[E]%
+\>[3]{}\hsindent{6}{}\<[9]%
+\>[9]{}\Varid{h2}\;\Varid{x}\;(\Varid{a},((\Varid{t11},\Varid{t12}),(\Varid{t21},\Varid{t22})))\mid \Varid{x}\leq \Varid{a}\mathrel{=}\Conid{Node}\;(\Varid{a},(\Varid{t11},\Varid{t22})){}\<[E]%
+\\
+\>[9]{}\hsindent{31}{}\<[40]%
+\>[40]{}\mid \Varid{otherwise}\mathrel{=}\Conid{Node}\;(\Varid{a},(\Varid{t12},\Varid{t21})){}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
 
@@ -1635,6 +1566,7 @@ Assim encontra-se abaixo resolvida a equação que nos levou a chegar às funç�
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{3}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{9}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{40}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
 \>[B]{}\Varid{isOrd'}\mathrel{=}\Varid{cataBTree}\;\Varid{g}{}\<[E]%
 \\
@@ -1667,17 +1599,7 @@ Assim encontra-se abaixo resolvida a equação que nos levou a chegar às funç�
 \\
 \>[3]{}\hsindent{6}{}\<[9]%
 \>[9]{}\Varid{h2}\;\anonymous \mathrel{=}\Conid{False}{}\<[E]%
-\ColumnHook
-\end{hscode}\resethooks
-
-
-\subsubsection*{rrot e lrot}
-
-A definição das próximas duas funções é bastante trivial tendo apenas que verificar se o lado que queremos fazer rotação tem um Node ou Empty.
-
-\begin{hscode}\SaveRestoreHook
-\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\\[\blanklineskip]%
 \>[B]{}\Varid{rrot}\;(\Conid{Node}\;(\Varid{a},((\Conid{Node}\;(e_1 ,(\Varid{t11},\Varid{t12}))),\Varid{t2})))\mathrel{=}\Conid{Node}\;(e_1 ,((\Varid{t11}),(\Conid{Node}\;(\Varid{a},(\Varid{t12},\Varid{t2}))))){}\<[E]%
 \\
 \>[B]{}\Varid{rrot}\;\Varid{l}\mathrel{=}\Varid{l}{}\<[E]%
@@ -1685,112 +1607,25 @@ A definição das próximas duas funções é bastante trivial tendo apenas que 
 \>[B]{}\Varid{lrot}\;(\Conid{Node}\;(\Varid{a},(\Varid{t1},(\Conid{Node}\;(e_2 ,(\Varid{t21},\Varid{t22}))))))\mathrel{=}\Conid{Node}\;(e_2 ,((\Conid{Node}\;(\Varid{a},(\Varid{t1},\Varid{t21}))),\Varid{t22})){}\<[E]%
 \\
 \>[B]{}\Varid{lrot}\;\Varid{t}\mathrel{=}\Varid{t}{}\<[E]%
-\ColumnHook
-\end{hscode}\resethooks
-
-\subsubsection*{splay}
-
-A definição de splay foi obtida por nós seguindo as formulas da Unidade Curricular sendo abaixo apresentada.
-
-\begin{eqnarray*}
-%
-\start
-%
- \ensuremath{\Varid{splay}\mathrel{=}\cata{\alt{\Varid{g1}}{\Varid{g2}}}} 
-%
-\just={lei-43}
-%
-    \ensuremath{\Varid{splay}\comp \Varid{inList}\mathrel{=}\alt{\Varid{g1}}{\Varid{g2}}\comp \Conid{F}\;\Varid{splay}}    
-%
-\just={def inBTree ; def F }
-%
-    \ensuremath{\Varid{splay}\comp \alt{\Varid{nil}}{\Varid{cons}}\mathrel{=}\alt{\Varid{g1}}{\Varid{g2}}\comp (\Varid{id}+(\Varid{id}\times\Varid{splay}))}
-%
-\just={lei-20 ; lei-22}
-%
-    \ensuremath{\alt{\Varid{splay}\comp \Varid{nil}\;(\Varid{splay}\comp \Varid{cons})}{\cdot }\mathrel{=}\alt{\Varid{g1}}{\Varid{g2}\comp (\Varid{id}\times\Varid{splay})}}
-%
-\just={lei-27}
-%
-  \ensuremath{\begin{lcbr}\Varid{splay}\comp \Varid{nil}\mathrel{=}\Varid{g1}\\\Varid{splay}\comp \Varid{cons}\mathrel{=}\Varid{g2}\comp (\Varid{id}\times\Varid{splay})\end{lcbr}}
-%
-\just={inserindo variáveis}
-%
-  \ensuremath{\begin{lcbr}\Varid{splay}\comp \Varid{nil}\;()\mathrel{=}\Varid{g1}\;()\\\Varid{splay}\comp \Varid{cons}\;(\Varid{h},\Varid{t})\mathrel{=}\Varid{g2}\comp (\Varid{id}\times\Varid{splay})\;(\Varid{h},\Varid{t})\end{lcbr}}
-%
-\just={lei-3 ; lei-75}
-%
-  \ensuremath{\begin{lcbr}\Varid{splay}\;[\mskip1.5mu \mskip1.5mu]\mathrel{=}\Varid{g1}\;()\\\Varid{splay}\;(\Varid{h}\mathbin{:}\Varid{t})\mathrel{=}\Varid{g2}\comp (\Varid{a},(\Varid{splay}\;\Varid{t}))\end{lcbr}}
-%
- \end{eqnarray*}
-
-Depois de chegar a esta definição facilmente deduzimos que aplicar \textit{splay} a uma lista vazia de \textit{Bool} iremos retornar uma função que em nada altere a \textit{BTree}, sendo essa funçao a identidade.
-
-Para descobrir qual seria g2 tivemos de pensar um pouco mais mas seguindo a mesma ordem de pensamento conseguimos perceber que esta terá de retornar Empty a partir do momento em que a árvore que receba seja Empty e terá de retornar a função splay aplicada ao resto da lista para aplicar à \textit{BTree} da esquerda caso a cabeça da lista seja o \textit{Bool} true ou à \textit{BTree} da direita caso seja false.  
-
-Podemos assim definir o diagrama de tipos que a seguir apresentamos:
-
-\begin{eqnarray*}
-\xymatrix@C=3.4cm@R=2cm{
-	\ensuremath{\Conid{Bool}\;^*}
-		\ar[d]|{\ensuremath{\Varid{splay}\mathrel{=}\cata{\Varid{g}}}}
-		\ar@/_0.5cm/[r]_-{\ensuremath{\Varid{out}}}
-&
-	\ensuremath{\mathrm{1}\mathbin{+}(\Conid{Bool}\times(\Conid{Bool}\;^*))}
-		\ar@/_0.5cm/[l]^-{\ensuremath{\mathbf{in}}}
-		\ar[d]|{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\times\cata{\Varid{g}})}}
-\\
-	\ensuremath{\fun{BTree} \;^{BTree}}
-&
-	\ensuremath{\mathrm{1}\mathbin{+}(\Conid{Bool}\times\fun{BTree} \;^{BTree})}
-		\ar[l]^-{\ensuremath{\Varid{g}\mathrel{=}\alt{\underline{\Varid{id}}}{\Varid{curry}\;(\Varid{\Conid{Cp}.cond}\;((\Conid{Empty}\equiv )\comp \p2)\;\Varid{func1}\;\Varid{func2})}}}
-}
-\end{eqnarray*}
-
-\begin{hscode}\SaveRestoreHook
-\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{splay}\mathrel{=}\Varid{cataList}\;\alt{\underline{\Varid{id}}}{\Varid{curry}\;(\Varid{\Conid{Cp}.cond}\;((\Conid{Empty}\equiv )\comp \p2)\;\Varid{func1}\;\Varid{func2})}{}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\Varid{splay}\mathrel{=}\Varid{cataList}\;\alt{\Varid{g1}}{\Varid{g2}}{}\<[E]%
 \\
 \>[B]{}\hsindent{3}{}\<[3]%
-\>[3]{}\mathbf{where}{}\<[E]%
+\>[3]{}\mathbf{where}\;\Varid{g1}\mathrel{=}\underline{\Varid{id}}{}\<[E]%
 \\
-\>[3]{}\hsindent{2}{}\<[5]%
-\>[5]{}\Varid{func1}\mathrel{=}\Varid{id}\comp \p2{}\<[E]%
+\>[3]{}\hsindent{6}{}\<[9]%
+\>[9]{}\Varid{g2}\;\anonymous \;\Conid{Empty}\mathrel{=}\Conid{Empty}{}\<[E]%
 \\
-\>[3]{}\hsindent{2}{}\<[5]%
-\>[5]{}\Varid{func2}\mathrel{=}\Varid{\Conid{Cp}.cond}\;(\p1\comp \p1)\;(\Varid{\Conid{Cp}.ap}\comp (\p2\times\Varid{getNodEsq}))\;(\Varid{\Conid{Cp}.ap}\comp (\p2\times\Varid{getNodDir})){}\<[E]%
-\ColumnHook
-\end{hscode}\resethooks
-
-Em baixo temos uma versão pointwise mais simples de entender.
-
-\begin{hscode}\SaveRestoreHook
-\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{34}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{splayPW}\mathrel{=}\Varid{cataList}\;\alt{\underline{\Varid{id}}}{\Varid{g2}}{}\<[E]%
+\>[3]{}\hsindent{6}{}\<[9]%
+\>[9]{}\Varid{g2}\;(\Varid{b1},\Varid{sp2})\;(\Conid{Node}\;(\Varid{a},(\Varid{t1},\Varid{t2})))\mid \Varid{b1}\equiv \Conid{True}\mathrel{=}\Varid{sp2}\;\Varid{t1}{}\<[E]%
 \\
-\>[B]{}\hsindent{3}{}\<[3]%
-\>[3]{}\mathbf{where}{}\<[E]%
-\\
-\>[B]{}\hsindent{3}{}\<[3]%
-\>[3]{}\Varid{g2}\;\anonymous \;\Conid{Empty}\mathrel{=}\Conid{Empty}{}\<[E]%
-\\
-\>[B]{}\hsindent{3}{}\<[3]%
-\>[3]{}\Varid{g2}\;(\Varid{b1},\Varid{sp2})\;(\Conid{Node}\;(\Varid{a},(\Varid{t1},\Varid{t2})))\mid \Varid{b1}\equiv \Conid{True}\mathrel{=}\Varid{sp2}\;\Varid{t1}{}\<[E]%
-\\
-\>[3]{}\hsindent{31}{}\<[34]%
-\>[34]{}\mid \Varid{otherwise}\mathrel{=}\Varid{sp2}\;\Varid{t2}{}\<[E]%
+\>[9]{}\hsindent{31}{}\<[40]%
+\>[40]{}\mid \Varid{otherwise}\mathrel{=}\Varid{sp2}\;\Varid{t2}{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
 
 \subsection*{Problema 3}
-\subsubsection*{extLTree}
-
+\subsection*{extLTree}
 O raciocinio para a \textit{extLTree} foi percorrer a \textit{Bdt} dada através de um cata destruindo a informação no primeiro membro do par Query guardando apenas no Fork as informações do segundo membro do par, e guardando em Leaf o representado em Dec.
 Desta forma ficamos com uma simples LTree onde apenas temos a decisão final consoante o caminho escolhido para atravessar a mesma.
 \textit{extLTree} pode ser representada no seguinte diagrama:
@@ -1798,16 +1633,16 @@ Desta forma ficamos com uma simples LTree onde apenas temos a decisão final con
 \begin{eqnarray*}
 \xymatrix@C=3.4cm@R=2cm{
 	\ensuremath{\Conid{Bdt}}
-		\ar[d]|{\ensuremath{\Varid{extLTree}\mathrel{=}\cata{\Varid{g}}}}
+		\ar[d]|{\ensuremath{\Varid{extLTree}\mathrel{=}(\Varid{cataBdt\char95 }\;\Varid{g})}}
 		\ar@/_0.5cm/[r]_-{\ensuremath{\Varid{out}}}
 &
-	\ensuremath{\Conid{A}\mathbin{+}(\Conid{A}\times(\Conid{Bdt}\times\Conid{Bdt}))}
+	\ensuremath{\Conid{A}\mathbin{+}\Conid{A}\times(\Conid{Bdt}\times\Conid{Bdt})}
 		\ar@/_0.5cm/[l]^-{\ensuremath{\mathbf{in}}}
-		\ar[d]|{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\times(\cata{\Varid{g}}\times\cata{\Varid{g}}))}}
+		\ar[d]|{\ensuremath{\Varid{id}\mathbin{+}\Varid{id}\times(\Varid{cataBdt\char95 }\;\Varid{g}\times\Varid{cataBdt\char95 }\;\Varid{g}}}
 \\
 	\ensuremath{\mathsf{LTree}}
 &
-	\ensuremath{\Conid{A}\mathbin{+}(\Conid{A}\times(\mathsf{LTree}\times\mathsf{LTree}))}
+	\ensuremath{\Conid{A}\mathbin{+}\Conid{A}\times(\mathsf{LTree}\times\mathsf{LTree})}
 		\ar[l]^-{\ensuremath{\Varid{g}\mathrel{=}\alt{\Conid{Leaf}}{\Conid{Fork}\comp \p2}}}
 }
 \end{eqnarray*}
@@ -1815,6 +1650,7 @@ Desta forma ficamos com uma simples LTree onde apenas temos a decisão final con
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{3}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{9}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
 \>[B]{}\Varid{extLTree}\mathbin{::}\Conid{Bdt}\;\Varid{a}\to \mathsf{LTree}\;\Varid{a}{}\<[E]%
 \\
@@ -1825,25 +1661,13 @@ Desta forma ficamos com uma simples LTree onde apenas temos a decisão final con
 \\
 \>[B]{}\hsindent{3}{}\<[3]%
 \>[3]{}\Varid{g2}\mathrel{=}\Conid{Fork}\comp \p2{}\<[E]%
-\ColumnHook
-\end{hscode}\resethooks
-
-\subsubsection*{Definições do tipo de dados}
-\begin{hscode}\SaveRestoreHook
-\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\\[\blanklineskip]%
 \>[B]{}\Varid{inBdt}\mathrel{=}\alt{\Conid{Dec}}{\Conid{Query}}{}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{outBdt}\;(\Conid{Dec}\;\Varid{c})\mathrel{=}i_1\;\Varid{c}{}\<[E]%
 \\
 \>[B]{}\Varid{outBdt}\;(\Conid{Query}\;\Varid{d})\mathrel{=}i_2\;\Varid{d}{}\<[E]%
-\ColumnHook
-\end{hscode}\resethooks
-
-\subsubsection*{Padrões de recursividade}
-\begin{hscode}\SaveRestoreHook
-\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\\[\blanklineskip]%
 \>[B]{}\Varid{baseBdt}\;\Varid{f}\;\Varid{g}\;\Varid{h}\mathrel{=}\Varid{f}+\Varid{g}\times(\Varid{h}\times\Varid{h}){}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{recBdt}\;\Varid{h}\mathrel{=}\Varid{baseBdt}\;\Varid{id}\;\Varid{id}\;\Varid{h}{}\<[E]%
@@ -1851,53 +1675,7 @@ Desta forma ficamos com uma simples LTree onde apenas temos a decisão final con
 \>[B]{}\Varid{cataBdt}\;\Varid{g}\mathrel{=}\Varid{g}\comp \Varid{recBdt}\;(\Varid{cataBdt}\;\Varid{g})\comp \Varid{outBdt}{}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{anaBdt}\;\Varid{g}\mathrel{=}\Varid{inBdt}\comp \Varid{recBdt}\;(\Varid{anaBdt}\;\Varid{g})\comp \Varid{g}{}\<[E]%
-\ColumnHook
-\end{hscode}\resethooks
-Como pedido temos abaixo apresentado o diagrama de anaBdt:
-
-\begin{eqnarray*}
-\xymatrix@C=3.1cm@R=2cm{
-	\ensuremath{\Conid{Bdt}}
-		\ar@/_0.5cm/[r]_-{\ensuremath{\Varid{out}}}
-&
-	\ensuremath{\Conid{A}\mathbin{+}(\Conid{String}\times(\Conid{Bdt},\Conid{Bdt})}
-		\ar@/_0.5cm/[l]_-{\ensuremath{\mathbf{in}}}
-\\
-	\ensuremath{\Conid{Bdt}}
-		\ar[u]|{\ensuremath{\Varid{anaBdt}\mathrel{=}\ana{\Varid{g}} }}
-		\ar[r]_{\ensuremath{\Varid{g}}}
-&
-	\ensuremath{\Conid{A}\mathbin{+}(\Conid{String}\times(\Conid{Bdt},\Conid{Bdt}))}
-		\ar[u]|{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\times(\ana{\Varid{g}} \times\ana{\Varid{g}} ))}}
-}
-\end{eqnarray*}
-
-\subsubsection*{navLTree}
-A forma de pensar usada para esta função foi a utilização de um catamorfismo que irá percorrer a \textit{LTree} dada, e consoante a lista de \textit{Bool} a receber irá caso a cabeça desta lista seja true aplicar o resultado do catamorfismo da \textit{LTree} da direita aplicado à cauda da lista de \textit{Bool} à lista da direita e o contrário quando for false.
-Desta forma podemos definir navLTree no seguinte diagrama:
-
-\begin{eqnarray*}
-\xymatrix@C=3.4cm@R=2cm{
-	\ensuremath{\mathsf{LTree}}
-		\ar[d]|{\ensuremath{\Varid{navLTree}\mathrel{=}\cata{\Varid{g}}}}
-		\ar@/_0.5cm/[r]_-{\ensuremath{\Varid{out}}}
-&
-	\ensuremath{\Conid{A}\mathbin{+}(\mathsf{LTree}\times\mathsf{LTree})}
-		\ar@/_0.5cm/[l]^-{\ensuremath{\mathbf{in}}}
-		\ar[d]|{\ensuremath{\Varid{id}\mathbin{+}(\cata{\Varid{g}}\times\cata{\Varid{g}})}}
-\\
-	\ensuremath{\mathsf{LTree}\;^{Bool^*}}
-&
-	\ensuremath{\Conid{A}\mathbin{+}\Conid{A}\times(\mathsf{LTree}\;^{Bool^*}\times\mathsf{LTree}\;^{Bool^*})}
-		\ar[l]^-{\ensuremath{\Varid{g}\mathrel{=}\alt{\underline{\Conid{Leaf}}}{\Varid{fFunction}}}}
-}
-\end{eqnarray*}
-
-\begin{hscode}\SaveRestoreHook
-\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{9}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\\[\blanklineskip]%
 \>[B]{}\Varid{navLTree}\mathbin{::}\mathsf{LTree}\;\Varid{a}\to ([\mskip1.5mu \Conid{Bool}\mskip1.5mu]\to \mathsf{LTree}\;\Varid{a}){}\<[E]%
 \\
 \>[B]{}\Varid{navLTree}\mathrel{=}\Varid{cataLTree}\;\Varid{g}{}\<[E]%
@@ -1910,169 +1688,43 @@ Desta forma podemos definir navLTree no seguinte diagrama:
 \\[\blanklineskip]%
 \>[B]{}\Varid{fFunction}\mathbin{::}(([\mskip1.5mu \Conid{Bool}\mskip1.5mu]\to \mathsf{LTree}\;\Varid{a}),([\mskip1.5mu \Conid{Bool}\mskip1.5mu]\to \mathsf{LTree}\;\Varid{a}))\to [\mskip1.5mu \Conid{Bool}\mskip1.5mu]\to \mathsf{LTree}\;\Varid{a}{}\<[E]%
 \\
-\>[B]{}\Varid{fFunction}\mathrel{=}\Varid{curry}\;(\Varid{\Conid{Cp}.cond}\;(\Varid{null}\comp \p2)\;(\Conid{Fork}\comp \conj{\Varid{\Conid{Cp}.ap}\comp (\p1\times\Varid{nil})}{\Varid{\Conid{Cp}.ap}\comp (\p2\times\Varid{nil})})\;(\Varid{\Conid{Cp}.cond}\;(\Varid{head}\comp \p2)\;(\Varid{\Conid{Cp}.ap}\comp (\p1\times\Varid{tail}))\;(\Varid{\Conid{Cp}.ap}\comp (\p2\times\Varid{tail})))){}\<[E]%
+\>[B]{}\Varid{fFunction}\;(\Varid{t1},\Varid{t2})\mathrel{=}\Varid{\Conid{Cp}.cond}\;\Varid{null}\;(\Conid{Fork}\comp \conj{\Varid{t1}}{\Varid{t2}})\;(\Varid{\Conid{Cp}.cond}\;\Varid{head}\;(\Varid{t1}\comp \Varid{tail})\;(\Varid{t2}\comp \Varid{tail})){}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
 
-Em baixo temos uma versão pointwise que nos fornece um mais fácil entendimento do raciocinio
+
+\subsection*{Problema 4}
 
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{3}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{9}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{27}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{navLTreePW}\mathbin{::}\mathsf{LTree}\;\Varid{a}\to ([\mskip1.5mu \Conid{Bool}\mskip1.5mu]\to \mathsf{LTree}\;\Varid{a}){}\<[E]%
-\\
-\>[B]{}\Varid{navLTreePW}\mathrel{=}\Varid{cataLTree}\;\Varid{g}{}\<[E]%
-\\
-\>[B]{}\hsindent{3}{}\<[3]%
-\>[3]{}\mathbf{where}\;\Varid{g}\mathrel{=}\alt{\Varid{g1}}{\Varid{fFunctionPW}}{}\<[E]%
-\\
-\>[3]{}\hsindent{6}{}\<[9]%
-\>[9]{}\Varid{g1}\;\Varid{a}\mathrel{=}\underline{(\Conid{Leaf}\;\Varid{a})}{}\<[E]%
-\\[\blanklineskip]%
-\>[B]{}\Varid{fFunctionPW}\mathbin{::}(([\mskip1.5mu \Conid{Bool}\mskip1.5mu]\to \mathsf{LTree}\;\Varid{a}),([\mskip1.5mu \Conid{Bool}\mskip1.5mu]\to \mathsf{LTree}\;\Varid{a}))\to [\mskip1.5mu \Conid{Bool}\mskip1.5mu]\to \mathsf{LTree}\;\Varid{a}{}\<[E]%
-\\
-\>[B]{}\Varid{fFunctionPW}\;(\Varid{t1},\Varid{t2})\;[\mskip1.5mu \mskip1.5mu]\mathrel{=}\Conid{Fork}\;((\Varid{t1}\;[\mskip1.5mu \mskip1.5mu]),(\Varid{t2}\;[\mskip1.5mu \mskip1.5mu])){}\<[E]%
-\\
-\>[B]{}\Varid{fFunctionPW}\;(\Varid{t1},\Varid{t2})\;(\Varid{h}\mathbin{:}\Varid{t})\mid \Varid{h}\mathrel{=}\Varid{t1}\;\Varid{t}{}\<[E]%
-\\
-\>[B]{}\hsindent{27}{}\<[27]%
-\>[27]{}\mid \Varid{otherwise}\mathrel{=}\Varid{t2}\;\Varid{t}{}\<[E]%
-\ColumnHook
-\end{hscode}\resethooks
-
-\subsection*{Problema 4}
-Este problema consiste em colocar os alunos a prova com uma primeira função relativamente facil de resolver pois segue o mesmo principio da função definida anteriormente \textit{navLTree} e após isso aumentar a dificuldade para os alunos criarem uma mesma versão mas desta vez monadificada.
-
-\subsubsection*{bnvaLTree}
-
-Esta função foi realizada da mesma forma que a anterior sendo diferente apenas no facto que é uma tree e não uma lista.
-
-
-Para poder definir em pointfree decidimos criar as seguintes funções que apenas serão aplicadas a Node e que nos retornam cada um dos parametros deste como podemos ver abaixo.
-\begin{hscode}\SaveRestoreHook
-\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{getNodVal}\mathbin{::}\fun{BTree} \;\Varid{a}\to \Varid{a}{}\<[E]%
-\\
-\>[B]{}\Varid{getNodVal}\;(\Conid{Node}\;(\Varid{a},(\Varid{t1},\Varid{t2})))\mathrel{=}\Varid{a}{}\<[E]%
-\\[\blanklineskip]%
-\>[B]{}\Varid{getNodEsq}\mathbin{::}\fun{BTree} \;\Varid{a}\to \fun{BTree} \;\Varid{a}{}\<[E]%
-\\
-\>[B]{}\Varid{getNodEsq}\;(\Conid{Node}\;(\Varid{a},(\Varid{t1},\Varid{t2})))\mathrel{=}\Varid{t1}{}\<[E]%
-\\[\blanklineskip]%
-\>[B]{}\Varid{getNodDir}\mathbin{::}\fun{BTree} \;\Varid{a}\to \fun{BTree} \;\Varid{a}{}\<[E]%
-\\
-\>[B]{}\Varid{getNodDir}\;(\Conid{Node}\;(\Varid{a},(\Varid{t1},\Varid{t2})))\mathrel{=}\Varid{t2}{}\<[E]%
-\ColumnHook
-\end{hscode}\resethooks
-Para complementar a nossa resposta encontra-se abaixo o diagrama de tipos do mesmo:
-
-\begin{eqnarray*}
-\xymatrix@C=3.4cm@R=2cm{
-	\ensuremath{\mathsf{LTree}}
-		\ar[d]|{\ensuremath{\Varid{bnavLTree}\mathrel{=}\cata{\Varid{g}}}}
-		\ar@/_0.5cm/[r]_-{\ensuremath{\Varid{out}}}
-&
-	\ensuremath{\Conid{A}\mathbin{+}(\mathsf{LTree}\times\mathsf{LTree})}
-		\ar@/_0.5cm/[l]^-{\ensuremath{\mathbf{in}}}
-		\ar[d]|{\ensuremath{\Varid{id}\mathbin{+}(\cata{\Varid{g}}\times\cata{\Varid{g}})}}
-\\
-	\ensuremath{\mathsf{LTree}\;^{BTree}}
-&
-	\ensuremath{\Conid{A}\mathbin{+}\Conid{A}\times(\mathsf{LTree}\;^{BTree}\times\mathsf{LTree}\;^{BTree})}
-		\ar[l]^-{\ensuremath{\Varid{g}\mathrel{=}\alt{\underline{\Conid{Leaf}}}{\Varid{bfFunction}}}}
-}
-
-\end{eqnarray*}
-\begin{hscode}\SaveRestoreHook
-\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{13}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{19}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{41}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
 \>[B]{}\Varid{bnavLTree}\mathrel{=}\Varid{cataLTree}\;\Varid{g}{}\<[E]%
 \\
 \>[B]{}\hsindent{3}{}\<[3]%
-\>[3]{}\mathbf{where}\;\Varid{g}\mathrel{=}\alt{\underline{\cdot }\comp \Conid{Leaf}}{\Varid{bfFunction}}{}\<[E]%
-\\[\blanklineskip]%
-\>[B]{}\Varid{bfFunction}\mathbin{::}((\fun{BTree} \;\Conid{Bool}\to \mathsf{LTree}\;\Varid{a}),(\fun{BTree} \;\Conid{Bool}\to \mathsf{LTree}\;\Varid{a}))\to \fun{BTree} \;\Conid{Bool}\to \mathsf{LTree}\;\Varid{a}{}\<[E]%
-\\
-\>[B]{}\Varid{bfFunction}\mathrel{=}\Varid{curry}\;(\Varid{\Conid{Cp}.cond}\;((\Conid{Empty}\equiv )\comp \p2)\;\Varid{func1}\;\Varid{func2}){}\<[E]%
-\\
-\>[B]{}\hsindent{13}{}\<[13]%
-\>[13]{}\mathbf{where}\;\Varid{func1}\mathrel{=}\Conid{Fork}\comp \conj{\Varid{\Conid{Cp}.ap}\comp (\p1\times\Varid{id})}{\Varid{\Conid{Cp}.ap}\comp (\p2\times\Varid{id})}{}\<[E]%
-\\
-\>[13]{}\hsindent{6}{}\<[19]%
-\>[19]{}\Varid{func2}\mathrel{=}\Varid{\Conid{Cp}.cond}\;(\Varid{getNodVal}\comp \p2)\;(\Varid{\Conid{Cp}.ap}\comp (\p1\times\Varid{getNodEsq}))\;(\Varid{\Conid{Cp}.ap}\comp (\p2\times\Varid{getNodDir})){}\<[E]%
-\ColumnHook
-\end{hscode}\resethooks
-
-Em baixo temos uma versão pointwise que permite uma compreensão mais simples e intuitiva do que aquela que apresentamos acima.
-
-\begin{hscode}\SaveRestoreHook
-\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{9}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{43}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{bnavLTreePW}\mathrel{=}\Varid{cataLTree}\;\Varid{g}{}\<[E]%
-\\
-\>[B]{}\hsindent{3}{}\<[3]%
-\>[3]{}\mathbf{where}\;\Varid{g}\mathrel{=}\alt{\Varid{g1}}{\Varid{bfFunctionPW}}{}\<[E]%
+\>[3]{}\mathbf{where}\;\Varid{g}\mathrel{=}\alt{\Varid{g1}}{\Varid{bfFunction}}{}\<[E]%
 \\
 \>[3]{}\hsindent{6}{}\<[9]%
 \>[9]{}\Varid{g1}\;\Varid{a}\mathrel{=}\underline{(\Conid{Leaf}\;\Varid{a})}{}\<[E]%
 \\[\blanklineskip]%
-\>[B]{}\Varid{bfFunctionPW}\mathbin{::}((\fun{BTree} \;\Conid{Bool}\to \mathsf{LTree}\;\Varid{a}),(\fun{BTree} \;\Conid{Bool}\to \mathsf{LTree}\;\Varid{a}))\to \fun{BTree} \;\Conid{Bool}\to \mathsf{LTree}\;\Varid{a}{}\<[E]%
+\>[B]{}\Varid{bfFunction}\mathbin{::}((\fun{BTree} \;\Conid{Bool}\to \mathsf{LTree}\;\Varid{a}),(\fun{BTree} \;\Conid{Bool}\to \mathsf{LTree}\;\Varid{a}))\to \fun{BTree} \;\Conid{Bool}\to \mathsf{LTree}\;\Varid{a}{}\<[E]%
 \\
-\>[B]{}\Varid{bfFunctionPW}\;(\Varid{t1},\Varid{t2})\;\Conid{Empty}\mathrel{=}\Conid{Fork}\;((\Varid{t1}\;\Conid{Empty}),(\Varid{t2}\;\Conid{Empty})){}\<[E]%
+\>[B]{}\Varid{bfFunction}\;(\Varid{t1},\Varid{t2})\;\Conid{Empty}\mathrel{=}\Conid{Fork}\;((\Varid{t1}\;\Conid{Empty}),(\Varid{t2}\;\Conid{Empty})){}\<[E]%
 \\
-\>[B]{}\Varid{bfFunctionPW}\;(\Varid{t1},\Varid{t2})\;(\Conid{Node}\;(\Varid{a},(\Varid{tt1},\Varid{tt2})))\mid \Varid{a}\mathrel{=}\Varid{t1}\;\Varid{tt1}{}\<[E]%
+\>[B]{}\Varid{bfFunction}\;(\Varid{t1},\Varid{t2})\;(\Conid{Node}\;(\Varid{a},(\Varid{tt1},\Varid{tt2})))\mid \Varid{a}\mathrel{=}\Varid{t1}\;\Varid{tt1}{}\<[E]%
 \\
-\>[B]{}\hsindent{43}{}\<[43]%
-\>[43]{}\mid \Varid{otherwise}\mathrel{=}\Varid{t2}\;\Varid{tt2}{}\<[E]%
-\ColumnHook
-\end{hscode}\resethooks
-
-\subsubsection*{pbnavLTree}
-
-Para a resolução desta função recorremos ao uso de funções que encontramos enquanto estavamos a explorar o Probability.hs.
-Decidimos usar um catamorfismo para percorrer a \textit{LTree} dada, em cada um dos nodos da \texit{BTree} em que estavamos caso fosse Empty teriamos que retornar a mesma probabilidade a cada uma das possíveis decisões como seria de esperar e caso fosse um nodo utilizamos a função do módulo Probability que distribui as probabilidades para o lado esquerdo e direito da \textit{LTree} consoante a probabilidade de o valor do nodo da \textit{BTree} ser True ou False.
-Utilizando esta forma de pensar a definição da função torna-se simples sendo também simples definir o seu diagrama de tipos que a seguir aprsentamos. 
-
-\begin{eqnarray*}
-\xymatrix@C=3.4cm@R=2cm{
-	\ensuremath{\mathsf{LTree}}
-		\ar[d]|{\ensuremath{\Varid{pbnavLTree}\mathrel{=}\cata{\Varid{g}}}}
-		\ar@/_0.5cm/[r]_-{\ensuremath{\Varid{out}}}
-&
-	\ensuremath{\Conid{A}\mathbin{+}(\mathsf{LTree}\times\mathsf{LTree})}
-		\ar@/_0.5cm/[l]^-{\ensuremath{\mathbf{in}}}
-		\ar[d]|{\ensuremath{\Varid{id}\mathbin{+}(\cata{\Varid{g}}\times\cata{\Varid{g}})}}
-\\
-	\ensuremath{\fun{Dist}\;(\mathsf{LTree})\;^{BTree}}
-&
-	\ensuremath{\Conid{A}\mathbin{+}\Conid{A}\times(\fun{Dist}\;(\mathsf{LTree})\;^{BTree}\times\fun{Dist}\;(\mathsf{LTree})\;^{BTree})}
-		\ar[l]^-{\ensuremath{\Varid{g}\mathrel{=}\alt{\underline{(\Varid{certainly}\comp \Conid{Leaf})}}{\Varid{bpfFunction}}}}
-}
-
-\end{eqnarray*}
-
-\begin{hscode}\SaveRestoreHook
-\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{9}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\hsindent{41}{}\<[41]%
+\>[41]{}\mid \Varid{otherwise}\mathrel{=}\Varid{t2}\;\Varid{tt2}{}\<[E]%
+\\[\blanklineskip]%
 \>[B]{}\Varid{pbnavLTree}\mathrel{=}\Varid{cataLTree}\;\Varid{g}{}\<[E]%
 \\
 \>[B]{}\hsindent{3}{}\<[3]%
 \>[3]{}\mathbf{where}\;\Varid{g}\mathrel{=}\alt{\Varid{g1}}{\Varid{pbfFunction}}{}\<[E]%
 \\
 \>[3]{}\hsindent{6}{}\<[9]%
-\>[9]{}\Varid{g1}\mathrel{=}\underline{\cdot }\comp \Varid{certainly}\comp \Conid{Leaf}{}\<[E]%
+\>[9]{}\Varid{g1}\;\Varid{a}\mathrel{=}\underline{(\Varid{certainly}\;(\Conid{Leaf}\;\Varid{a}))}{}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{pbfFunction}\mathbin{::}((\fun{BTree} \;(\fun{Dist}\;\Conid{Bool})\to \fun{Dist}\;(\mathsf{LTree}\;\Varid{a})),(\fun{BTree} \;(\fun{Dist}\;\Conid{Bool})\to \fun{Dist}\;(\mathsf{LTree}\;\Varid{a})))\to \fun{BTree} \;(\fun{Dist}\;\Conid{Bool})\to \fun{Dist}\;(\mathsf{LTree}\;\Varid{a}){}\<[E]%
 \\
@@ -2081,64 +1733,6 @@ Utilizando esta forma de pensar a definição da função torna-se simples sendo
 \>[B]{}\Varid{pbfFunction}\;(\Varid{t1},\Varid{t2})\;(\Conid{Node}\;(\Varid{e},(\Varid{l1},\Varid{l2})))\mathrel{=}\Varid{\Conid{Probability}.cond}\;\Varid{e}\;(\Varid{t1}\;\Varid{l1})\;(\Varid{t2}\;\Varid{l2}){}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
-
-Tendo definida esta função podemos facilmente calcular as varias probabilidades e a resposta ao problema da Anita.
-
-Seja decisao a \textit{LTree} de decisão apresentada no início do problema e bTProbabilidade a \textit{BTree} de probabilidades abaixo definidas:
-
-\begin{hscode}\SaveRestoreHook
-\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{9}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{15}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{18}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{19}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{25}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{31}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{decisao}\mathrel{=}\Conid{Query}\;(\text{\ttfamily \char34 2a-feira?\char34},{}\<[E]%
-\\
-\>[B]{}\hsindent{9}{}\<[9]%
-\>[9]{}((\Conid{Query}\;(\text{\ttfamily \char34 chuva~na~ida?\char34},{}\<[E]%
-\\
-\>[9]{}\hsindent{6}{}\<[15]%
-\>[15]{}((\Conid{Dec}\;\text{\ttfamily \char34 precisa\char34}),{}\<[E]%
-\\
-\>[9]{}\hsindent{6}{}\<[15]%
-\>[15]{}(\Conid{Query}\;(\text{\ttfamily \char34 chuva~na~volta?\char34},{}\<[E]%
-\\
-\>[15]{}\hsindent{4}{}\<[19]%
-\>[19]{}((\Conid{Dec}\;\text{\ttfamily \char34 precisa\char34}),(\Conid{Dec}\;\text{\ttfamily \char34 nao~precisa\char34})))))),{}\<[E]%
-\\
-\>[B]{}\hsindent{9}{}\<[9]%
-\>[9]{}(\Conid{Dec}\;\text{\ttfamily \char34 nao~precisa\char34})))){}\<[E]%
-\\[\blanklineskip]%
-\>[B]{}\Varid{bTProbabilidade}\mathrel{=}\Conid{Node}\;((\Conid{D}\;[\mskip1.5mu (\Conid{True},\mathrm{1}\mathbin{/}\mathrm{7}),(\Conid{False},\mathrm{6}\mathbin{/}\mathrm{7})\mskip1.5mu]),{}\<[E]%
-\\
-\>[B]{}\hsindent{18}{}\<[18]%
-\>[18]{}(\Conid{Node}\;((\Conid{D}\;[\mskip1.5mu (\Conid{True},\mathrm{0.8}),(\Conid{False},\mathrm{0.2})\mskip1.5mu]),{}\<[E]%
-\\
-\>[18]{}\hsindent{7}{}\<[25]%
-\>[25]{}(\Conid{Empty},{}\<[E]%
-\\
-\>[18]{}\hsindent{7}{}\<[25]%
-\>[25]{}\Conid{Node}\;((\Conid{D}\;[\mskip1.5mu (\Conid{True},\mathrm{0.6}),(\Conid{False},\mathrm{0.4})\mskip1.5mu]),{}\<[E]%
-\\
-\>[25]{}\hsindent{6}{}\<[31]%
-\>[31]{}(\Conid{Empty},\Conid{Empty})))),{}\<[E]%
-\\
-\>[B]{}\hsindent{18}{}\<[18]%
-\>[18]{}\Conid{Empty})){}\<[E]%
-\ColumnHook
-\end{hscode}\resethooks
-
-Chamando o conjunto de funções obtemos o seguinte resultado tendo como podemos ver abaixo 86.9 \% probabilidades de não precisar de levar guarda chuva maioritariamente devido a ter apenas de se preocupar com isso em 1 dos 7 dias da semana.
-
-
-\begin{figure}[h]\centering
-    \includegraphics[scale=0.80]{images/P3-Anita.png}
-    \caption{Resposta ao problema de Anita.}
-    \label{fig:anita}
-    \end{figure}
 
 \subsection*{Problema 5}
 

@@ -1519,10 +1519,7 @@ janela = InWindow
 
 put  = uncurry Translate 
 
-putTiles :: Int -> Int -> [Picture]
-putTiles 0 _ = []
-putTiles n 0 = truchet2 : putTiles (n-1) 0
-putTiles n m = truchet1 : putTiles (n-1) (m-1)
+putTiles a b = (replicate a truchet1) ++ (replicate b truchet2)  
 
 draw :: Int -> Int -> Int -> [Picture] -> [Picture]
 draw _ _ _ [] = []
@@ -1533,13 +1530,12 @@ main :: IO()
 main = do
     putStrLn "Enter the width:"
     xi <- getLine
-    let x = (read xi :: Int)
     putStrLn "Enter the height:"
     yi <- getLine
-    let y = (read yi :: Int)
+    let (x,y) = ((read xi :: Int),(read yi :: Int))
     n <- getStdRandom (randomR(0,x*y))
-    r <- permuta (putTiles (x*y) n)
-    display janela white (put ((-480),(-480)) (Pictures (draw x y x r)) )
+    r <- permuta (putTiles2 ((x*y)-n) n)
+    display janela white ( put ((-480),(-480)) (Graphics.Gloss.scale (10/fromIntegral x) (10/fromIntegral y) (Pictures (draw x y x r)) ))
 
 -------------------------------------------------
 \end{code}

@@ -1586,6 +1586,8 @@ Chamando o conjunto de funções obtemos o seguinte resultado tendo como podemos
 
 \subsection*{Problema 5}
 
+Pare resolver este problema, decidimos tirar proveito da função permuta que nos é fornecida
+
 \begin{code}
 
 truchet1 = Pictures [ put (0,80) (Arc (-90) 0 40), put (80,0) (Arc 90 180 40) ]
@@ -1603,12 +1605,18 @@ janela = InWindow
 
 put  = uncurry Translate 
 
-putTiles a b = (replicate a truchet1) ++ (replicate b truchet2)  
+\end{code}
+
+Após o input do utilizador é gerado um número aleatório (n) entre 0 e o número total de ladrilhos necessários para fazer a imagem, depois é gerada uma lista com n ladrilhos do tipo truchet1 e total-n ladrilhos do tipo truchet2 a qual será aplicada a função permuta, ficamos assim com uma lista gerada aleatóriamente.
+Por fim criamos a função draw que é reponsável por desenhar cada peça no ponto na tela correto, esta função recebe para além da lista a desenhar as dimensões do mosaico e um acumulador que indica quando é necessário desenhar uma nova linha.
+
+\begin{code}
+
 
 draw :: Int -> Int -> Int -> [Picture] -> [Picture]
 draw _ _ _ [] = []
 draw x y 0 l = (draw x (y-1) x l)
-draw x y i (h:t) = (put ((fromIntegral (i*80)),(fromIntegral (y*80))) h) : (draw x y (i-1) t)
+draw x y i (h:t) = (put ((fromIntegral (i*80-480)),(fromIntegral (y*80-480))) h):(draw x y (i-1) t)
 
 main :: IO()
 main = do
@@ -1618,11 +1626,17 @@ main = do
     yi <- getLine
     let (x,y) = ((read xi :: Int),(read yi :: Int))
     n <- getStdRandom (randomR(0,x*y))
-    r <- permuta (putTiles ((x*y)-n) n)
-    display janela white ( put ((-480),(-480)) (Graphics.Gloss.scale (10/fromIntegral x) (10/fromIntegral y) (Pictures (draw x y x r)) ))
+    l <- permuta ((replicate ((x*y)-n) truchet1) ++ (replicate n truchet2))
+    display janela white (Pictures (draw x y x l))
 
 -------------------------------------------------
 \end{code}
+
+\begin{figure}[!h]\centering
+    \includegraphics[scale=1]{images/P5-Truchet.png}
+    \caption{Resposta ao problema 5.}
+    \label{fig:truchet}
+    \end{figure}
 
 %----------------- Fim do anexo com soluções dos alunos ------------------------%
 

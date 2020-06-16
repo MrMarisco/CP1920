@@ -89,7 +89,7 @@
 %format (cataLTree_ (g)) = "\cata{" g "}"
 %format (cataBTree_ (g)) = "\cata{" g "}"
 %format (cataList_ (g)) = "\cata{" g "}"
-%format (anaBdt_ (g)) = "\ana{" g "} "
+%format (cataExp_ (g)) = "\cata{" g "}"
 %format listS = "^*"
 %format powerBool = "^{Bool^*}"
 %format powerBTree = "^{BTree}"
@@ -121,13 +121,13 @@
 
 \begin{center}\large
 \begin{tabular}{ll}
-\textbf{Grupo} nr. & 99 (preencher)
+\textbf{Grupo} nr. & 35
 \\\hline
-a11111 & Nome1 (preencher)	
+a89556 & Marco Avelino Teixeira Pereira	
 \\
-a22222 & Nome2 (preencher)	
+a89549 & Alexandre Ferreira Gomes
 \\
-a33333 & Nome3 (preencher)	
+a69856 & Manuel Jorge Mimoso Carvalho	
 \end{tabular}
 \end{center}
 
@@ -976,85 +976,49 @@ outras funções auxiliares que sejam necessárias.
 
 \subsection*{Problema 1}
 
-A função discollect abaixo apresentada tira partido da utilização de \| de modo a preencher cada par retornado com o respetivo valor.
+\subsubsection*{discollect}
 
+A função discollect abaixo apresentada tira partido da utilização da notação do de modo a preencher cada par retornado com o respetivo valor.
 \begin{code}
 discollect :: (Ord b, Ord a) => [(b, [a])] -> [(b, a)]
 discollect d = Cp.cond null nil (do { (a,x) <- head; return ([(a,b) | b <- x]++(discollect . tail) d) }) d
 \end{code}
 
+No entanto pode ser definida de uma forma mais "casual" e simples de entender como aquela abaixo apresentada:
+\begin{spec}
+
+discollectPW :: (Ord b, Ord a) => [(b, [a])] -> [(b, a)]
+discollectPW [] = []
+discollectPW ((a, x) : y) = [(a, b) | b <- x] ++ discollectPW y
+
+\end{spec}
 A função de exportação do dicionário usa a ja implementada função collect após a função tar ter retornado a lista com pares entre a palavra em português e uma lista de possíveis traduções desta.
 
+\subsubsection*{dic\_exp}
 \begin{code}
 dic_exp :: Dict -> [(String,[String])]
 dic_exp = collect . tar
 \end{code}
 
+\subsubsection*{tar}
+
 Como foi dito em cima aqui se encontra a função tar que utiliza como gene uma função que terá como input duas alternativas sendo elas o Var e o Term, logo o gene tem de ser um either. 
 Sabendo isso temos apenas de encontrar os seus constituintes g1 e g2.
-O constituinte g1 será aplicado ao resultado de outExp . (Var v), tendo o seu retorno de ser uma lsta com apenas um par em que o primeiro constituinte seria "" e o segundo seria a palavra traduzida a qual chegamos(v).
-O constituinte g2 será aplicado a (id >< map {|cataExp g|} ) . outExp . (Term v d), a partir disto facilmente chegamos a conclusão que g2 será aplicado a (v,k) onde k é uma lista do tipo que temos de retornar e são os pares de traduções que se formam a partir daquele termo v, logo tudo o que temos de fazer é inserir v no inicio do primeiro membro de cada um dos pares da lista k concatenada,
-daí ficamos com g2 (v,k) = map ((v++) >< id) (concat k)
-
-Sendo assim fácil definir a função tar:
+O constituinte g1 será aplicado ao resultado de | out (Var v) |, tendo o seu retorno de ser uma lista com apenas um par em que o primeiro constituinte seria "" e o segundo seria a palavra traduzida a qual chegamos(v).
+O constituinte g2 será aplicado a | (id >< map (cataExp_ g) ) . out |, a partir disto facilmente chegamos a conclusão que g2 será aplicado a (v,k) onde k é uma lista do tipo que temos de retornar e são os pares de traduções que se formam a partir daquele termo v, logo tudo o que temos de fazer é inserir v no inicio do primeiro membro de cada um dos pares da lista k concatenada, daí ficamos com | g2 (v,k) = map ((v++) >< id) (concat k)| .
 
 \begin{code}
 tar = cataExp g where
   g = either g1 g2 where
-    g1 s = [("",s)]
-    g2 (o,l) = map ((o++) >< id) (concat l)
+    g1 = singl . (split (const "") (id))
+    g2 (o,l)= map ((o++) >< id) (concat l)
+
 \end{code}
 
-Esta função foi o primeiro desafio do trabalho pois não nos era dito nada sobre a forma que ela devia tomar mas com um pouco de raciocinio chega-se a conclusão que iriamos percorrer a palavra que na sua essência é simplesmente uma lista de caracteres.
-Sabendo isso tinhamos o molde inicial, um cataList após isso tinhamos que conseguir descobrir cada um dos contituintes do either, aplicando o conjunto de fórmulas muito comum neste contexto de catamorfismo conseguimos como é apresentado a seguir chegar a:
-
-\begin{eqnarray*}
-%
-\start
-%
- | dic_rd = cataList_ (either g1 g2) | 
-%
-\just={lei-43}
-%
-    | dic_rd . inList = (either g1 g2) . F dic_rd |    
-%
-\just={def inBTree ; def F }
-%
-    | dic_rd . either nil cons = (either g1 g2) . (id -||- (id >< dic_rd)))|
-%
-\just={lei-20 ; lei-22}
-%
-    | either (dic_rd . nil (dic_rd . cons) = (either g1  (g2 . (id >< dic_rd))) |
-%
-\just={lei-27}
-%
-  | lcbr (dic_rd . nil = g1) (dic_rd . cons = g2 . (id >< dic_rd)) |
-%
-\just={inserindo variáveis}
-%
-  | lcbr (dic_rd . nil () = g1 ()) (dic_rd . cons (a,b) = g2 . (id >< dic_rd) (a,b) |
-%
-\just={lei-3 ; lei-75}
-%
-  | lcbr (dic_rd [] = g1 ()) (dic_rd (a:b)) = g2 . (a,(dic_rd b)))) |
-%
- \end{eqnarray*}
-
-Chegando a este modelo conseguimos atravês de raciocinio lógico chegar a conclusão que a leitura de uma palavra vazia de um dicionário deverá caso o dicionário seja Var v retornar essa tradução e caso o dicionário seja um Term não fará sentido retornar nada.
-
-O caso mais complicado como já é costume é a resolução de g2, g2 irá receber o resultado de aplicar a procura do resto da palavra aos vários dicionarios da lista proveniente de Term nesse sentido temos apenas que verificar se a primeira letra da palavra coincide com a letra apresentada em Term e após isto temos apenas que retornar o resultado que tinhamos anteriormente referido da aplicação de dic_rd ao resto da palavra, mas existe uma armadilha pois como aplicamos dic_rd a todos os outros possíveis dicionários da lista do term temos que filtrar esse resultado retirando os Nothing e temos ainda que juntar as listas de cada um dos resultados que forem diferentes de Nothing,para tal criamos uma função auxiliar parecida com a Sequence a qual, orginalmente, chamamos auxSequence.
-
-Existe também um caso extra que é o de a palavra que estamos a aplicar ainda não ter terminado ou seja a lista de caracteres ter pelo menos um membro e o dicionário no qual estamos a procurar ser um Var, mas uma simples condição de verificação resolve esse assunto.
-
+\subsubsection*{dic\_rd}
+Esta função foi o primeiro problema que tivemos de resolver sem receber informação alguma sobre que caminho seguir, pensando na tipagem desta função vemos que o primeiro argumento que ela recebe é uma /textit{String}, que é como sabemos uma lista de /textit{Char}, logo a primeira ideia que ocorre seria o uso de um cataList que percorra a lista de /textit{Char} tal que quando a lista for vazia ele retorne as váriaveis que se encontra nesse local do /textit{Dic}.
+No entanto para poder definir esta função decidimos criar uma outra auxiliar que seja parecida com a sequence mas que funcione com listas e as concatene ao invés de as juntar numa lista de listas e ainda que quando receba um Nothing, não faça com que o resultado seja automaticamente Nothing, ignorando-o apenas.
 \begin{code}
-dic_rd = cataList (either (const g1) g2)
-  where g1 (Var v) = Just [v]
-        g1 (Term o l) = Nothing
-        g2 (a,g2t) (Term o l) | o== "" = auxSequence (map (g2 (a,g2t)) l) 
-                              | o==[a] = auxSequence [ b | b <- (map g2t l), Nothing /= b] 
-                              | otherwise = Nothing  
-        g2 _ (Var v) = Nothing
-
 
 auxSequence :: [Maybe [String]] -> Maybe [String]
 auxSequence = cataList (either g1 g2)
@@ -1063,24 +1027,95 @@ auxSequence = cataList (either g1 g2)
         g2 (Nothing,Nothing) = Nothing
         g2 (Just a,Nothing) = Just a
         g2 (Nothing,Just a) = Just a
+
 \end{code}
+Tendo a nossa função auxiliar tivemos apenas que usar as definições aprendidas na UC para tornar fácil a descoberta de dic_rd.
 
-Para a resolução desta função, que na nossa opinião foi a mais complicada entre todos os problemas, tivemos a ajuda do professor, sabendo que era um hyloList optamos por, atravês da função de divide procurar o local de inserção e atravês da função conquer tratar da inserção da tradução.
+\begin{eqnarray*}
+%
+\start
+%
+| dic_rd = cataList_ (either g1 g2) | 
+%
+\just={lei-43}
+%
+| dic_rd . inList = (either g1 g2) . F dic_rd |    
+%
+\just={def inBTree ; def F }
+%
+| dic_rd . either nil cons = (either g1 g2) . (id -||- (id >< dic_rd))|
+%
+\just={lei-20 ; lei-22}
+%
+| either (dic_rd . nil (splay . cons)) = (either g1  (g2 . (id >< dic_rd))) |
+%
+\just={lei-27}
+%
+| lcbr (dic_rd . nil = g1) (dic_rd . cons = g2 . (id >< dic_rd )) |
+%
+\just={inserindo variáveis}
+%
+| lcbr (dic_rd . nil () = g1 ()) (dic_rd . cons (h,t) = g2 . (id >< dic_rd) (h,t)) |
+%
+\just={lei-3 ; lei-75}
+%
+| lcbr (dic_rd [] = g1 ()) (dic_rd (h:t) = g2 . (h,(dic_rd t))) |
+%
+ \end{eqnarray*}
 
-Na função de divide decidimos...
-
-A seguir temos a apresentação do diagrama de tipos associado a esta:
-
+Tendo chegado a isto temos agora que tentar deduzir as definições de g1 e g2, ora, g1 é como sempre o caso mais simples, caso estejamos perante uma lista vazia e um \textit{Dict} Var vamos querer retornar o Just do singl da \textit{String} que vem neste, caso contrário queremos retornar Nothing pois não há traduções desta palavra.
+Quanto a g2 temos as mesmas hipóteses, caso esta receba uma Var vamos retornar Nothing pois não temos mais nada a percorrer no dicionário, caso receba um Term temos que verificar se a String deste é igual à cabeça da nossa lista de caracteres colocada em forma de lista, se isso for verdade mapeamos o segundo valor do par acima visto a cada um dos elementos da lista presente em Term caso contrário retornamos Nothing.
 
 \begin{code}
-dic_in p s (Term "" v) = Term "" (hyloList (conquerFunction s) (divideFunction) (p,v))
+dic_rd = cataList (either (const g1) g2)
+  where g1 (Var v) = Just [v]
+        g1 (Term o l) = Nothing
+        g2 (a,g2t) (Term o l) | o== "" = auxSequence (map (g2 (a,g2t)) l) 
+                              | o==[a] = auxSequence [ b | b <- (map g2t l), Nothing /= b] 
+        g2 _ _ = Nothing
+\end{code}
+
+\subsubsection*{dic\_in}
+
+A seguir temos a função de inserção no dicionário, esta função foi feita tirando partido da dica dada pelos docentes no FAQ, que foi o uso de um hylo.
+Abaixo encontra-se o diagrama de tipos de forma a fundamentar a explicação que iremos dar com mais coerência.
+
+\resizebox{5cm}{!}{
+  \begin{eqnarray*}
+  \xymatrix@@C=3cm@@R=2cm{
+	  |String >< Dict listS|
+		  \ar[r]^{|divideFunction|}
+		  \ar[d]||{|anaList_ (divideFunction)|}
+  &
+	  |1 + ((Dict listS + (Char >< Dict listS )) >< (String >< Dict listS))|
+		  \ar[d]||{| id + id >< (anaList_ divideFunction) |}
+  \\
+	  |(Dict listS + (Char >< Dict listS )) listS|
+		  \ar[d]||{|cataList_ conquerFunction|}
+		  \ar@@/^0.4cm/[r]^-{|out|}
+  &
+	  |1 + (Dict listS + (Char >< Dict listS )) >< (Dict listS + (Char >< Dict listS )) listS|
+		  \ar[d]||{|id + id >< (cataList_ conquerFunction)|}
+		  \ar@@/^0.4cm/[l]^-{|in|}
+  \\
+	  |Dict listS|
+  &
+	  |1 + (Dict listS + (Char >< Dict listS )) >< Dict listS|
+		  \ar[l]^{|conquerFunction|}
+  }
+  \end{eqnarray*}
+}
+
+A função desempenhada por divideFunction é recebendo a palavra a procurar no dicionário 
+
+\begin{code}
+dic_in p s (Term "" v) = Term "" (hyloList (conquerFunction s) divideFunction (p,v))
 
 divideFunction :: (String,[Dict]) -> Either () (Either [Dict] (Char,[Dict]),(String,[Dict]))
 divideFunction ("",[]) = i1 ()
 divideFunction ((h:t),[]) = i2 ((i2 (h,[])),(t,[]))
 divideFunction ("",d) = i2 ( i1 d ,("",[]))
-divideFunction ((h:t),((Term k v):ds)) | k==[h] =  i2 (i2 (h,ds), (t,v))
-                                       | otherwise = (either (i1 . id) (i2.((either (i1 . ((Term k v):)) (i2 . (id >< ((Term k v):)))) >< id)) . divideFunction) ((h:t),ds)
+divideFunction ((h:t),((Term k v):ds)) | (k==[h]) = i2 (i2 (h,ds), (t,v))
 divideFunction ((h:t),(d:ds)) = (either (i1 . id) (i2.((either (i1 . (d:)) (i2 . (id >< (d:)))) >< id)) . divideFunction) ((h:t),ds)
 
 conquerFunction :: String -> Either () (Either [Dict] (Char,[Dict]),[Dict]) -> [Dict]
@@ -1093,10 +1128,6 @@ cFaux t l = either (tt1 t l) (tt2 t l)
 
 \end{code}
 
-Após algum tempo a pensar tivemos uma outra ideia para a resolução desta que consistia em um anamorfismo de /textit{List} após um anamorfismo de /textit{Exp} a qual apresentamos a seguir:
-
-
-
 \subsection*{Problema 2}
 
 \subsubsection*{maisDir e maisEsq}
@@ -1108,37 +1139,37 @@ O raciocinio e as fórmulas de Cálculo de Programas usadas na resolução da fu
 %
 \start
 %
- | maisDir = cataBTree_ (either g1 g2) | 
+| maisDir = cataBTree_ (either g1 g2) | 
 %
 \just={lei-43}
 %
-    | maisDir . inBTree = (either g1 g2) . F maisDir |    
+| maisDir . inBTree = (either g1 g2) . F maisDir |    
 %
 \just={def inBTree ; def F }
 %
-    | maisDir . either (const Empty) Node = (either g1 g2) . (id -||- (id >< ( maisDir >< maisDir )))|
+| maisDir . either (const Empty) Node = (either g1 g2) . (id -||- (id >< ( maisDir >< maisDir )))|
 %
 \just={lei-20 ; lei-22}
 %
-    | either (maisDir . (const Empty)) (maisDir . Node) = (either g1  (g2 . (id >< ( maisDir >< maisDir )))) |
+| either (maisDir . (const Empty)) (maisDir . Node) = (either g1  (g2 . (id >< ( maisDir >< maisDir )))) |
 %
 \just={lei-27}
 %
-  | lcbr (maisDir . (const Empty) = g1) (maisDir . Node = g2 . (id >< ( maisDir >< maisDir ))) |
+| lcbr (maisDir . (const Empty) = g1) (maisDir . Node = g2 . (id >< ( maisDir >< maisDir ))) |
 %
 \just={inserindo variáveis}
 %
-  | lcbr (maisDir . (const Empty) () = g1 ()) (maisDir . Node (a,(t1,t2)) = g2 . (id >< (maisDir >< maisDir )) (a,(t1,t2)) |
+| lcbr (maisDir . (const Empty) () = g1 ()) (maisDir . Node (a,(t1,t2)) = g2 . (id >< (maisDir >< maisDir )) (a,(t1,t2)) |
 %
 \just={lei-3 ; lei-75}
 %
-  | lcbr (maisDir Empty = g1 ()) (maisDir (Node (a,(t1,t2))) = g2 . (a,((maisDir t1 ),(maisDir t2)))) |
+| lcbr (maisDir Empty = g1 ()) (maisDir (Node (a,(t1,t2))) = g2 . (a,((maisDir t1 ),(maisDir t2)))) |
 %
  \end{eqnarray*}
 
 A partir do sistema de equações ao qual chegamos conseguimos facilmente extrair g1 pois o node mais à direita de uma árvore vazia não existe logo Nothing.
 
-Para g2 temos um contratempo pois não podemos apenas dizer que o resultado seria o obtido em \textit{maisDir} t1 pois este pode retornar Nothing mas um simples pattern match resolve essa situação.
+Para g2 temos um contratempo pois não podemos apenas dizer que o resultado seria o obtido em \textit{maisDir} t1 pois este pode retornar Nothing mas um simples pattern matching resolve essa situação.
 
 Por isso decidimos criar a função abaixo apresentada que retorna o \textit{Bool} True caso receba um \textit{Maybe} com valor Nothing.
 \begin{code}
@@ -1188,35 +1219,39 @@ maisEsq = cataBTree g where
 
 \end{code}
 
-Para a resolução da função abaixo recorremos ao enunciado, à equação dada que nos diz que insOrd' x = split <insOrd x,id>, a partir desta conseguimos aplicar a lei de Fokkinga e outras para chegar a um estado em que se torna mais fácil a prespeção de o que cada função possa ser.
+Para a resolução da função abaixo recorremos ao enunciado, à equação dada que nos diz que \begin{eqnarray*} |insOrd' x = split (insOrd x) id| \end{eqnarray*} A partir desta conseguimos aplicar a lei de Fokkinga e outras para chegar a um estado em que se torna mais fácil a prespeção de o que cada função possa ser.
 
-Como no formulário temos o nome que cada função toma como sendo h e k no lado direito da equação presente na fórmula de Fokkinga decidimos manter essa formulação criando assim hFunction e referindo k2 como o segundo constituinte de k.
-Assim encontra-se abaixo resolvida a equação que nos levou a chegar às funções apresentadas de forma mais fácil. 
+Como no formulário temos o nome que cada função toma como sendo h e k no lado direito da equação presente na fórmula de Fokkinga decidimos manter essa formulação criando assim hFunction.
+Dessa forma chegamos à definição que apresentamos abaixo e substituindo a definição apresentada de \textit{insOrd'} por aquela que é dada no enunciado vemos que estas estão definidas com recursividade mútua.
+Sendo \textit{insOrd'} uma função que retorna um par de BTrees sendo o primeiro o uma forma de diferenciar em qual dos dois lados vai inserir retornarndo a \textit{BTree} com a inserção no lado correto e o segundo a \textit{BTree} que contem apenas os segundos elementos dos dois pares que recebe que são uma cópia do que era anteriormente para não perder informação.
+Desta forma em insOrd temos apenas que decidir qual dos lados queremos ao aplicar a mesma hFunction.
+Quando atingimos h com vazio sabemos que chegamos ao ponto onde devemos inserir o Node com a o valor a inserir e Empty nas suas duas árvores.
 
-
-
-
+\subsubsection*{insOrd}
 \begin{code}
 
 insOrd' x = cataBTree g
-  where g = split (hFunction x) (either (const Empty) (Node . (id >< (p2 >< p2))))
+  where g = split (hFunction x) (either (const Empty) k2)
+        k2 (a,((t11,t12),(t21,t22))) = Node (a,(t12,t22))
 
-insOrd a = (hFunction a) . recBTree(insOrd' a) . outBTree 
+insOrd a = (hFunction a) . recBTree(insOrd' a) . outBTree  
   
-hFunction :: (Ord a) => a -> Either () (a,((BTree a,BTree a),(BTree a,BTree a))) -> BTree a 
-hFunction x = either (const (Node (x,(Empty,Empty)))) (g2)
-            where 
-              g2 =Cp.cond ( (x>=) . p1) (Node . (id >< (p1 >< p2))) (Node . (id >< (p2 >< p1)))
+hFunction x = either (h1 x) (h2 x) 
+  where h1 x () = Node (x,(Empty,Empty))
+        h2 x (a,((t11,t12),(t21,t22))) | x<=a = Node (a,(t11,t22))
+                                       | otherwise = Node (a,(t12,t21))
 
 \end{code}
+\subsubsection*{isOrd}
 
-
+A função abaixo apresentada funciona de forma parecida à anterior usando \textit{isOrd'} apenas para retornar um par em que o segundo elemento é uma forma de não perder informação sobre a árvore e o primeiro é o \textit{Bool} qeu julgou se a árvore do seu par estava ou não ordenada.
+Da mesma forma que acima fizemos aqui podemos também simplesmente substituir a definição apresentada por \textit{isOrd'} para que estas funções fiquem implementadas utilizando recursividade mútua de uma forma mais facilmente visível.
 
 \begin{code}
 
 isOrd' = cataBTree g
-  where g = split hFunc (either (const Empty) k2)
-        k2 (a,((b1,t1),(b2,t2))) = Node (a,(t1,t2))
+    where g = split hFunc (either (const Empty) k2)
+          k2 (a,((b1,t1),(b2,t2))) = Node (a,(t1,t2))
 
 isOrd = hFunc . recBTree(isOrd') . outBTree
 
@@ -1245,7 +1280,7 @@ lrot t = t
 
 \subsubsection*{splay}
 
-A definição de splay foi obtida por nós seguindo as formulas da Unidade Curricular sendo abaixo apresentada que já anteriormente foi apresentado no trabalho mudando apenas o nome da função logo iremos apenas apresentar o início e fim do raciocinio por questões de espaço e de repetição.
+A definição de splay foi obtida por nós seguindo as formulas da Unidade Curricular sendo abaixo apresentada.
 
 \begin{eqnarray*}
 %
@@ -1253,7 +1288,27 @@ A definição de splay foi obtida por nós seguindo as formulas da Unidade Curri
 %
  | splay = cataList_ (either g1 g2) | 
 %
-\just={...}
+\just={lei-43}
+%
+    | splay . inList = (either g1 g2) . F splay |    
+%
+\just={def inBTree ; def F }
+%
+    | splay . either nil cons = (either g1 g2) . (id -||- (id >< splay))|
+%
+\just={lei-20 ; lei-22}
+%
+    | either (splay . nil (splay . cons)) = (either g1  (g2 . (id >< splay))) |
+%
+\just={lei-27}
+%
+  | lcbr (splay . nil = g1) (splay . cons = g2 . (id >< splay )) |
+%
+\just={inserindo variáveis}
+%
+  | lcbr (splay . nil () = g1 ()) (splay . cons (h,t) = g2 . (id >< splay) (h,t)) |
+%
+\just={lei-3 ; lei-75}
 %
   | lcbr (splay [] = g1 ()) (splay (h:t) = g2 . (a,(splay t))) |
 %
@@ -1351,24 +1406,6 @@ cataBdt g = g . recBdt (cataBdt g) . outBdt
 
 anaBdt g = inBdt . recBdt (anaBdt g) . g
 \end{code}
-Como pedido temos abaixo apresentado o diagrama de anaBdt:
-
-\begin{eqnarray*}
-\xymatrix@@C=3.1cm@@R=2cm{
-	|Bdt|
-		\ar@@/_0.5cm/[r]_-{|out|}
-&
-	|A + (String >< (Bdt,Bdt)|
-		\ar@@/_0.5cm/[l]_-{|in|}
-\\
-	|Bdt|
-		\ar[u]||{|anaBdt = anaBdt_ g|}
-		\ar[r]_{|g|}
-&
-	|A + (String >< (Bdt,Bdt))|
-		\ar[u]||{|id + (id >< (anaBdt_ g >< anaBdt_ g))|}
-}
-\end{eqnarray*}
 
 \subsubsection*{navLTree}
 A forma de pensar usada para esta função foi a utilização de um catamorfismo que irá percorrer a \textit{LTree} dada, e consoante a lista de \textit{Bool} a receber irá caso a cabeça desta lista seja true aplicar o resultado do catamorfismo da \textit{LTree} da direita aplicado à cauda da lista de \textit{Bool} à lista da direita e o contrário quando for false.
@@ -1398,12 +1435,15 @@ navLTree = cataLTree g
         g1 = const . Leaf
 
 fFunction :: (([Bool] -> LTree a),([Bool] -> LTree a)) -> [Bool] -> LTree a
-fFunction = curry (Cp.cond (null . p2) (Fork . (split (Cp.ap . (p1 >< nil)) (Cp.ap . (p2 >< nil)))) (Cp.cond (head . p2) (Cp.ap . (p1 >< tail)) (Cp.ap . (p2 >< tail))))
+fFunction = curry (Cp.cond (null . p2) ff1 ff2)
+          where ff1 = Fork . (split (Cp.ap . (p1 >< nil)) (Cp.ap . (p2 >< nil)))
+                ff2 = Cp.cond (head . p2) (Cp.ap . (p1 >< tail)) (Cp.ap . (p2 >< tail))
+
 \end{code}
 
-Em baixo temos uma versão pointwise que nos fornece um mais fácil entendimento do raciocinio
+Em baixo temos uma versão pointwise que nos fornece um mais fácil entendimento do raciocinio.
 
-\begin{code}
+\begin{spec}
 navLTreePW :: LTree a -> ([Bool] -> LTree a)
 navLTreePW = cataLTree g
   where g = either g1 fFunctionPW
@@ -1414,7 +1454,7 @@ fFunctionPW (t1,t2) [] = Fork ((t1 []),(t2 []))
 fFunctionPW (t1,t2) (h:t) | h = t1 t
                           | otherwise = t2 t
 
-\end{code}
+\end{spec}
 
 \subsection*{Problema 4}
 Este problema consiste em colocar os alunos a prova com uma primeira função relativamente facil de resolver pois segue o mesmo principio da função definida anteriormente \textit{navLTree} e após isso aumentar a dificuldade para os alunos criarem uma mesma versão mas desta vez monadificada.
@@ -1436,7 +1476,7 @@ getNodDir :: BTree a -> BTree a
 getNodDir (Node (a,(t1,t2))) = t2
 
 \end{code}
-Para complementar a nossa resposta encontra-se abaixo o diagrama de tipos do mesmo:
+Para complementar a nossa resposta encontra-se abaixo o diagrama de tipos:
 
 \begin{eqnarray*}
 \xymatrix@@C=3.4cm@@R=2cm{
@@ -1468,7 +1508,7 @@ bfFunction = curry (Cp.cond ((Empty==).p2) func1 func2)
 
 Em baixo temos uma versão pointwise que permite uma compreensão mais simples e intuitiva do que aquela que apresentamos acima.
 
-\begin{code}
+\begin{spec}
 bnavLTreePW = cataLTree g
   where g = either g1 bfFunctionPW
         g1 a = const(Leaf a)
@@ -1477,7 +1517,7 @@ bfFunctionPW :: ((BTree Bool -> LTree a),(BTree Bool -> LTree a)) -> BTree Bool 
 bfFunctionPW (t1,t2) Empty = Fork ((t1 Empty),(t2 Empty))
 bfFunctionPW (t1,t2) (Node (a,(tt1,tt2))) | a = t1 tt1
                                           | otherwise = t2 tt2
-\end{code}
+\end{spec}
 
 \subsubsection*{pbnavLTree}
 
@@ -1502,15 +1542,13 @@ Utilizando esta forma de pensar a definição da função torna-se simples sendo
 }
 
 \end{eqnarray*}
-
 \begin{code}
 pbnavLTree = cataLTree g
-  where g = either g1 pbfFunction
-        g1 = const . certainly . Leaf
+  where g = either g1 pbfFunctionPW
+        g1 a = const(certainly (Leaf a))
 
-pbfFunction :: ((BTree (Dist Bool) -> Dist(LTree a)),(BTree (Dist Bool) -> Dist (LTree a))) -> BTree (Dist Bool) -> Dist (LTree a)
-pbfFunction (t1,t2) Empty = Probability.cond (choose 0.5 True False) (t1 Empty) (t2 Empty)
-pbfFunction (t1,t2) (Node (e,(l1,l2))) = Probability.cond e (t1 l1) (t2 l2) 
+pbfFunctionPW (t1,t2) Empty = Probability.cond (choose 0.5 True False) (t1 Empty) (t2 Empty)
+pbfFunctionPW (t1,t2) (Node (e,(l1,l2))) = Probability.cond e (t1 l1) (t2 l2) 
 
 \end{code}
 
@@ -1520,16 +1558,16 @@ Seja decisao a \textit{LTree} de decisão apresentada no início do problema e b
 
 \begin{code}
 
-decisao = Query ("2a-feira?",
+decisao = 
+      Query ("2a-feira?",
         ((Query ("chuva na ida?",
               ((Dec "precisa"),
               (Query ("chuva na volta?",
                   ((Dec "precisa"),(Dec "nao precisa")))))),
         (Dec "nao precisa"))))
 
-
-
-bTProbabilidade = Node ((D [(True,1/7),(False,6/7)]),
+bTProbabilidade = 
+                Node ((D [(True,1/7),(False,6/7)]),
                  (Node ((D [(True,0.8),(False,0.2)]),
                         (Empty,
                         Node ((D [(True,0.6),(False,0.4)]),
@@ -1540,8 +1578,7 @@ bTProbabilidade = Node ((D [(True,1/7),(False,6/7)]),
 
 Chamando o conjunto de funções obtemos o seguinte resultado tendo como podemos ver abaixo 86.9 \% probabilidades de não precisar de levar guarda chuva maioritariamente devido a ter apenas de se preocupar com isso em 1 dos 7 dias da semana.
 
-
-\begin{figure}[h]\centering
+\begin{figure}[!h]\centering
     \includegraphics[scale=0.80]{images/P3-Anita.png}
     \caption{Resposta ao problema de Anita.}
     \label{fig:anita}
@@ -1566,10 +1603,7 @@ janela = InWindow
 
 put  = uncurry Translate 
 
-putTiles :: Int -> Int -> [Picture]
-putTiles 0 _ = []
-putTiles n 0 = truchet2 : putTiles (n-1) 0
-putTiles n m = truchet1 : putTiles (n-1) (m-1)
+putTiles a b = (replicate a truchet1) ++ (replicate b truchet2)  
 
 draw :: Int -> Int -> Int -> [Picture] -> [Picture]
 draw _ _ _ [] = []
@@ -1580,13 +1614,12 @@ main :: IO()
 main = do
     putStrLn "Enter the width:"
     xi <- getLine
-    let x = (read xi :: Int)
     putStrLn "Enter the height:"
     yi <- getLine
-    let y = (read yi :: Int)
+    let (x,y) = ((read xi :: Int),(read yi :: Int))
     n <- getStdRandom (randomR(0,x*y))
-    r <- permuta (putTiles (x*y) n)
-    display janela white (put ((-480),(-480)) (Pictures (draw x y x r)) )
+    r <- permuta (putTiles ((x*y)-n) n)
+    display janela white ( put ((-480),(-480)) (Graphics.Gloss.scale (10/fromIntegral x) (10/fromIntegral y) (Pictures (draw x y x r)) ))
 
 -------------------------------------------------
 \end{code}

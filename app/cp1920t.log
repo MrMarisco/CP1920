@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.6.6)  8 JUN 2020 20:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.6.6)  16 JUN 2020 13:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -798,72 +798,16 @@ Overfull \hbox (18.06151pt too wide) in paragraph at lines 1366--1370
  exerc[]^^Pcios pro-pos-tos, de acordo com o "layout"que
  []
 
+\openout5 = `cp1920t.ptb'.
 
-! LaTeX Error: \mathit allowed only in math mode.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1373 ... utilização de \\ensuremath{\Varid{de}
-                                                  \;\Varid{modo}\;\Varid{a}\...
+Overfull \hbox (12.3705pt too wide) in paragraph at lines 1376--1383
+ [][] 
+ []
 
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.1373 ...tilização de \\ensuremath{\Varid{de}\;
-                                                  \Varid{modo}\;\Varid{a}\;\...
 
-? 
-! Extra }, or forgotten $.
-l.1373 ...n}\;([\mskip1.5mu (\Varid{a},\Varid{b})}
-                                                   b <- x]++(discollect . ta...
-
-? 
-! Extra }, or forgotten $.
-l.1373 ...d{b})} b <- x]++(discollect . tail) d) }
-                                                  ) d
-? 
-
-! LaTeX Error: \begin{document} ended by \end{code}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1374 \end{code}
-                 
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.1374 \end{code}
-                 
-? 
-! Missing } inserted.
-<inserted text> 
-                }
-l.1374 \end{code}
-                 
-? 
-! Extra \endgroup.
-<recently read> \endgroup 
-                          
-l.1374 \end{code}
-                 
-? 
-
-Overfull \hbox (13.18973pt too wide) in paragraph at lines 1373--1375
-\OT1/cmr/m/n/10 ([] \OT1/cmr/m/it/10 b\OML/cmm/m/it/10 ; [] \OT1/cmr/m/it/10 a\
-OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 ) \OT1/cmr/m/n/10 [ (\OT1/cmr/m/it/10 b\OML/c
-mm/m/it/10 ; \OT1/cmr/m/n/10 [ \OT1/cmr/m/it/10 a \OT1/cmr/m/n/10 ]) ] \OMS/cms
-y/m/n/10 ! \OT1/cmr/m/n/10 [ (\OT1/cmr/m/it/10 b\OML/cmm/m/it/10 ; \OT1/cmr/m/i
-t/10 a\OT1/cmr/m/n/10 ) ] [] \OT1/cmr/m/it/10 d [] [] [] [] \OT1/cmr/m/n/10 ([]
- \OMS/cmsy/m/n/10 f \OT1/cmr/m/n/10 (\OT1/cmr/m/it/10 a\OML/cmm/m/it/10 ; \OT1/
-cmr/m/it/10 x\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10   []\OT1/cmr/m/n/10 ; [] ([ (\O
-T1/cmr/m/it/10 a\OML/cmm/m/it/10 ; \OT1/cmr/m/it/10 b\OT1/cmr/m/n/10 )\OML/cmm/
-m/it/10 b <
+Overfull \hbox (12.3705pt too wide) in paragraph at lines 1376--1383
+ [][] 
  []
 
 \openout5 = `cp1920t.ptb'.
@@ -871,182 +815,184 @@ m/it/10 b <
 [13]
 \openout5 = `cp1920t.ptb'.
 
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
-
-Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
- [][][][] 
- []
-
+\openout5 = `cp1920t.ptb'.
+
+\openout5 = `cp1920t.ptb'.
+
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1461 ... para tornar fácil a descoberta de dic_
+                                                  rd.
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1462 
+       
+? 
 [14]
 \openout5 = `cp1920t.ptb'.
 
+
+! Missing \endgroup inserted.
+<inserted text> 
+                \endgroup 
+l.1552 }
+        
+? 
+! Missing \endgroup inserted.
+<inserted text> 
+                \endgroup 
+l.1552 }
+        
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.1552 }
+        
+? 
+<xymatrix 2x3 374>
+Overfull \hbox (55.49368pt too wide) in alignment at lines 1552--1552
+[][][] []
+ []
+
+
+! LaTeX Error: \begin{document} ended by \end{eqnarray*}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1552 }
+        
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1552 }
+        
+? 
+! Display math should end with $$.
+<to be read again> 
+                   \endgroup 
+l.1552 }
+        
+? 
+! Extra \endgroup.
+\color@endgroup ->\endgraf \endgroup 
+                                     
+l.1552 }
+        
+? 
+! Too many }'s.
+\@begin@tempboxa ...begingroup #2\color@endgroup }
+                                                  \def \width {\wd \@tempbox...
+l.1552 }
+        
+? 
+
+! Package graphics Error: Division by 0.
+
+See the graphics package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1552 }
+        
+? 
+! Extra \endgroup.
+\Gscale@box@dd ...\box \@tempboxa }\@end@tempboxa 
+                                                  
+l.1552 }
+        
+? 
+[15]
+\openout5 = `cp1920t.ptb'.
+
+
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+ [][] 
+ []
+
+
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+ [][] 
+ []
+
+
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+ [][] 
+ []
+
+
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+ [][] 
+ []
+
+
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+ [][] 
+ []
+
+
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+ [][] 
+ []
+
+
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+ [][] 
+ []
+
+
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+ [][] 
+ []
+
+
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+ [][] 
+ []
+
+
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+ [][] 
+ []
+
+
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+ [][] 
+ []
+
+
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+ [][][][] 
+ []
+
+
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+ [][][][] 
+ []
+
+\openout5 = `cp1920t.ptb'.
+
+[16]
 \openout5 = `cp1920t.ptb'.
 
  <xymatrix 2x2 246>
 \openout5 = `cp1920t.ptb'.
 
- [15]
+\openout5 = `cp1920t.ptb'.
+
+ [17]
 \openout5 = `cp1920t.ptb'.
 
 \openout5 = `cp1920t.ptb'.
 
-\openout5 = `cp1920t.ptb'.
-
- [16] <xymatrix 2x2 246>
+ [18] <xymatrix 2x2 246>
 \openout5 = `cp1920t.ptb'.
 
 \openout5 = `cp1920t.ptb'.
@@ -1054,147 +1000,116 @@ Overfull \hbox (39.92879pt too wide) in paragraph at lines 1393--1485
  <xymatrix 2x2 246>
 \openout5 = `cp1920t.ptb'.
 
+\openout5 = `cp1920t.ptb'.
 
-[17]
+
+[19]
+\openout5 = `cp1920t.ptb'.
+
+ <xymatrix 2x2 246>
 \openout5 = `cp1920t.ptb'.
 
 \openout5 = `cp1920t.ptb'.
 
- <xymatrix 2x2 243> <xymatrix 2x2 246>
-\openout5 = `cp1920t.ptb'.
-
-
-Overfull \hbox (220.31702pt too wide) in paragraph at lines 1896--1915
- [][] 
- []
-
-
-Overfull \hbox (220.31702pt too wide) in paragraph at lines 1896--1915
- [][] 
- []
-
-
-Overfull \hbox (220.31702pt too wide) in paragraph at lines 1896--1915
- [][][][] 
- []
-
-
-Overfull \hbox (220.31702pt too wide) in paragraph at lines 1896--1915
- [][][][] 
- []
-
-
-Overfull \hbox (220.31702pt too wide) in paragraph at lines 1896--1915
- [][] 
- []
-
-
-Overfull \hbox (220.31702pt too wide) in paragraph at lines 1896--1915
- [][] 
- []
-
-\openout5 = `cp1920t.ptb'.
-
-[18]
+ [20]
 \openout5 = `cp1920t.ptb'.
 
  <xymatrix 2x2 246>
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1988 
+l.2091 
        
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.1988 
+l.2091 
        
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.1988 
+l.2091 
        
 ? 
 ! Missing \cr inserted.
 <inserted text> 
                 \cr 
-l.1988 
+l.2091 
        
 ? 
 ! Missing { inserted.
 <inserted text> 
                 {
-l.1988 
+l.2091 
        
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1988 
+l.2091 
        
 ? 
 
-Underfull \hbox (badness 10000) in alignment at lines 1973--1988
+Underfull \hbox (badness 10000) in alignment at lines 2076--2091
  [][][][]
  []
 
 ! Missing $$ inserted.
 <to be read again> 
                    \par 
-l.1988 
+l.2091 
        
 ? 
 ! Misplaced alignment tab character &.
 \reserved@a ->&
                 & &
-l.1989 \end{eqnarray*}
+l.2092 \end{eqnarray*}
                       
 ? 
 ! Misplaced alignment tab character &.
 \reserved@a ->& &
                   &
-l.1989 \end{eqnarray*}
+l.2092 \end{eqnarray*}
                       
 ? 
 ! Misplaced alignment tab character &.
 \reserved@a ->& & &
                    
-l.1989 \end{eqnarray*}
+l.2092 \end{eqnarray*}
                       
 ? 
 ! Misplaced \cr.
 \@@eqncr ...l \@eqnswtrue \global \@eqcnt \z@ \cr 
                                                   
-l.1989 \end{eqnarray*}
+l.2092 \end{eqnarray*}
                       
 ? 
 ! Extra }, or forgotten \endgroup.
 \endeqnarray ->\@@eqncr \egroup 
                                 \global \advance \c@equation \m@ne $$\@ignor...
-l.1989 \end{eqnarray*}
+l.2092 \end{eqnarray*}
                       
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1989 \end{eqnarray*}
+l.2092 \end{eqnarray*}
                       
 ? 
 ! Display math should end with $$.
 <to be read again> 
                    \endgroup 
-l.1989 \end{eqnarray*}
+l.2092 \end{eqnarray*}
                       
 ? 
 \openout5 = `cp1920t.ptb'.
 
 \openout5 = `cp1920t.ptb'.
 
-[19]
 ! Undefined control sequence.
-l.2043 ...ee} dada, em cada um dos nodos da \texit
+l.2146 ...ee} dada, em cada um dos nodos da \texit
                                                   {BTree} em que estavamos c...
 
 ? 
@@ -1202,162 +1117,251 @@ l.2043 ...ee} dada, em cada um dos nodos da \texit
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.2061 
+l.2164 
        
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2061 
+l.2164 
        
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2061 
+l.2164 
        
 ? 
 ! Missing \cr inserted.
 <inserted text> 
                 \cr 
-l.2061 
+l.2164 
        
 ? 
 ! Missing { inserted.
 <inserted text> 
                 {
-l.2061 
+l.2164 
        
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.2061 
+l.2164 
        
 ? 
 
-Underfull \hbox (badness 10000) in alignment at lines 2046--2061
+Underfull \hbox (badness 10000) in alignment at lines 2149--2164
  [][][][]
  []
 
 ! Missing $$ inserted.
 <to be read again> 
                    \par 
-l.2061 
+l.2164 
        
 ? 
+[21]
 ! Misplaced alignment tab character &.
 \reserved@a ->&
                 & &
-l.2062 \end{eqnarray*}
+l.2165 \end{eqnarray*}
                       
 ? 
 ! Misplaced alignment tab character &.
 \reserved@a ->& &
                   &
-l.2062 \end{eqnarray*}
+l.2165 \end{eqnarray*}
                       
 ? 
 ! Misplaced alignment tab character &.
 \reserved@a ->& & &
                    
-l.2062 \end{eqnarray*}
+l.2165 \end{eqnarray*}
                       
 ? 
 ! Misplaced \cr.
 \@@eqncr ...l \@eqnswtrue \global \@eqcnt \z@ \cr 
                                                   
-l.2062 \end{eqnarray*}
+l.2165 \end{eqnarray*}
                       
 ? 
 ! Extra }, or forgotten \endgroup.
 \endeqnarray ->\@@eqncr \egroup 
                                 \global \advance \c@equation \m@ne $$\@ignor...
-l.2062 \end{eqnarray*}
+l.2165 \end{eqnarray*}
                       
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.2062 \end{eqnarray*}
+l.2165 \end{eqnarray*}
                       
 ? 
 ! Display math should end with $$.
 <to be read again> 
                    \endgroup 
-l.2062 \end{eqnarray*}
+l.2165 \end{eqnarray*}
                       
 ? 
 \openout5 = `cp1920t.ptb'.
 
-
-Overfull \hbox (126.17294pt too wide) in paragraph at lines 2064--2083
- [][] 
- []
-
-
-Overfull \hbox (126.17294pt too wide) in paragraph at lines 2064--2083
- [][][][] 
- []
-
-
-Overfull \hbox (126.17294pt too wide) in paragraph at lines 2064--2083
- [][][][] 
- []
-
-
-Overfull \hbox (126.17294pt too wide) in paragraph at lines 2064--2083
- [][] 
- []
-
-
-Overfull \hbox (126.17294pt too wide) in paragraph at lines 2064--2083
- [][] 
- []
-
-
-Overfull \hbox (126.17294pt too wide) in paragraph at lines 2064--2083
- [][] 
- []
-
 \openout5 = `cp1920t.ptb'.
 
-<images/P3-Anita.png, id=277, 360.59718pt x 34.62938pt>
+<images/P3-Anita.png, id=293, 360.59718pt x 34.62938pt>
 File: images/P3-Anita.png Graphic file (type png)
 <use images/P3-Anita.png>
-Package pdftex.def Info: images/P3-Anita.png  used on input line 2138.
+Package pdftex.def Info: images/P3-Anita.png  used on input line 2245.
 (pdftex.def)             Requested size: 288.47813pt x 27.70352pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 \openout5 = `cp1920t.ptb'.
 
-[20] (./cp1920t.ind [21 <./images/P3-Anita.png (PNG copy)>] [22
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][][][][][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][][][][][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][][][][][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][][][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][][][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][][][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][][][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][][][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][][][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][][][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][][][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][][][] 
+ []
+
+
+Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+ [][] 
+ []
+
+[22 <./images/P3-Anita.png (PNG copy)>] (./cp1920t.ind [23] [24
 
 
 ])
 (./cp1920t.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2240.
- [23
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2338.
+ [25
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2240.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2338.
  (./cp1920t.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2240.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2240.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2338.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2338.
 
 Package rerunfilecheck Info: File `cp1920t.out' has not changed.
 (rerunfilecheck)             Checksum: 628570B73880F7F6B343CF9F839CDB98;365.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2240.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2338.
  ) 
 Here is how much of TeX's memory you used:
- 13292 strings out of 492167
- 188057 string characters out of 6131559
- 361122 words of memory out of 5000000
+ 13301 strings out of 492167
+ 188157 string characters out of 6131559
+ 358122 words of memory out of 5000000
  17279 multiletter control sequences out of 15000+600000
  37140 words of font info for 111 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1383,10 +1387,10 @@ ier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr
 nts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palati
 no/uplri8a.pfb></usr/share/texmf-dist/fonts/type1/public/xypic/xyatip10.pfb></u
 sr/share/texmf-dist/fonts/type1/public/xypic/xybtip10.pfb>
-Output written on cp1920t.pdf (23 pages, 668371 bytes).
+Output written on cp1920t.pdf (25 pages, 674569 bytes).
 PDF statistics:
- 459 PDF objects out of 1000 (max. 8388607)
- 390 compressed objects within 4 object streams
- 91 named destinations out of 1000 (max. 500000)
+ 477 PDF objects out of 1000 (max. 8388607)
+ 405 compressed objects within 5 object streams
+ 100 named destinations out of 1000 (max. 500000)
  89 words of extra memory for PDF output out of 10000 (max. 10000000)
 

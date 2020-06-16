@@ -1016,7 +1016,7 @@ tar = cataExp g where
 \end{code}
 
 \subsubsection*{dic\_rd}
-Esta função foi o primeiro problema que tivemos de resolver sem receber informação alguma sobre que caminho seguir, pensando na tipagem desta função vemos que o primeiro argumento que ela recebe é uma /textit{String}, que é como sabemos uma lista de /textit{Char}, logo a primeira ideia que ocorre seria o uso de um cataList que percorra a lista de /textit{Char} tal que quando a lista for vazia ele retorne as váriaveis que se encontra nesse local do /textit{Dic}.
+Esta função foi o primeiro problema que tivemos de resolver sem receber informação alguma sobre que caminho seguir, pensando na tipagem desta função vemos que o primeiro argumento que ela recebe é uma \textit{String}, que é como sabemos uma lista de \textit{Char}, logo a primeira ideia que ocorre seria o uso de um cataList que percorra a lista de \textit{Char} tal que quando a lista for vazia ele retorne as váriaveis que se encontra nesse local do \textit{Dict}.
 No entanto para poder definir esta função decidimos criar uma outra auxiliar que seja parecida com a sequence mas que funcione com listas e as concatene ao invés de as juntar numa lista de listas e ainda que quando receba um Nothing, não faça com que o resultado seja automaticamente Nothing, ignorando-o apenas.
 \begin{code}
 
@@ -1069,7 +1069,7 @@ Quanto a g2 temos as mesmas hipóteses, caso esta receba uma Var vamos retornar 
 \begin{code}
 dic_rd = cataList (either (const g1) g2)
   where g1 (Var v) = Just [v]
-        g1 (Term o l) = Nothing
+        g1 (Term o l) | o=="" = auxSequence (map g1 l)
         g2 (a,g2t) (Term o l) | o== "" = auxSequence (map (g2 (a,g2t)) l) 
                               | o==[a] = auxSequence [ b | b <- (map g2t l), Nothing /= b] 
         g2 _ _ = Nothing
@@ -1106,7 +1106,7 @@ Abaixo encontra-se o diagrama de tipos de forma a fundamentar a explicação que
   \end{eqnarray*}
 }
 
-A função desempenhada por divideFunction é recebendo a palavra a procurar no dicionário 
+A função desempenhada por divideFunction é recebendo a palavra a procurar no dicionário
 
 \begin{code}
 dic_in p s (Term "" v) = Term "" (hyloList (conquerFunction s) divideFunction (p,v))
@@ -1424,7 +1424,7 @@ Desta forma podemos definir navLTree no seguinte diagrama:
 	|LTree powerBool|
 &
 	|A + A >< (LTree powerBool >< LTree powerBool)|
-		\ar[l]^-{|g = either (const Leaf) fFunction|}
+		\ar[l]^-{|g = either (flip (const Leaf)) fFunction|}
 }
 \end{eqnarray*}
 
@@ -1432,7 +1432,7 @@ Desta forma podemos definir navLTree no seguinte diagrama:
 navLTree :: LTree a -> ([Bool] -> LTree a)
 navLTree = cataLTree g 
   where g = either g1 fFunction
-        g1 = const . Leaf
+        g1 = flip (const Leaf)
 
 fFunction :: (([Bool] -> LTree a),([Bool] -> LTree a)) -> [Bool] -> LTree a
 fFunction = curry (Cp.cond (null . p2) ff1 ff2)
@@ -1491,14 +1491,14 @@ Para complementar a nossa resposta encontra-se abaixo o diagrama de tipos:
 	|LTree powerBTree|
 &
 	|A + A >< (LTree powerBTree >< LTree powerBTree)|
-		\ar[l]^-{|g = either (const Leaf) bfFunction|}
+		\ar[l]^-{|g = either (flip (const Leaf)) bfFunction|}
 }
 
 \end{eqnarray*}
 \begin{code}
 
 bnavLTree = cataLTree g
-  where g = either (const . Leaf) bfFunction
+  where g = either (flip (const Leaf)) bfFunction
 
 bfFunction :: ((BTree Bool -> LTree a),(BTree Bool -> LTree a)) -> BTree Bool -> LTree a
 bfFunction = curry (Cp.cond ((Empty==).p2) func1 func2)
@@ -1538,14 +1538,14 @@ Utilizando esta forma de pensar a definição da função torna-se simples sendo
 	|Dist (LTree) powerBTree|
 &
 	|A + A >< (Dist (LTree) powerBTree >< Dist (LTree) powerBTree)|
-		\ar[l]^-{|g = either (const (certainly . Leaf)) bpfFunction|}
+		\ar[l]^-{|g = either (flip (const (return . Leaf))) bpfFunction|}
 }
 
 \end{eqnarray*}
 \begin{code}
 pbnavLTree = cataLTree g
   where g = either g1 pbfFunctionPW
-        g1 a = const(certainly (Leaf a))
+        g1 = flip (const (return . Leaf))
 
 pbfFunctionPW (t1,t2) Empty = Probability.cond (choose 0.5 True False) (t1 Empty) (t2 Empty)
 pbfFunctionPW (t1,t2) (Node (e,(l1,l2))) = Probability.cond e (t1 l1) (t2 l2) 
@@ -1633,8 +1633,8 @@ main = do
 \end{code}
 
 \begin{figure}[!h]\centering
-    \includegraphics[scale=1]{images/P5-Truchet.png}
-    \caption{Resposta ao problema 5.}
+    \includegraphics[scale=0.25]{images/P5-Truchet.png}
+    \caption{Resposta ao problema 5}
     \label{fig:truchet}
     \end{figure}
 

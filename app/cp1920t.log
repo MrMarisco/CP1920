@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.6.6)  16 JUN 2020 13:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.6.6)  16 JUN 2020 18:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -505,7 +505,11 @@ LaTeX Info: Redefining \addtolength on input line 81.
 
 
 Writing index file cp1920t.idx
-(./cp1920t.aux)
+(./cp1920t.aux
+
+LaTeX Warning: Label `fig:truchet' multiply defined.
+
+)
 \openout1 = `cp1920t.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 297.
@@ -825,13 +829,16 @@ Overfull \hbox (12.3705pt too wide) in paragraph at lines 1376--1383
                 $
 l.1461 ... para tornar fácil a descoberta de dic_
                                                   rd.
-? 
+? R
+OK, entering \nonstopmode...
 ! Missing $ inserted.
 <inserted text> 
                 $
 l.1462 
        
-? 
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
 [14]
 \openout5 = `cp1920t.ptb'.
 
@@ -841,19 +848,34 @@ l.1462
                 \endgroup 
 l.1552 }
         
-? 
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
 ! Missing \endgroup inserted.
 <inserted text> 
                 \endgroup 
 l.1552 }
         
-? 
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
 ! Missing } inserted.
 <inserted text> 
                 }
 l.1552 }
         
-? 
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
 <xymatrix 2x3 374>
 Overfull \hbox (55.49368pt too wide) in alignment at lines 1552--1552
 [][][] []
@@ -868,31 +890,44 @@ Type  H <return>  for immediate help.
                                                   
 l.1552 }
         
-? 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
 ! Missing $ inserted.
 <inserted text> 
                 $
 l.1552 }
         
-? 
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
 ! Display math should end with $$.
 <to be read again> 
                    \endgroup 
 l.1552 }
         
-? 
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
 ! Extra \endgroup.
 \color@endgroup ->\endgraf \endgroup 
                                      
 l.1552 }
         
-? 
+Things are pretty mixed up, but I think the worst is over.
+
 ! Too many }'s.
 \@begin@tempboxa ...begingroup #2\color@endgroup }
                                                   \def \width {\wd \@tempbox...
 l.1552 }
         
-? 
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
 
 ! Package graphics Error: Division by 0.
 
@@ -902,13 +937,17 @@ Type  H <return>  for immediate help.
                                                   
 l.1552 }
         
-? 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
 ! Extra \endgroup.
 \Gscale@box@dd ...\box \@tempboxa }\@end@tempboxa 
                                                   
 l.1552 }
         
-? 
+Things are pretty mixed up, but I think the worst is over.
+
 [15]
 \openout5 = `cp1920t.ptb'.
 
@@ -1020,37 +1059,55 @@ Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
                 $
 l.2091 
        
-? 
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
 ! Missing } inserted.
 <inserted text> 
                 }
 l.2091 
        
-? 
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
 ! Missing } inserted.
 <inserted text> 
                 }
 l.2091 
        
-? 
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
 ! Missing \cr inserted.
 <inserted text> 
                 \cr 
 l.2091 
        
-? 
+I'm guessing that you meant to end an alignment here.
+
 ! Missing { inserted.
 <inserted text> 
                 {
 l.2091 
        
-? 
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
 ! Missing $ inserted.
 <inserted text> 
                 $
 l.2091 
        
-? 
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
 
 Underfull \hbox (badness 10000) in alignment at lines 2076--2091
  [][][][]
@@ -1061,49 +1118,86 @@ Underfull \hbox (badness 10000) in alignment at lines 2076--2091
                    \par 
 l.2091 
        
-? 
+Displays can use special alignments (like \eqalignno)
+only if nothing but the alignment itself is between $$'s.
+
 ! Misplaced alignment tab character &.
 \reserved@a ->&
                 & &
 l.2092 \end{eqnarray*}
                       
-? 
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
 ! Misplaced alignment tab character &.
 \reserved@a ->& &
                   &
 l.2092 \end{eqnarray*}
                       
-? 
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
 ! Misplaced alignment tab character &.
 \reserved@a ->& & &
                    
 l.2092 \end{eqnarray*}
                       
-? 
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
 ! Misplaced \cr.
 \@@eqncr ...l \@eqnswtrue \global \@eqcnt \z@ \cr 
                                                   
 l.2092 \end{eqnarray*}
                       
-? 
+I can't figure out why you would want to use a tab mark
+or \cr or \span just now. If something like a right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
 ! Extra }, or forgotten \endgroup.
 \endeqnarray ->\@@eqncr \egroup 
                                 \global \advance \c@equation \m@ne $$\@ignor...
 l.2092 \end{eqnarray*}
                       
-? 
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
 ! Missing $ inserted.
 <inserted text> 
                 $
 l.2092 \end{eqnarray*}
                       
-? 
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
 ! Display math should end with $$.
 <to be read again> 
                    \endgroup 
 l.2092 \end{eqnarray*}
                       
-? 
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
 \openout5 = `cp1920t.ptb'.
 
 \openout5 = `cp1920t.ptb'.
@@ -1111,45 +1205,67 @@ l.2092 \end{eqnarray*}
 ! Undefined control sequence.
 l.2146 ...ee} dada, em cada um dos nodos da \texit
                                                   {BTree} em que estavamos c...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
-? 
 <xymatrix 2x2 246>
 ! Missing $ inserted.
 <inserted text> 
                 $
 l.2164 
        
-? 
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
 ! Missing } inserted.
 <inserted text> 
                 }
 l.2164 
        
-? 
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
 ! Missing } inserted.
 <inserted text> 
                 }
 l.2164 
        
-? 
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
 ! Missing \cr inserted.
 <inserted text> 
                 \cr 
 l.2164 
        
-? 
+I'm guessing that you meant to end an alignment here.
+
 ! Missing { inserted.
 <inserted text> 
                 {
 l.2164 
        
-? 
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
 ! Missing $ inserted.
 <inserted text> 
                 $
 l.2164 
        
-? 
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
 
 Underfull \hbox (badness 10000) in alignment at lines 2149--2164
  [][][][]
@@ -1160,209 +1276,208 @@ Underfull \hbox (badness 10000) in alignment at lines 2149--2164
                    \par 
 l.2164 
        
-? 
+Displays can use special alignments (like \eqalignno)
+only if nothing but the alignment itself is between $$'s.
+
 [21]
 ! Misplaced alignment tab character &.
 \reserved@a ->&
                 & &
 l.2165 \end{eqnarray*}
                       
-? 
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
 ! Misplaced alignment tab character &.
 \reserved@a ->& &
                   &
 l.2165 \end{eqnarray*}
                       
-? 
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
 ! Misplaced alignment tab character &.
 \reserved@a ->& & &
                    
 l.2165 \end{eqnarray*}
                       
-? 
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
 ! Misplaced \cr.
 \@@eqncr ...l \@eqnswtrue \global \@eqcnt \z@ \cr 
                                                   
 l.2165 \end{eqnarray*}
                       
-? 
+I can't figure out why you would want to use a tab mark
+or \cr or \span just now. If something like a right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
 ! Extra }, or forgotten \endgroup.
 \endeqnarray ->\@@eqncr \egroup 
                                 \global \advance \c@equation \m@ne $$\@ignor...
 l.2165 \end{eqnarray*}
                       
-? 
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
 ! Missing $ inserted.
 <inserted text> 
                 $
 l.2165 \end{eqnarray*}
                       
-? 
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
 ! Display math should end with $$.
 <to be read again> 
                    \endgroup 
 l.2165 \end{eqnarray*}
                       
-? 
-\openout5 = `cp1920t.ptb'.
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
 
 \openout5 = `cp1920t.ptb'.
 
-<images/P3-Anita.png, id=293, 360.59718pt x 34.62938pt>
+\openout5 = `cp1920t.ptb'.
+
+<images/P3-Anita.png, id=294, 360.59718pt x 34.62938pt>
 File: images/P3-Anita.png Graphic file (type png)
 <use images/P3-Anita.png>
 Package pdftex.def Info: images/P3-Anita.png  used on input line 2245.
 (pdftex.def)             Requested size: 288.47813pt x 27.70352pt.
 \openout5 = `cp1920t.ptb'.
 
+[22 <./images/P3-Anita.png (PNG copy)>]
+\openout5 = `cp1920t.ptb'.
 
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
  [][] 
  []
 
 
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
  [][] 
  []
 
 
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
  [][] 
  []
 
 
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
  [][] 
  []
 
 
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
- [][][][][][] 
- []
-
-
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
- [][][][][][] 
- []
-
-
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
- [][][][][][] 
- []
-
-
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
  [][] 
  []
 
 
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
+ [][] 
+ []
+
+
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
  [][][][] 
  []
 
 
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
- [][] 
- []
-
-
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
- [][] 
- []
-
-
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
- [][] 
- []
-
-
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
- [][] 
- []
-
-
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
- [][] 
- []
-
-
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
- [][] 
- []
-
-
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
- [][] 
- []
-
-
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
  [][][][] 
  []
 
 
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
  [][][][] 
  []
 
 
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
  [][][][] 
  []
 
 
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
  [][][][] 
  []
 
 
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
  [][][][] 
  []
 
 
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
  [][][][] 
  []
 
 
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
  [][][][] 
  []
 
 
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
- [][][][] 
- []
-
-
-Overfull \hbox (166.8919pt too wide) in paragraph at lines 2252--2324
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
  [][] 
  []
 
-[22 <./images/P3-Anita.png (PNG copy)>] (./cp1920t.ind [23] [24
+<images/P5-Truchet.png, id=301, 804.00375pt x 831.105pt>
+File: images/P5-Truchet.png Graphic file (type png)
+<use images/P5-Truchet.png>
+Package pdftex.def Info: images/P5-Truchet.png  used on input line 2335.
+(pdftex.def)             Requested size: 201.00044pt x 207.77574pt.
+(./cp1920t.ind [23 <./images/P5-Truchet.png>] [24
 
 
-])
-(./cp1920t.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2338.
+]) (./cp1920t.bbl)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2352.
  [25
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2338.
- (./cp1920t.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2338.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2338.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2352.
+
+(./cp1920t.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2352.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2352.
 
 Package rerunfilecheck Info: File `cp1920t.out' has not changed.
 (rerunfilecheck)             Checksum: 628570B73880F7F6B343CF9F839CDB98;365.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2338.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2352.
  ) 
 Here is how much of TeX's memory you used:
- 13301 strings out of 492167
- 188157 string characters out of 6131559
- 358122 words of memory out of 5000000
- 17279 multiletter control sequences out of 15000+600000
+ 13309 strings out of 492167
+ 188337 string characters out of 6131559
+ 358155 words of memory out of 5000000
+ 17285 multiletter control sequences out of 15000+600000
  37140 words of font info for 111 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  45i,19n,77p,3294b,816s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1387,10 +1502,10 @@ ier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr
 nts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palati
 no/uplri8a.pfb></usr/share/texmf-dist/fonts/type1/public/xypic/xyatip10.pfb></u
 sr/share/texmf-dist/fonts/type1/public/xypic/xybtip10.pfb>
-Output written on cp1920t.pdf (25 pages, 674569 bytes).
+Output written on cp1920t.pdf (25 pages, 689501 bytes).
 PDF statistics:
- 477 PDF objects out of 1000 (max. 8388607)
- 405 compressed objects within 5 object streams
- 100 named destinations out of 1000 (max. 500000)
- 89 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 480 PDF objects out of 1000 (max. 8388607)
+ 407 compressed objects within 5 object streams
+ 101 named destinations out of 1000 (max. 500000)
+ 94 words of extra memory for PDF output out of 10000 (max. 10000000)
 

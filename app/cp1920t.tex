@@ -1431,7 +1431,7 @@ O constituinte g2 será aplicado a \ensuremath{(\Varid{id}\times\map \;\cata{\Va
 \end{hscode}\resethooks
 
 \subsubsection*{dic\_rd}
-Esta função foi o primeiro problema que tivemos de resolver sem receber informação alguma sobre que caminho seguir, pensando na tipagem desta função vemos que o primeiro argumento que ela recebe é uma /textit{String}, que é como sabemos uma lista de /textit{Char}, logo a primeira ideia que ocorre seria o uso de um cataList que percorra a lista de /textit{Char} tal que quando a lista for vazia ele retorne as váriaveis que se encontra nesse local do /textit{Dic}.
+Esta função foi o primeiro problema que tivemos de resolver sem receber informação alguma sobre que caminho seguir, pensando na tipagem desta função vemos que o primeiro argumento que ela recebe é uma \textit{String}, que é como sabemos uma lista de \textit{Char}, logo a primeira ideia que ocorre seria o uso de um cataList que percorra a lista de \textit{Char} tal que quando a lista for vazia ele retorne as váriaveis que se encontra nesse local do \textit{Dict}.
 No entanto para poder definir esta função decidimos criar uma outra auxiliar que seja parecida com a sequence mas que funcione com listas e as concatene ao invés de as juntar numa lista de listas e ainda que quando receba um Nothing, não faça com que o resultado seja automaticamente Nothing, ignorando-o apenas.
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
@@ -1507,7 +1507,7 @@ Quanto a g2 temos as mesmas hipóteses, caso esta receba uma Var vamos retornar 
 \>[3]{}\mathbf{where}\;\Varid{g1}\;(\Conid{Var}\;\Varid{v})\mathrel{=}\Conid{Just}\;[\mskip1.5mu \Varid{v}\mskip1.5mu]{}\<[E]%
 \\
 \>[3]{}\hsindent{6}{}\<[9]%
-\>[9]{}\Varid{g1}\;(\Conid{Term}\;\Varid{o}\;\Varid{l})\mathrel{=}\Conid{Nothing}{}\<[E]%
+\>[9]{}\Varid{g1}\;(\Conid{Term}\;\Varid{o}\;\Varid{l})\mid \Varid{o}\equiv \text{\ttfamily \char34 \char34}\mathrel{=}\Varid{auxSequence}\;(\map \;\Varid{g1}\;\Varid{l}){}\<[E]%
 \\
 \>[3]{}\hsindent{6}{}\<[9]%
 \>[9]{}\Varid{g2}\;(\Varid{a},\Varid{g2t})\;(\Conid{Term}\;\Varid{o}\;\Varid{l})\mid \Varid{o}\equiv \text{\ttfamily \char34 \char34}\mathrel{=}\Varid{auxSequence}\;(\map \;(\Varid{g2}\;(\Varid{a},\Varid{g2t}))\;\Varid{l}){}\<[E]%
@@ -1551,7 +1551,7 @@ Abaixo encontra-se o diagrama de tipos de forma a fundamentar a explicação que
   \end{eqnarray*}
 }
 
-A função desempenhada por divideFunction é recebendo a palavra a procurar no dicionário 
+A função desempenhada por divideFunction é recebendo a palavra a procurar no dicionário
 
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
@@ -1984,7 +1984,7 @@ Desta forma podemos definir navLTree no seguinte diagrama:
 	\ensuremath{\mathsf{LTree}\;^{Bool^*}}
 &
 	\ensuremath{\Conid{A}\mathbin{+}\Conid{A}\times(\mathsf{LTree}\;^{Bool^*}\times\mathsf{LTree}\;^{Bool^*})}
-		\ar[l]^-{\ensuremath{\Varid{g}\mathrel{=}\alt{\underline{\Conid{Leaf}}}{\Varid{fFunction}}}}
+		\ar[l]^-{\ensuremath{\Varid{g}\mathrel{=}\alt{\Varid{flip}\;\underline{\Conid{Leaf}}}{\Varid{fFunction}}}}
 }
 \end{eqnarray*}
 
@@ -2003,7 +2003,7 @@ Desta forma podemos definir navLTree no seguinte diagrama:
 \>[3]{}\mathbf{where}\;\Varid{g}\mathrel{=}\alt{\Varid{g1}}{\Varid{fFunction}}{}\<[E]%
 \\
 \>[3]{}\hsindent{6}{}\<[9]%
-\>[9]{}\Varid{g1}\mathrel{=}\underline{\cdot }\comp \Conid{Leaf}{}\<[E]%
+\>[9]{}\Varid{g1}\mathrel{=}\Varid{flip}\;\underline{\Conid{Leaf}}{}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{fFunction}\mathbin{::}(([\mskip1.5mu \Conid{Bool}\mskip1.5mu]\to \mathsf{LTree}\;\Varid{a}),([\mskip1.5mu \Conid{Bool}\mskip1.5mu]\to \mathsf{LTree}\;\Varid{a}))\to [\mskip1.5mu \Conid{Bool}\mskip1.5mu]\to \mathsf{LTree}\;\Varid{a}{}\<[E]%
 \\
@@ -2086,7 +2086,7 @@ Para complementar a nossa resposta encontra-se abaixo o diagrama de tipos:
 	\ensuremath{\mathsf{LTree}\;^{BTree}}
 &
 	\ensuremath{\Conid{A}\mathbin{+}\Conid{A}\times(\mathsf{LTree}\;^{BTree}\times\mathsf{LTree}\;^{BTree})}
-		\ar[l]^-{\ensuremath{\Varid{g}\mathrel{=}\alt{\underline{\Conid{Leaf}}}{\Varid{bfFunction}}}}
+		\ar[l]^-{\ensuremath{\Varid{g}\mathrel{=}\alt{\Varid{flip}\;\underline{\Conid{Leaf}}}{\Varid{bfFunction}}}}
 }
 
 \end{eqnarray*}
@@ -2099,7 +2099,7 @@ Para complementar a nossa resposta encontra-se abaixo o diagrama de tipos:
 \>[B]{}\Varid{bnavLTree}\mathrel{=}\Varid{cataLTree}\;\Varid{g}{}\<[E]%
 \\
 \>[B]{}\hsindent{3}{}\<[3]%
-\>[3]{}\mathbf{where}\;\Varid{g}\mathrel{=}\alt{\underline{\cdot }\comp \Conid{Leaf}}{\Varid{bfFunction}}{}\<[E]%
+\>[3]{}\mathbf{where}\;\Varid{g}\mathrel{=}\alt{\Varid{flip}\;\underline{\Conid{Leaf}}}{\Varid{bfFunction}}{}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{bfFunction}\mathbin{::}((\fun{BTree} \;\Conid{Bool}\to \mathsf{LTree}\;\Varid{a}),(\fun{BTree} \;\Conid{Bool}\to \mathsf{LTree}\;\Varid{a}))\to \fun{BTree} \;\Conid{Bool}\to \mathsf{LTree}\;\Varid{a}{}\<[E]%
 \\
@@ -2159,7 +2159,7 @@ Utilizando esta forma de pensar a definição da função torna-se simples sendo
 	\ensuremath{\fun{Dist}\;(\mathsf{LTree})\;^{BTree}}
 &
 	\ensuremath{\Conid{A}\mathbin{+}\Conid{A}\times(\fun{Dist}\;(\mathsf{LTree})\;^{BTree}\times\fun{Dist}\;(\mathsf{LTree})\;^{BTree})}
-		\ar[l]^-{\ensuremath{\Varid{g}\mathrel{=}\alt{\underline{(\Varid{certainly}\comp \Conid{Leaf})}}{\Varid{bpfFunction}}}}
+		\ar[l]^-{\ensuremath{\Varid{g}\mathrel{=}\alt{\Varid{flip}\;\underline{(\Varid{return}\comp \Conid{Leaf})}}{\Varid{bpfFunction}}}}
 }
 
 \end{eqnarray*}
@@ -2174,7 +2174,7 @@ Utilizando esta forma de pensar a definição da função torna-se simples sendo
 \>[3]{}\mathbf{where}\;\Varid{g}\mathrel{=}\alt{\Varid{g1}}{\Varid{pbfFunctionPW}}{}\<[E]%
 \\
 \>[3]{}\hsindent{6}{}\<[9]%
-\>[9]{}\Varid{g1}\;\Varid{a}\mathrel{=}\underline{(\Varid{certainly}\;(\Conid{Leaf}\;\Varid{a}))}{}\<[E]%
+\>[9]{}\Varid{g1}\mathrel{=}\Varid{flip}\;\underline{(\Varid{return}\comp \Conid{Leaf})}{}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{pbfFunctionPW}\;(\Varid{t1},\Varid{t2})\;\Conid{Empty}\mathrel{=}\Varid{\Conid{Probability}.cond}\;(\Varid{choose}\;\mathrm{0.5}\;\Conid{True}\;\Conid{False})\;(\Varid{t1}\;\Conid{Empty})\;(\Varid{t2}\;\Conid{Empty}){}\<[E]%
 \\
@@ -2249,9 +2249,10 @@ Chamando o conjunto de funções obtemos o seguinte resultado tendo como podemos
 
 \subsection*{Problema 5}
 
+Pare resolver este problema, decidimos tirar proveito da função permuta que nos é fornecida
+
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{6}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{14}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{31}{@{}>{\hspre}l<{\hspost}@{}}%
@@ -2280,16 +2281,23 @@ Chamando o conjunto de funções obtemos o seguinte resultado tendo como podemos
 \\[\blanklineskip]%
 \>[B]{}\Varid{put}{}\<[6]%
 \>[6]{}\mathrel{=}\uncurry{\Conid{Translate}}{}\<[E]%
-\\[\blanklineskip]%
-\>[B]{}\Varid{putTiles}\;\Varid{a}\;\Varid{b}\mathrel{=}(\Varid{replicate}\;\Varid{a}\;\Varid{truchet1})\plus (\Varid{replicate}\;\Varid{b}\;\Varid{truchet2}){}\<[E]%
-\\[\blanklineskip]%
+\ColumnHook
+\end{hscode}\resethooks
+
+Após o input do utilizador é gerado um número aleatório (n) entre 0 e o número total de ladrilhos necessários para fazer a imagem, depois é gerada uma lista com n ladrilhos do tipo truchet1 e total-n ladrilhos do tipo truchet2 a qual será aplicada a função permuta, ficamos assim com uma lista gerada aleatóriamente.
+Por fim criamos a função draw que é reponsável por desenhar cada peça no ponto na tela correto, esta função recebe para além da lista a desenhar as dimensões do mosaico e um acumulador que indica quando é necessário desenhar uma nova linha.
+
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
 \>[B]{}\Varid{draw}\mathbin{::}\Conid{Int}\to \Conid{Int}\to \Conid{Int}\to [\mskip1.5mu \Conid{Picture}\mskip1.5mu]\to [\mskip1.5mu \Conid{Picture}\mskip1.5mu]{}\<[E]%
 \\
 \>[B]{}\Varid{draw}\;\anonymous \;\anonymous \;\anonymous \;[\mskip1.5mu \mskip1.5mu]\mathrel{=}[\mskip1.5mu \mskip1.5mu]{}\<[E]%
 \\
 \>[B]{}\Varid{draw}\;\Varid{x}\;\Varid{y}\;\mathrm{0}\;\Varid{l}\mathrel{=}(\Varid{draw}\;\Varid{x}\;(\Varid{y}\mathbin{-}\mathrm{1})\;\Varid{x}\;\Varid{l}){}\<[E]%
 \\
-\>[B]{}\Varid{draw}\;\Varid{x}\;\Varid{y}\;\Varid{i}\;(\Varid{h}\mathbin{:}\Varid{t})\mathrel{=}(\Varid{put}\;((\Varid{fromIntegral}\;(\Varid{i}\mathbin{*}\mathrm{80})),(\Varid{fromIntegral}\;(\Varid{y}\mathbin{*}\mathrm{80})))\;\Varid{h})\mathbin{:}(\Varid{draw}\;\Varid{x}\;\Varid{y}\;(\Varid{i}\mathbin{-}\mathrm{1})\;\Varid{t}){}\<[E]%
+\>[B]{}\Varid{draw}\;\Varid{x}\;\Varid{y}\;\Varid{i}\;(\Varid{h}\mathbin{:}\Varid{t})\mathrel{=}(\Varid{put}\;((\Varid{fromIntegral}\;(\Varid{i}\mathbin{*}\mathrm{80}\mathbin{-}\mathrm{480})),(\Varid{fromIntegral}\;(\Varid{y}\mathbin{*}\mathrm{80}\mathbin{-}\mathrm{480})))\;\Varid{h})\mathbin{:}(\Varid{draw}\;\Varid{x}\;\Varid{y}\;(\Varid{i}\mathbin{-}\mathrm{1})\;\Varid{t}){}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{main}\mathbin{::}\fun{IO}\;(){}\<[E]%
 \\
@@ -2314,14 +2322,20 @@ Chamando o conjunto de funções obtemos o seguinte resultado tendo como podemos
 \>[5]{}\Varid{n}\leftarrow \Varid{getStdRandom}\;(\Varid{randomR}\;(\mathrm{0},\Varid{x}\mathbin{*}\Varid{y})){}\<[E]%
 \\
 \>[B]{}\hsindent{5}{}\<[5]%
-\>[5]{}\Varid{r}\leftarrow \Varid{permuta}\;(\Varid{putTiles}\;((\Varid{x}\mathbin{*}\Varid{y})\mathbin{-}\Varid{n})\;\Varid{n}){}\<[E]%
+\>[5]{}\Varid{l}\leftarrow \Varid{permuta}\;((\Varid{replicate}\;((\Varid{x}\mathbin{*}\Varid{y})\mathbin{-}\Varid{n})\;\Varid{truchet1})\plus (\Varid{replicate}\;\Varid{n}\;\Varid{truchet2})){}\<[E]%
 \\
 \>[B]{}\hsindent{5}{}\<[5]%
-\>[5]{}\Varid{display}\;\Varid{janela}\;\Varid{white}\;(\Varid{put}\;((\mathbin{-}\mathrm{480}),(\mathbin{-}\mathrm{480}))\;(\Varid{\Conid{Graphics}.\Conid{Gloss}.scale}\;(\mathrm{10}\mathbin{/}\Varid{fromIntegral}\;\Varid{x})\;(\mathrm{10}\mathbin{/}\Varid{fromIntegral}\;\Varid{y})\;(\Conid{Pictures}\;(\Varid{draw}\;\Varid{x}\;\Varid{y}\;\Varid{x}\;\Varid{r})))){}\<[E]%
+\>[5]{}\Varid{display}\;\Varid{janela}\;\Varid{white}\;(\Conid{Pictures}\;(\Varid{draw}\;\Varid{x}\;\Varid{y}\;\Varid{x}\;\Varid{l})){}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\mbox{\onelinecomment }{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
+
+\begin{figure}[!h]\centering
+    \includegraphics[scale=0.25]{images/P5-Truchet.png}
+    \caption{Resposta ao problema 5}
+    \label{fig:truchet}
+    \end{figure}
 
 %----------------- Fim do anexo com soluções dos alunos ------------------------%
 

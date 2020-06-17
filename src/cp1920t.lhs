@@ -93,6 +93,7 @@
 %format listS = "^*"
 %format powerBool = "^{Bool^*}"
 %format powerBTree = "^{BTree}"
+%format anaList_ g = "\ana{" g "}"
 
 %---------------------------------------------------------------------------
 
@@ -302,6 +303,27 @@ prop_dic_red p s d
 A operação |dic_rd| implementa a procura na correspondente exportação do dicionário:
 \begin{code}
 prop_dic_rd (p,t) = dic_rd  p t == lookup p (dic_exp t)
+\end{code}
+\end{propriedade}
+\begin{code}
+valid t = t == (dic_imp . dic_norm . dic_exp) t
+\end{code}
+\begin{propriedade}
+Se um significado |s| de uma palavra |p| já existe num dicionário normalizado então adicioná-lo
+em memória não altera nada:
+\begin{code}
+prop_dic_red1 p s d
+   | d /= dic_norm d = True  
+   | dic_red p s d = dic_imp d == dic_in p s (dic_imp d)
+   | otherwise = True
+\end{code}
+\end{propriedade}
+\begin{propriedade}
+A operação |dic_rd| implementa a procura na correspondente exportação de um dicionário normalizado:
+\begin{code}
+prop_dic_rd1 (p,t)
+   | valid t     = dic_rd  p t == lookup p (dic_exp t)
+   | otherwise = True
 \end{code}
 \end{propriedade}
 
@@ -978,10 +1000,10 @@ outras funções auxiliares que sejam necessárias.
 
 \subsubsection*{discollect}
 
-A função discollect abaixo apresentada tira partido da utilização da notação do de modo a preencher cada par retornado com o respetivo valor.
+A função discollect abaixo apresentada tira partido da utilização da "maquinaria monástica" modo a preencher cada par retornado com o respetivo valor.
 \begin{code}
 discollect :: (Ord b, Ord a) => [(b, [a])] -> [(b, a)]
-discollect d = Cp.cond null nil (do { (a,x) <- head; return ([(a,b) | b <- x]++(discollect . tail) d) }) d
+discollect d = Cp.cond null nil ( head >>= \(a,x) -> (return ([(a,b) | b <- x]++(discollect . tail) d))) d
 \end{code}
 
 No entanto pode ser definida de uma forma mais "casual" e simples de entender como aquela abaixo apresentada:
@@ -1029,7 +1051,7 @@ auxSequence = cataList (either g1 g2)
         g2 (Nothing,Just a) = Just a
 
 \end{code}
-Tendo a nossa função auxiliar tivemos apenas que usar as definições aprendidas na UC para tornar fácil a descoberta de dic_rd.
+Tendo a nossa função auxiliar tivemos apenas que usar as definições aprendidas na UC para tornar fácil a descoberta de dic\_rd.
 
 \begin{eqnarray*}
 %
@@ -1063,13 +1085,14 @@ Tendo a nossa função auxiliar tivemos apenas que usar as definições aprendid
 %
  \end{eqnarray*}
 
-Tendo chegado a isto temos agora que tentar deduzir as definições de g1 e g2, ora, g1 é como sempre o caso mais simples, caso estejamos perante uma lista vazia e um \textit{Dict} Var vamos querer retornar o Just do singl da \textit{String} que vem neste, caso contrário queremos retornar Nothing pois não há traduções desta palavra.
+Tendo chegado a isto temos agora que tentar deduzir as definições de g1 e g2, ora, g1 é como sempre o caso mais simples, caso estejamos perante uma lista vazia e um \textit{Dict} Var vamos querer retornar o Just do singl da \textit{String} que vem neste, caso contrário queremos retornar Nothing pois não há traduções desta palavra a menos que a String do termo seja uma String vazia.
 Quanto a g2 temos as mesmas hipóteses, caso esta receba uma Var vamos retornar Nothing pois não temos mais nada a percorrer no dicionário, caso receba um Term temos que verificar se a String deste é igual à cabeça da nossa lista de caracteres colocada em forma de lista, se isso for verdade mapeamos o segundo valor do par acima visto a cada um dos elementos da lista presente em Term caso contrário retornamos Nothing.
 
 \begin{code}
 dic_rd = cataList (either (const g1) g2)
   where g1 (Var v) = Just [v]
         g1 (Term o l) | o=="" = auxSequence (map g1 l)
+                      | otherwise = Nothing
         g2 (a,g2t) (Term o l) | o== "" = auxSequence (map (g2 (a,g2t)) l) 
                               | o==[a] = auxSequence [ b | b <- (map g2t l), Nothing /= b] 
         g2 _ _ = Nothing
@@ -1106,13 +1129,16 @@ Abaixo encontra-se o diagrama de tipos de forma a fundamentar a explicação que
   \end{eqnarray*}
 }
 
-A função desempenhada por divideFunction é recebendo a palavra a procurar no dicionário
+A função desempenhada pelo anamorfismo é, recebendo a palavra a procurar no dicionário e a lista de vários dicionários onde adicionar, procurar onde inserir a palavra, retornando informações quanto a isso para que depois o catamorfismo tenha apenas de inserir a Var ou de criar os vários Term necessários para poder por fim inserir a Var.
+
+A \textit{divideFunction} vai fazer a maior parte do trabalho daí a sua grande extensão, irá inserir a direita um par em que o constituinte da esquerda é um Either tal que a inserção à direita deste significa que a palavra terminou e encontrou o lugar onde inserir e a inserção à esquerda significa que ainda não chegou ao fim a palavra mas encontrou o Term onde deverá inserir guardando o \textit{Char} para o catamorfismo colocar no Term e a lista de dicionários que já não serão procurados pois já encontrou o que queria. O constituinte da direita é o resto da palavra e a lista de dicionários onde ainda procurar, reconstruindo o dicionário.
+
+A \textit{conquerFunction} irá receber a tradução da palavra e inserir consoante o outcome do anamorfismo, inserir simplesmente a Var caso não tenha de inserir Term e inserindo Term quando necessário através da auxiliar \textit{cFaux}.
 
 \begin{code}
 dic_in p s (Term "" v) = Term "" (hyloList (conquerFunction s) divideFunction (p,v))
 
 divideFunction :: (String,[Dict]) -> Either () (Either [Dict] (Char,[Dict]),(String,[Dict]))
-divideFunction ("",[]) = i1 ()
 divideFunction ((h:t),[]) = i2 ((i2 (h,[])),(t,[]))
 divideFunction ("",d) = i2 ( i1 d ,("",[]))
 divideFunction ((h:t),((Term k v):ds)) | (k==[h]) = i2 (i2 (h,ds), (t,v))
@@ -1219,15 +1245,15 @@ maisEsq = cataBTree g where
 
 \end{code}
 
+\subsubsection*{insOrd}
 Para a resolução da função abaixo recorremos ao enunciado, à equação dada que nos diz que \begin{eqnarray*} |insOrd' x = split (insOrd x) id| \end{eqnarray*} A partir desta conseguimos aplicar a lei de Fokkinga e outras para chegar a um estado em que se torna mais fácil a prespeção de o que cada função possa ser.
 
 Como no formulário temos o nome que cada função toma como sendo h e k no lado direito da equação presente na fórmula de Fokkinga decidimos manter essa formulação criando assim hFunction.
 Dessa forma chegamos à definição que apresentamos abaixo e substituindo a definição apresentada de \textit{insOrd'} por aquela que é dada no enunciado vemos que estas estão definidas com recursividade mútua.
-Sendo \textit{insOrd'} uma função que retorna um par de BTrees sendo o primeiro o uma forma de diferenciar em qual dos dois lados vai inserir retornarndo a \textit{BTree} com a inserção no lado correto e o segundo a \textit{BTree} que contem apenas os segundos elementos dos dois pares que recebe que são uma cópia do que era anteriormente para não perder informação.
+Sendo \textit{insOrd'} uma função que retorna um par de \textit{BTree} sendo o primeiro o uma forma de diferenciar em qual dos dois lados vai inserir retornarndo a \textit{BTree} com a inserção no lado correto e o segundo a \textit{BTree} que contem apenas os segundos elementos dos dois pares que recebe que são uma cópia do que era anteriormente para não perder informação.
 Desta forma em insOrd temos apenas que decidir qual dos lados queremos ao aplicar a mesma hFunction.
 Quando atingimos h com vazio sabemos que chegamos ao ponto onde devemos inserir o Node com a o valor a inserir e Empty nas suas duas árvores.
 
-\subsubsection*{insOrd}
 \begin{code}
 
 insOrd' x = cataBTree g
@@ -1360,8 +1386,8 @@ splayPW = cataList (either (const id) g2)
 \subsection*{Problema 3}
 \subsubsection*{extLTree}
 
-O raciocinio para a \textit{extLTree} foi percorrer a \textit{Bdt} dada através de um cata destruindo a informação no primeiro membro do par Query guardando apenas no Fork as informações do segundo membro do par, e guardando em Leaf o representado em Dec.
-Desta forma ficamos com uma simples LTree onde apenas temos a decisão final consoante o caminho escolhido para atravessar a mesma.
+O raciocinio para a \textit{extLTree} foi percorrer a \textit{Bdt} dada através de um catamorfismo destruindo a informação no primeiro membro do par Query guardando apenas no Fork as informações do segundo membro do par, e guardando em Leaf o representado em Dec.
+Desta forma ficamos com uma simples \textit{LTree} onde apenas temos a decisão final consoante o caminho escolhido para atravessar a mesma.
 \textit{extLTree} pode ser representada no seguinte diagrama:
 
 \begin{eqnarray*}
@@ -1408,7 +1434,7 @@ anaBdt g = inBdt . recBdt (anaBdt g) . g
 \end{code}
 
 \subsubsection*{navLTree}
-A forma de pensar usada para esta função foi a utilização de um catamorfismo que irá percorrer a \textit{LTree} dada, e consoante a lista de \textit{Bool} a receber irá caso a cabeça desta lista seja true aplicar o resultado do catamorfismo da \textit{LTree} da direita aplicado à cauda da lista de \textit{Bool} à lista da direita e o contrário quando for false.
+A forma de pensar usada para esta função foi a utilização de um catamorfismo que irá percorrer a \textit{LTree} dada, e consoante a lista de \textit{Bool} a receber irá caso a cabeça desta lista seja true aplicar o resultado do catamorfismo da \textit{LTree} da direita aplicado à cauda da lista de \textit{Bool} à lista da direita e o contrário quando for False.
 Desta forma podemos definir navLTree no seguinte diagrama:
 
 \begin{eqnarray*}
@@ -1457,11 +1483,11 @@ fFunctionPW (t1,t2) (h:t) | h = t1 t
 \end{spec}
 
 \subsection*{Problema 4}
-Este problema consiste em colocar os alunos a prova com uma primeira função relativamente facil de resolver pois segue o mesmo principio da função definida anteriormente \textit{navLTree} e após isso aumentar a dificuldade para os alunos criarem uma mesma versão mas desta vez monadificada.
+Este problema consiste em colocar os alunos a prova com uma primeira função relativamente fácil de resolver pois segue o mesmo principio da função definida anteriormente \textit{navLTree} e após isso aumentar a dificuldade para os alunos criarem uma mesma versão mas desta vez monadificada, usando a "maquinaria monástica".
 
 \subsubsection*{bnvaLTree}
 
-Esta função foi realizada da mesma forma que a anterior sendo diferente apenas no facto que é uma tree e não uma lista.
+Esta função foi realizada da mesma forma que a anterior sendo diferente apenas no facto que é uma \textit{BTree} e não uma lista.
 
 
 Para poder definir em pointfree decidimos criar as seguintes funções que apenas serão aplicadas a Node e que nos retornam cada um dos parametros deste como podemos ver abaixo.
@@ -1522,8 +1548,8 @@ bfFunctionPW (t1,t2) (Node (a,(tt1,tt2))) | a = t1 tt1
 \subsubsection*{pbnavLTree}
 
 Para a resolução desta função recorremos ao uso de funções que encontramos enquanto estavamos a explorar o Probability.hs.
-Decidimos usar um catamorfismo para percorrer a \textit{LTree} dada, em cada um dos nodos da \texit{BTree} em que estavamos caso fosse Empty teriamos que retornar a mesma probabilidade a cada uma das possíveis decisões como seria de esperar e caso fosse um nodo utilizamos a função do módulo Probability que distribui as probabilidades para o lado esquerdo e direito da \textit{LTree} consoante a probabilidade de o valor do nodo da \textit{BTree} ser True ou False.
-Utilizando esta forma de pensar a definição da função torna-se simples sendo também simples definir o seu diagrama de tipos que a seguir aprsentamos. 
+Decidimos usar um catamorfismo para percorrer a \textit{LTree} dada, em cada um dos nodos da \textit{BTree} em que estavamos caso fosse Empty teriamos que retornar a mesma probabilidade a cada uma das possíveis decisões como seria de esperar e caso fosse um nodo utilizamos a função do módulo Probability que distribui as probabilidades para o lado esquerdo e direito da \textit{LTree} consoante a probabilidade de o valor do nodo da \textit{BTree} ser True ou False.
+Utilizando esta forma de pensar a definição da função torna-se simples sendo também simples definir o seu diagrama de tipos que a seguir apresentamos. 
 
 \begin{eqnarray*}
 \xymatrix@@C=3.4cm@@R=2cm{
@@ -1547,7 +1573,7 @@ pbnavLTree = cataLTree g
   where g = either g1 pbfFunctionPW
         g1 = flip (const (return . Leaf))
 
-pbfFunctionPW (t1,t2) Empty = Probability.cond (choose 0.5 True False) (t1 Empty) (t2 Empty)
+pbfFunctionPW (t1,t2) Empty =  (>>=) (prod (t1 Empty) (t2 Empty)) (return . Fork)
 pbfFunctionPW (t1,t2) (Node (e,(l1,l2))) = Probability.cond e (t1 l1) (t2 l2) 
 
 \end{code}
@@ -1586,7 +1612,7 @@ Chamando o conjunto de funções obtemos o seguinte resultado tendo como podemos
 
 \subsection*{Problema 5}
 
-Pare resolver este problema, decidimos tirar proveito da função permuta que nos é fornecida
+Pare resolver este problema, decidimos tirar proveito da função permuta que nos é fornecida.
 
 \begin{code}
 

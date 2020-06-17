@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.6.6)  16 JUN 2020 18:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.6.6)  17 JUN 2020 16:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -665,24 +665,35 @@ Package pdftex.def Info: images/dic.png  used on input line 432.
 
 \openout5 = `cp1920t.ptb'.
 
-<images/example1.png, id=84, 795.97375pt x 511.9125pt>
+\openout5 = `cp1920t.ptb'.
+
+\openout5 = `cp1920t.ptb'.
+
+\openout5 = `cp1920t.ptb'.
+
+ [3 <./images/dic.png>]
+<images/example1.png, id=98, 795.97375pt x 511.9125pt>
 File: images/example1.png Graphic file (type png)
 <use images/example1.png>
-Package pdftex.def Info: images/example1.png  used on input line 497.
+Package pdftex.def Info: images/example1.png  used on input line 543.
 (pdftex.def)             Requested size: 206.94829pt x 133.0941pt.
-<images/example2.png, id=85, 980.66376pt x 532.99126pt>
+<images/example2.png, id=99, 980.66376pt x 532.99126pt>
 File: images/example2.png Graphic file (type png)
 <use images/example2.png>
-Package pdftex.def Info: images/example2.png  used on input line 498.
+Package pdftex.def Info: images/example2.png  used on input line 544.
 (pdftex.def)             Requested size: 254.96655pt x 138.57445pt.
 
-Overfull \hbox (8.57076pt too wide) in paragraph at lines 497--500
+Overfull \hbox (8.57076pt too wide) in paragraph at lines 543--546
 [][] [] 
  []
 
 \openout5 = `cp1920t.ptb'.
 
-[3 <./images/dic.png>]
+\openout5 = `cp1920t.ptb'.
+
+\openout5 = `cp1920t.ptb'.
+
+[4 <./images/example1.png> <./images/example2.png>]
 \openout5 = `cp1920t.ptb'.
 
 \openout5 = `cp1920t.ptb'.
@@ -691,44 +702,39 @@ Overfull \hbox (8.57076pt too wide) in paragraph at lines 497--500
 
 \openout5 = `cp1920t.ptb'.
 
-\openout5 = `cp1920t.ptb'.
-
-\openout5 = `cp1920t.ptb'.
-
- [4 <./images/example1.png> <./images/example2.png>]
 File: images/example1.png Graphic file (type png)
 <use images/example1.png>
-Package pdftex.def Info: images/example1.png  used on input line 649.
+Package pdftex.def Info: images/example1.png  used on input line 695.
 (pdftex.def)             Requested size: 214.91579pt x 138.21822pt.
-<images/example3.png, id=122, 903.375pt x 527.9725pt>
+<images/example3.png, id=124, 903.375pt x 527.9725pt>
 File: images/example3.png Graphic file (type png)
 <use images/example3.png>
-Package pdftex.def Info: images/example3.png  used on input line 650.
+Package pdftex.def Info: images/example3.png  used on input line 696.
 (pdftex.def)             Requested size: 243.9145pt x 142.55447pt.
 
-Overfull \hbox (5.4862pt too wide) in paragraph at lines 649--653
+Overfull \hbox (5.4862pt too wide) in paragraph at lines 695--699
 [][] [] 
  []
 
 File: images/example2.png Graphic file (type png)
 <use images/example2.png>
-Package pdftex.def Info: images/example2.png  used on input line 658.
+Package pdftex.def Info: images/example2.png  used on input line 704.
 (pdftex.def)             Requested size: 245.16533pt x 133.24748pt.
-<images/example4.png, id=123, 899.36pt x 595.22375pt>
+<images/example4.png, id=125, 899.36pt x 595.22375pt>
 File: images/example4.png Graphic file (type png)
 <use images/example4.png>
-Package pdftex.def Info: images/example4.png  used on input line 659.
+Package pdftex.def Info: images/example4.png  used on input line 705.
 (pdftex.def)             Requested size: 224.83945pt x 148.80557pt.
 
-Overfull \hbox (16.66069pt too wide) in paragraph at lines 658--662
+Overfull \hbox (16.66069pt too wide) in paragraph at lines 704--708
 [][] [] 
  []
 
 \openout5 = `cp1920t.ptb'.
 
-[5 <./images/example3.png> <./images/example4.png>]
 \openout5 = `cp1920t.ptb'.
 
+[5 <./images/example3.png>]
 \openout5 = `cp1920t.ptb'.
 
 \openout5 = `cp1920t.ptb'.
@@ -736,7 +742,7 @@ Overfull \hbox (16.66069pt too wide) in paragraph at lines 658--662
  <xymatrix 4x3 214>
 \openout5 = `cp1920t.ptb'.
 
- [6]
+ [6 <./images/example4.png>]
 \openout5 = `cp1920t.ptb'.
 
 \openout5 = `cp1920t.ptb'.
@@ -758,19 +764,19 @@ Overfull \hbox (16.66069pt too wide) in paragraph at lines 658--662
 
 \openout5 = `cp1920t.ptb'.
 
-<images/tiles.png, id=188, 982.67125pt x 569.12625pt>
+<images/tiles.png, id=192, 982.67125pt x 569.12625pt>
 File: images/tiles.png Graphic file (type png)
 <use images/tiles.png>
-Package pdftex.def Info: images/tiles.png  used on input line 1013.
+Package pdftex.def Info: images/tiles.png  used on input line 1059.
 (pdftex.def)             Requested size: 196.53076pt x 113.82323pt.
-<images/truchet.png, id=189, 1606.0pt x 1654.18pt>
+<images/truchet.png, id=193, 1606.0pt x 1654.18pt>
 File: images/truchet.png Graphic file (type png)
 <use images/truchet.png>
-Package pdftex.def Info: images/truchet.png  used on input line 1019.
+Package pdftex.def Info: images/truchet.png  used on input line 1065.
 (pdftex.def)             Requested size: 321.19432pt x 330.83014pt.
  [9] [10 <./images/tiles.png> <./images/truchet.png>]
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1028.
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1074.
 <xymatrix 2x2 191>
 \openout5 = `cp1920t.ptb'.
 
@@ -797,7 +803,7 @@ LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <20.74> not available
 \openout5 = `cp1920t.ptb'.
 
 
-Overfull \hbox (18.06151pt too wide) in paragraph at lines 1366--1370
+Overfull \hbox (18.06151pt too wide) in paragraph at lines 1412--1416
 \OT1/ppl/m/n/10 Os alu-nos de-vem co-lo-car neste anexo as suas solu[][]oes aos
  exerc[]^^Pcios pro-pos-tos, de acordo com o "layout"que
  []
@@ -805,12 +811,12 @@ Overfull \hbox (18.06151pt too wide) in paragraph at lines 1366--1370
 \openout5 = `cp1920t.ptb'.
 
 
-Overfull \hbox (12.3705pt too wide) in paragraph at lines 1376--1383
+Overfull \hbox (14.0098pt too wide) in paragraph at lines 1422--1429
  [][] 
  []
 
 
-Overfull \hbox (12.3705pt too wide) in paragraph at lines 1376--1383
+Overfull \hbox (14.0098pt too wide) in paragraph at lines 1422--1429
  [][] 
  []
 
@@ -823,41 +829,21 @@ Overfull \hbox (12.3705pt too wide) in paragraph at lines 1376--1383
 
 \openout5 = `cp1920t.ptb'.
 
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.1461 ... para tornar fácil a descoberta de dic_
-                                                  rd.
-? R
-OK, entering \nonstopmode...
-! Missing $ inserted.
-<inserted text> 
-                $
-l.1462 
-       
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-[14]
+ [14]
 \openout5 = `cp1920t.ptb'.
 
 
 ! Missing \endgroup inserted.
 <inserted text> 
                 \endgroup 
-l.1552 }
+l.1602 }
         
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
+? R
+OK, entering \nonstopmode...
 ! Missing \endgroup inserted.
 <inserted text> 
                 \endgroup 
-l.1552 }
+l.1602 }
         
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -868,7 +854,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.1552 }
+l.1602 }
         
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -877,7 +863,7 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 <xymatrix 2x3 374>
-Overfull \hbox (55.49368pt too wide) in alignment at lines 1552--1552
+Overfull \hbox (55.49368pt too wide) in alignment at lines 1602--1602
 [][][] []
  []
 
@@ -888,7 +874,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1552 }
+l.1602 }
         
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -897,7 +883,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1552 }
+l.1602 }
         
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -908,7 +894,7 @@ my insertion and my current dilemma will both disappear.
 ! Display math should end with $$.
 <to be read again> 
                    \endgroup 
-l.1552 }
+l.1602 }
         
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
@@ -916,14 +902,14 @@ So I shall assume that you typed `$$' both times.
 ! Extra \endgroup.
 \color@endgroup ->\endgraf \endgroup 
                                      
-l.1552 }
+l.1602 }
         
 Things are pretty mixed up, but I think the worst is over.
 
 ! Too many }'s.
 \@begin@tempboxa ...begingroup #2\color@endgroup }
                                                   \def \width {\wd \@tempbox...
-l.1552 }
+l.1602 }
         
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
@@ -935,7 +921,7 @@ See the graphics package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1552 }
+l.1602 }
         
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -944,7 +930,7 @@ or  <return>  to continue without it.
 ! Extra \endgroup.
 \Gscale@box@dd ...\box \@tempboxa }\@end@tempboxa 
                                                   
-l.1552 }
+l.1602 }
         
 Things are pretty mixed up, but I think the worst is over.
 
@@ -952,73 +938,68 @@ Things are pretty mixed up, but I think the worst is over.
 \openout5 = `cp1920t.ptb'.
 
 
-Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1610--1641
  [][] 
  []
 
 
-Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1610--1641
  [][] 
  []
 
 
-Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1610--1641
  [][] 
  []
 
 
-Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1610--1641
  [][] 
  []
 
 
-Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1610--1641
  [][] 
  []
 
 
-Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1610--1641
  [][] 
  []
 
 
-Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1610--1641
  [][] 
  []
 
 
-Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1610--1641
  [][] 
  []
 
 
-Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1610--1641
  [][] 
  []
 
 
-Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1610--1641
  [][] 
  []
 
 
-Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
- [][] 
- []
-
-
-Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1610--1641
  [][][][] 
  []
 
 
-Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
+Overfull \hbox (30.8083pt too wide) in paragraph at lines 1610--1641
  [][][][] 
  []
-
-\openout5 = `cp1920t.ptb'.
 
 [16]
+\openout5 = `cp1920t.ptb'.
+
 \openout5 = `cp1920t.ptb'.
 
  <xymatrix 2x2 246>
@@ -1036,13 +1017,18 @@ Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
 
 \openout5 = `cp1920t.ptb'.
 
- <xymatrix 2x2 246>
+
+Overfull \hbox (1.06131pt too wide) in paragraph at lines 1959--1962
+\OT1/ppl/m/n/10 O ra-ci-o-ci-nio para a \OT1/ppl/m/it/10 ex-tL-Tree \OT1/ppl/m/
+n/10 foi per-cor-rer a \OT1/ppl/m/it/10 Bdt \OT1/ppl/m/n/10 dada atrav[]es de u
+m ca-ta-mor-fismo des-truindo a informa[][]ao
+ []
+
+<xymatrix 2x2 246> [19]
 \openout5 = `cp1920t.ptb'.
 
 \openout5 = `cp1920t.ptb'.
 
-
-[19]
 \openout5 = `cp1920t.ptb'.
 
  <xymatrix 2x2 246>
@@ -1057,7 +1043,7 @@ Overfull \hbox (30.8083pt too wide) in paragraph at lines 1556--1589
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.2091 
+l.2143 
        
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1065,7 +1051,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2091 
+l.2143 
        
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1076,7 +1062,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2091 
+l.2143 
        
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1087,14 +1073,14 @@ my insertion and my current dilemma will both disappear.
 ! Missing \cr inserted.
 <inserted text> 
                 \cr 
-l.2091 
+l.2143 
        
 I'm guessing that you meant to end an alignment here.
 
 ! Missing { inserted.
 <inserted text> 
                 {
-l.2091 
+l.2143 
        
 I've put in what seems to be necessary to fix
 the current column of the current alignment.
@@ -1103,20 +1089,20 @@ Try to go on, since this might almost work.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.2091 
+l.2143 
        
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-Underfull \hbox (badness 10000) in alignment at lines 2076--2091
+Underfull \hbox (badness 10000) in alignment at lines 2128--2143
  [][][][]
  []
 
 ! Missing $$ inserted.
 <to be read again> 
                    \par 
-l.2091 
+l.2143 
        
 Displays can use special alignments (like \eqalignno)
 only if nothing but the alignment itself is between $$'s.
@@ -1124,7 +1110,7 @@ only if nothing but the alignment itself is between $$'s.
 ! Misplaced alignment tab character &.
 \reserved@a ->&
                 & &
-l.2092 \end{eqnarray*}
+l.2144 \end{eqnarray*}
                       
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1136,7 +1122,7 @@ might try typing `S' now just to see what is salvageable.
 ! Misplaced alignment tab character &.
 \reserved@a ->& &
                   &
-l.2092 \end{eqnarray*}
+l.2144 \end{eqnarray*}
                       
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1148,7 +1134,7 @@ might try typing `S' now just to see what is salvageable.
 ! Misplaced alignment tab character &.
 \reserved@a ->& & &
                    
-l.2092 \end{eqnarray*}
+l.2144 \end{eqnarray*}
                       
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1160,7 +1146,7 @@ might try typing `S' now just to see what is salvageable.
 ! Misplaced \cr.
 \@@eqncr ...l \@eqnswtrue \global \@eqcnt \z@ \cr 
                                                   
-l.2092 \end{eqnarray*}
+l.2144 \end{eqnarray*}
                       
 I can't figure out why you would want to use a tab mark
 or \cr or \span just now. If something like a right brace
@@ -1171,7 +1157,7 @@ might try typing `S' now just to see what is salvageable.
 ! Extra }, or forgotten \endgroup.
 \endeqnarray ->\@@eqncr \egroup 
                                 \global \advance \c@equation \m@ne $$\@ignor...
-l.2092 \end{eqnarray*}
+l.2144 \end{eqnarray*}
                       
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -1182,7 +1168,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.2092 \end{eqnarray*}
+l.2144 \end{eqnarray*}
                       
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1193,7 +1179,7 @@ my insertion and my current dilemma will both disappear.
 ! Display math should end with $$.
 <to be read again> 
                    \endgroup 
-l.2092 \end{eqnarray*}
+l.2144 \end{eqnarray*}
                       
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
@@ -1202,20 +1188,11 @@ So I shall assume that you typed `$$' both times.
 
 \openout5 = `cp1920t.ptb'.
 
-! Undefined control sequence.
-l.2146 ...ee} dada, em cada um dos nodos da \texit
-                                                  {BTree} em que estavamos c...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-<xymatrix 2x2 246>
+[21] <xymatrix 2x2 246>
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.2164 
+l.2216 
        
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1223,7 +1200,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2164 
+l.2216 
        
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1234,7 +1211,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2164 
+l.2216 
        
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1245,14 +1222,14 @@ my insertion and my current dilemma will both disappear.
 ! Missing \cr inserted.
 <inserted text> 
                 \cr 
-l.2164 
+l.2216 
        
 I'm guessing that you meant to end an alignment here.
 
 ! Missing { inserted.
 <inserted text> 
                 {
-l.2164 
+l.2216 
        
 I've put in what seems to be necessary to fix
 the current column of the current alignment.
@@ -1261,29 +1238,28 @@ Try to go on, since this might almost work.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.2164 
+l.2216 
        
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-Underfull \hbox (badness 10000) in alignment at lines 2149--2164
+Underfull \hbox (badness 10000) in alignment at lines 2201--2216
  [][][][]
  []
 
 ! Missing $$ inserted.
 <to be read again> 
                    \par 
-l.2164 
+l.2216 
        
 Displays can use special alignments (like \eqalignno)
 only if nothing but the alignment itself is between $$'s.
 
-[21]
 ! Misplaced alignment tab character &.
 \reserved@a ->&
                 & &
-l.2165 \end{eqnarray*}
+l.2217 \end{eqnarray*}
                       
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1295,7 +1271,7 @@ might try typing `S' now just to see what is salvageable.
 ! Misplaced alignment tab character &.
 \reserved@a ->& &
                   &
-l.2165 \end{eqnarray*}
+l.2217 \end{eqnarray*}
                       
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1307,7 +1283,7 @@ might try typing `S' now just to see what is salvageable.
 ! Misplaced alignment tab character &.
 \reserved@a ->& & &
                    
-l.2165 \end{eqnarray*}
+l.2217 \end{eqnarray*}
                       
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1319,7 +1295,7 @@ might try typing `S' now just to see what is salvageable.
 ! Misplaced \cr.
 \@@eqncr ...l \@eqnswtrue \global \@eqcnt \z@ \cr 
                                                   
-l.2165 \end{eqnarray*}
+l.2217 \end{eqnarray*}
                       
 I can't figure out why you would want to use a tab mark
 or \cr or \span just now. If something like a right brace
@@ -1330,7 +1306,7 @@ might try typing `S' now just to see what is salvageable.
 ! Extra }, or forgotten \endgroup.
 \endeqnarray ->\@@eqncr \egroup 
                                 \global \advance \c@equation \m@ne $$\@ignor...
-l.2165 \end{eqnarray*}
+l.2217 \end{eqnarray*}
                       
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -1341,7 +1317,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.2165 \end{eqnarray*}
+l.2217 \end{eqnarray*}
                       
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1352,7 +1328,7 @@ my insertion and my current dilemma will both disappear.
 ! Display math should end with $$.
 <to be read again> 
                    \endgroup 
-l.2165 \end{eqnarray*}
+l.2217 \end{eqnarray*}
                       
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
@@ -1361,109 +1337,112 @@ So I shall assume that you typed `$$' both times.
 
 \openout5 = `cp1920t.ptb'.
 
-<images/P3-Anita.png, id=294, 360.59718pt x 34.62938pt>
+[22]
+<images/P3-Anita.png, id=302, 360.59718pt x 34.62938pt>
 File: images/P3-Anita.png Graphic file (type png)
 <use images/P3-Anita.png>
-Package pdftex.def Info: images/P3-Anita.png  used on input line 2245.
+Package pdftex.def Info: images/P3-Anita.png  used on input line 2299.
 (pdftex.def)             Requested size: 288.47813pt x 27.70352pt.
 \openout5 = `cp1920t.ptb'.
 
-[22 <./images/P3-Anita.png (PNG copy)>]
 \openout5 = `cp1920t.ptb'.
 
 
-Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2344--2386
  [][] 
  []
 
 
-Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2344--2386
  [][] 
  []
 
 
-Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2344--2386
  [][] 
  []
 
 
-Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2344--2386
  [][] 
  []
 
 
-Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2344--2386
  [][] 
  []
 
 
-Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2344--2386
  [][] 
  []
 
 
-Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2344--2386
  [][][][] 
  []
 
 
-Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2344--2386
  [][][][] 
  []
 
 
-Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2344--2386
  [][][][] 
  []
 
 
-Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2344--2386
  [][][][] 
  []
 
 
-Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2344--2386
  [][][][] 
  []
 
 
-Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2344--2386
  [][][][] 
  []
 
 
-Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2344--2386
  [][][][] 
  []
 
 
-Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2344--2386
  [][][][] 
  []
 
 
-Overfull \hbox (43.28317pt too wide) in paragraph at lines 2290--2332
+Overfull \hbox (43.28317pt too wide) in paragraph at lines 2344--2386
  [][] 
  []
 
-<images/P5-Truchet.png, id=301, 804.00375pt x 831.105pt>
+<images/P5-Truchet.png, id=303, 804.00375pt x 831.105pt>
 File: images/P5-Truchet.png Graphic file (type png)
 <use images/P5-Truchet.png>
-Package pdftex.def Info: images/P5-Truchet.png  used on input line 2335.
+Package pdftex.def Info: images/P5-Truchet.png  used on input line 2389.
 (pdftex.def)             Requested size: 201.00044pt x 207.77574pt.
-(./cp1920t.ind [23 <./images/P5-Truchet.png>] [24
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+(./cp1920t.ind [23 <./images/P3-Anita.png (PNG copy)>] [24 <./images/P5-Truchet
+.png>] [25
 
 
 ]) (./cp1920t.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2352.
- [25
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2406.
+ [26
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2352.
-
-(./cp1920t.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2352.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2352.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2406.
+ (./cp1920t.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2406.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2406.
 
 Package rerunfilecheck Info: File `cp1920t.out' has not changed.
 (rerunfilecheck)             Checksum: 628570B73880F7F6B343CF9F839CDB98;365.
@@ -1471,13 +1450,13 @@ Package rerunfilecheck Info: File `cp1920t.out' has not changed.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2352.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2406.
  ) 
 Here is how much of TeX's memory you used:
- 13309 strings out of 492167
- 188337 string characters out of 6131559
+ 13317 strings out of 492167
+ 188444 string characters out of 6131559
  358155 words of memory out of 5000000
- 17285 multiletter control sequences out of 15000+600000
+ 17290 multiletter control sequences out of 15000+600000
  37140 words of font info for 111 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  45i,19n,77p,3294b,816s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1502,10 +1481,10 @@ ier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr
 nts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palati
 no/uplri8a.pfb></usr/share/texmf-dist/fonts/type1/public/xypic/xyatip10.pfb></u
 sr/share/texmf-dist/fonts/type1/public/xypic/xybtip10.pfb>
-Output written on cp1920t.pdf (25 pages, 689501 bytes).
+Output written on cp1920t.pdf (26 pages, 691655 bytes).
 PDF statistics:
- 480 PDF objects out of 1000 (max. 8388607)
- 407 compressed objects within 5 object streams
- 101 named destinations out of 1000 (max. 500000)
+ 490 PDF objects out of 1000 (max. 8388607)
+ 416 compressed objects within 5 object streams
+ 104 named destinations out of 1000 (max. 500000)
  94 words of extra memory for PDF output out of 10000 (max. 10000000)
 

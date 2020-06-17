@@ -18,29 +18,29 @@
 \indexentry{Haskell!Gloss|hyperpage}{2}
 \indexentry{Haskell!QuickCheck|hyperpage}{2}
 \indexentry{Haskell|hyperpage}{2}
-\indexentry{Cálculo de Programas!Material Pedagógico!BTree.hs|hyperpage}{3}
+\indexentry{Cálculo de Programas!Material Pedagógico!BTree.hs|hyperpage}{4}
 \indexentry{Functor|hyperpage}{4}
 \indexentry{Functor|hyperpage}{4}
 \indexentry{Functor|hyperpage}{4}
-\indexentry{Functor|hyperpage}{4}
-\indexentry{Functor|hyperpage}{4}
-\indexentry{Functor|hyperpage}{4}
-\indexentry{Functor|hyperpage}{4}
-\indexentry{Functor|hyperpage}{4}
-\indexentry{Functor|hyperpage}{4}
-\indexentry{Functor|hyperpage}{4}
-\indexentry{Functor|hyperpage}{4}
-\indexentry{Functor|hyperpage}{6}
-\indexentry{Functor|hyperpage}{6}
-\indexentry{Functor|hyperpage}{6}
-\indexentry{Functor|hyperpage}{6}
+\indexentry{Functor|hyperpage}{5}
+\indexentry{Functor|hyperpage}{5}
+\indexentry{Functor|hyperpage}{5}
+\indexentry{Functor|hyperpage}{5}
+\indexentry{Functor|hyperpage}{5}
+\indexentry{Functor|hyperpage}{5}
+\indexentry{Functor|hyperpage}{5}
+\indexentry{Functor|hyperpage}{5}
+\indexentry{Functor|hyperpage}{5}
+\indexentry{Functor|hyperpage}{5}
+\indexentry{Functor|hyperpage}{5}
+\indexentry{Functor|hyperpage}{5}
 \indexentry{Functor|hyperpage}{6}
 \indexentry{Functor|hyperpage}{6}
 \indexentry{Haskell|hyperpage}{6}
-\indexentry{Haskell|hyperpage}{6}
+\indexentry{Haskell|hyperpage}{7}
 \indexentry{Função!\emph  {length}|hyperpage}{7}
-\indexentry{Haskell!Biblioteca!Probability|hyperpage}{7}
-\indexentry{Functor|hyperpage}{7}
+\indexentry{Haskell!Biblioteca!Probability|hyperpage}{8}
+\indexentry{Functor|hyperpage}{8}
 \indexentry{Functor|hyperpage}{8}
 \indexentry{Functor|hyperpage}{8}
 \indexentry{Haskell!interpretador!GHCi|hyperpage}{8}
@@ -132,8 +132,8 @@
 \indexentry{Função!$\pi _1$|hyperpage}{17}
 \indexentry{Função!$\pi _1$|hyperpage}{17}
 \indexentry{Função!$\pi _2$|hyperpage}{17}
-\indexentry{Combinador ``pointfree''!\emph  {either}|hyperpage}{17}
-\indexentry{Combinador ``pointfree''!\emph  {either}|hyperpage}{17}
+\indexentry{Combinador ``pointfree''!\emph  {either}|hyperpage}{18}
+\indexentry{Combinador ``pointfree''!\emph  {either}|hyperpage}{18}
 \indexentry{Combinador ``pointfree''!\emph  {either}|hyperpage}{18}
 \indexentry{Functor|hyperpage}{18}
 \indexentry{Functor|hyperpage}{18}
@@ -159,13 +159,13 @@
 \indexentry{Função!$\pi _2$|hyperpage}{19}
 \indexentry{Função!$\pi _2$|hyperpage}{19}
 \indexentry{Combinador ``pointfree''!\emph  {either}|hyperpage}{19}
-\indexentry{Combinador ``pointfree''!\emph  {cata}|hyperpage}{19}
-\indexentry{Combinador ``pointfree''!\emph  {cata}|hyperpage}{19}
-\indexentry{Combinador ``pointfree''!\emph  {cata}|hyperpage}{19}
-\indexentry{Função!$\pi _2$|hyperpage}{19}
-\indexentry{Combinador ``pointfree''!\emph  {either}|hyperpage}{19}
-\indexentry{Combinador ``pointfree''!\emph  {either}|hyperpage}{19}
-\indexentry{Função!$\pi _2$|hyperpage}{19}
+\indexentry{Combinador ``pointfree''!\emph  {cata}|hyperpage}{20}
+\indexentry{Combinador ``pointfree''!\emph  {cata}|hyperpage}{20}
+\indexentry{Combinador ``pointfree''!\emph  {cata}|hyperpage}{20}
+\indexentry{Função!$\pi _2$|hyperpage}{20}
+\indexentry{Combinador ``pointfree''!\emph  {either}|hyperpage}{20}
+\indexentry{Combinador ``pointfree''!\emph  {either}|hyperpage}{20}
+\indexentry{Função!$\pi _2$|hyperpage}{20}
 \indexentry{Combinador ``pointfree''!\emph  {either}|hyperpage}{20}
 \indexentry{Combinador ``pointfree''!\emph  {cata}|hyperpage}{20}
 \indexentry{Combinador ``pointfree''!\emph  {cata}|hyperpage}{20}
@@ -173,12 +173,12 @@
 \indexentry{Combinador ``pointfree''!\emph  {either}|hyperpage}{20}
 \indexentry{Combinador ``pointfree''!\emph  {either}|hyperpage}{20}
 \indexentry{Função!$\pi _2$|hyperpage}{20}
-\indexentry{Função!$\pi _1$|hyperpage}{20}
-\indexentry{Função!$\pi _2$|hyperpage}{20}
-\indexentry{Função!$\pi _2$|hyperpage}{20}
-\indexentry{Função!$\pi _1$|hyperpage}{20}
-\indexentry{Função!$\pi _2$|hyperpage}{20}
-\indexentry{Combinador ``pointfree''!\emph  {either}|hyperpage}{20}
+\indexentry{Função!$\pi _1$|hyperpage}{21}
+\indexentry{Função!$\pi _2$|hyperpage}{21}
+\indexentry{Função!$\pi _2$|hyperpage}{21}
+\indexentry{Função!$\pi _1$|hyperpage}{21}
+\indexentry{Função!$\pi _2$|hyperpage}{21}
+\indexentry{Combinador ``pointfree''!\emph  {either}|hyperpage}{21}
 \indexentry{Functor|hyperpage}{21}
 \indexentry{Functor|hyperpage}{21}
 \indexentry{Functor|hyperpage}{21}
@@ -198,10 +198,10 @@
 \indexentry{Função!$\pi _2$|hyperpage}{21}
 \indexentry{Função!$\pi _1$|hyperpage}{21}
 \indexentry{Função!$\pi _2$|hyperpage}{21}
-\indexentry{Combinador ``pointfree''!\emph  {either}|hyperpage}{21}
-\indexentry{Functor|hyperpage}{21}
-\indexentry{Functor|hyperpage}{21}
-\indexentry{Functor|hyperpage}{21}
+\indexentry{Combinador ``pointfree''!\emph  {either}|hyperpage}{22}
+\indexentry{Functor|hyperpage}{22}
+\indexentry{Functor|hyperpage}{22}
+\indexentry{Functor|hyperpage}{22}
 \indexentry{Combinador ``pointfree''!\emph  {cata}|hyperpage}{22}
 \indexentry{Combinador ``pointfree''!\emph  {cata}|hyperpage}{22}
 \indexentry{Combinador ``pointfree''!\emph  {cata}|hyperpage}{22}
